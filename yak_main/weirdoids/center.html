@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JQuery Cycle Plugin - Centering Slides Horizontally</title>
+<style type="text/css">
+img {
+	border: none
+}
+
+p {
+	text-align: center
+}
+
+.demo {
+border: 1px solid red;
+
+}
+
+div {
+border: 1px solid red;
+}
+/* give slideshow some style */
+#heads {
+	margin: 0px auto;
+	width: 900px;
+	height: 450px;
+	z-index: 10;
+}
+
+
+#heads_w {
+	width: 100%;position: absolute;
+}
+
+/* give each slide the same dimensions */
+#heads div {
+	width: 900px;
+	height: 450px;
+}
+
+/* make sure each slide image is centered */
+img {
+	margin: auto;
+	display: block
+}
+
+/* give slideshow some style */
+#body {
+	margin: 0px auto;
+	width: 900px;
+	height: 550px;
+	z-index: 8;
+}
+
+/* give each slide the same dimensions */
+#body div {
+	width: 900px;
+	height: 550px;
+	top: 300px;
+}
+#body_w {
+	width: 100%;
+	margin-top: 140px;
+	position: absolute;
+}
+
+#legs {
+	margin: 0px auto;
+	width: 1000px;
+	height: 500px;
+	z-index: 7;
+}
+
+/* give each slide the same dimensions */
+#legs div {
+	width: 1000px;
+	height: 500px;
+	top: 300px;
+}
+#legs_w {
+	width: 100%;
+	margin-top: 500px;
+	position: absolute;
+}
+
+</style>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://malsup.github.com/jquery.cycle.all.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		$('#heads').cycle({
+			fx : 'scrollHorz',
+			speed : 1000,
+			timeout : 2000,
+			cleartype: false
+		});
+
+		$('#body').cycle({
+			fx : 'scrollHorz',
+			speed : 1000,
+			timeout : 1300,
+			cleartype: false
+		});
+		$('#legs').cycle({
+			fx : 'scrollHorz',
+			speed : 1000,
+			timeout : 2300,
+			cleartype: false
+		});
+	});
+</script>
+</head>
+<body>
+
+
+	<div class="demo">
+		<div id="heads_w">
+			<div id="heads">
+				<!-- wrap each image in a div -->
+				<div>
+					<img src="imgs/p1_head_2.png" width="450" height="450" />
+				</div>
+				<div>
+					<img src="imgs/p1_head_3.png" width="450" height="450" />
+				</div>
+				<div>
+					<img src="imgs/p2_head_1.png" width="450" height="450" />
+				</div>
+				<div>
+					<img src="imgs/p1_head_4.png" width="450" height="450" />
+				</div>
+				<div>
+					<img src="imgs/p5_head_1.png" width="450" height="450" />
+				</div>
+				<div>
+					<img src="imgs/p6_head_1.png" width="450" height="450" />
+				</div>
+			</div>
+		</div>
+		<div id="body_w">
+			<div id="body">
+				<!-- wrap each image in a div -->
+				<div>
+					<img src="imgs/p2_body_1.png" width="700" height="550" />
+				</div>
+				<div>
+					<img src="imgs/p1_body_3.png" width="700" height="550" />
+				</div>
+				<div>
+					<img src="imgs/p1_body_4.png" width="700" height="550" />
+				</div>
+				<div>
+					<img src="imgs/p5_body_1.png" width="700" height="550" />
+				</div>
+				<div>
+					<img src="imgs/p3_body_1.png" width="700" height="550" />
+				</div>
+				<div>
+					<img src="imgs/p1_body_5.png" width="700" height="550" />
+				</div>
+			</div>
+		</div>
+		<div id="legs_w">
+			<div id="legs">
+				<!-- wrap each image in a div -->
+				<div>
+					<img src="imgs/p2_legs_1.png" width="700" height="500" />
+				</div>
+				<div>
+					<img src="imgs/p1_legs_3.png" width="700" height="500" />
+				</div>
+				<div>
+					<img src="imgs/p1_legs_4.png" width="700" height="500" />
+				</div>
+				<div>
+					<img src="imgs/p5_legs_1.png" width="700" height="500" />
+				</div>
+				<div>
+					<img src="imgs/p3_legs_1.png" width="700" height="500" />
+				</div>
+				<div>
+					<img src="imgs/p1_legs_5.png" width="700" height="500" />
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JQuery Cycle Plugin - Centering Slides Horizontally</title>
+<style type="text/css">
+img { border: none }
+p { text-align:center }
+
+/* give slideshow some style */
+#heads { margin: 20px auto; width: 500px; height: 300px; position: absolute}
+
+/* give each slide the same dimensions */
+#heads div { width: 500px; height: 300px;  }
+
+/* make sure each slide image is centered */
+img { margin: auto; display: block }
+
+
+/* give slideshow some style */
+#body {  margin: 20px auto; width: 500px; height: 300px; position: absolute}
+
+/* give each slide the same dimensions */
+#body div { width: 500px; height: 300px;  top: 300px;}
+
+
+
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript" src="http://malsup.github.com/jquery.cycle.all.js"></script>
+<script type="text/javascript">
+$(function() {
+    
+    $('#heads').cycle({ 
+        fx: 'scrollHorz',
+        speed: 1000,
+        timeout: 2000,
+		cleartype : false
+    });
+    
+    $('#body').cycle({ 
+        fx: 'scrollHorz',
+        speed: 1000,
+        timeout: 3000,
+		cleartype : false
+    });
+});
+</script>
+</head>
+<body>
+
+    <div class="demo">
+        <div id="heads">
+        	<!-- wrap each image in a div -->
+            <div><img src="imgs/p1_head_1.png" width="200" height="200" /></div>
+            <div><img src="imgs/p3_head_2.png" width="200" height="200" /></div>
+            <div><img src="imgs/p1_head_4.png" width="200" height="200" /></div>
+            <div><img src="imgs/p4_head_3.png" width="200" height="200" /></div>
+            <div><img src="imgs/p1_head_5.png" width="200" height="200" /></div>
+            <div><img src="imgs/p5_head_1.png" width="200" height="200" /></div>
+        </div>
+       <div id="body">
+        	<!-- wrap each image in a div -->
+            <div><img src="imgs/p3_body_5.png" width="200" height="200" /></div>
+            <div><img src="imgs/p1_body_1.png" width="200" height="200" /></div>
+            <div><img src="imgs/p2_body_2.png" width="200" height="200" /></div>
+            <div><img src="imgs/p1_body_1.png" width="200" height="200" /></div>
+            <div><img src="imgs/p3_body_3.png" width="200" height="200" /></div>
+            <div><img src="imgs/p1_body_4.png" width="200" height="200" /></div>
+        </div>
+    </div>
+</body>
+</html>
