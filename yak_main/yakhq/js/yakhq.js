@@ -5,6 +5,9 @@ var $userid = null;
 var $userfname = '';
 var $is_parent = false;
 var $is_in_signup_process = false;
+var $yaklogin = null;
+var $my_avatar = null;
+var $is_kid = 0;
 
 function resetGlobal() {
 	$is_logged_in = false;
@@ -12,6 +15,9 @@ function resetGlobal() {
 	$userfname = '';
 	$is_parent = false;
 	$is_in_signup_process = false;
+	$yaklogin = null;
+	$my_avatar = null;
+	$is_kid = 0;
 }
 
 function resetScreens() {
@@ -25,6 +31,12 @@ function resetScreens() {
 	$('#signup3d form')[0].reset();
 	$('#signup4 form')[0].reset();
 	$('#signup5 form')[0].reset();
+
+	// assume parent
+	$('.yakbar_request_btn').parent().show();
+
+	// dont show counters until they are > 0
+	$('.notifycount').hide();
 
 	resetAllDateSelectors();
 
@@ -175,11 +187,35 @@ $(document).ready(function() {
 	// });
 	// });
 
+	// / login menu
+	$('body').bind('hideOpenMenus', function() {
+		$("ul:jqmData(role='menu')").find('li > ul').hide();
+	});
+	var menuHandler = function(e) {
+		$('body').trigger('hideOpenMenus');
+		$(this).find('li > ul').show();
+		e.stopPropagation();
+	};
+	$("ul:jqmData(role='menu') li > ul li").click(function(e) {
+		$('body').trigger('hideOpenMenus');
+		e.stopPropagation();
+	});
+	$('body').delegate("ul:jqmData(role='menu')", 'click', menuHandler);
+	$('body').click(function(e) {
+		$('body').trigger('hideOpenMenus');
+	});
+	$('body').trigger('hideOpenMenus');
+
 });
 
 $(document)
 		.ready(
 				function() {
+
+					// fill in fastlogin
+					get_fastlogins();
+
+					// initialize sliders: home, apps, appdetails
 					$('#s0').cycle({
 						fx : 'scrollHorz',
 						speed : 'fast',
@@ -202,6 +238,38 @@ $(document)
 						prev : '#prev2'
 					});
 
+					$('#avatar_cycle').cycle({
+						fx : 'scrollHorz',
+						speed : 'fast',
+						timeout : 0,
+						next : '#avatars_next',
+						prev : '#avatars_prev',
+						before : onBefore
+
+					});
+
+					$('.avatar_image').live(
+							'click',
+							function(e, data) {
+								// check to see if pending requests
+								// TO DO
+								e.preventDefault();
+								console.log("clicked avatar image");
+								var selected_avatar = $(this).find('img').attr(
+										'src');
+								$('.avatar_image.highlight_avatar')
+										.removeClass('highlight_avatar');
+								$(this).addClass('highlight_avatar');
+								if ($my_avatar != selected_avatar) {
+									$my_avatar = selected_avatar;
+									$('.yakbar_user_img').attr('src',
+											$my_avatar);
+								}
+
+								set_user_avatar($my_avatar);
+
+							});
+
 					// should be logged in already
 					$('#hq').live(
 							"pageshow",
@@ -210,10 +278,13 @@ $(document)
 								// TO DO
 								console.log("pageshow #hq");
 								if ($is_parent) {
+
 									checkPendingKidVerificationRequest(
 											verifyKidsPostLoginHandler,
 											verifyKidsFailureHandler);
 									return false;
+								} else {
+									$('.yakbar_request_btn').parent().hide();
 								}
 								return false;
 
@@ -226,13 +297,14 @@ $(document)
 								transition : "fade"
 							});
 						} else {
-							$('#yakbar_user_fname').html($userfname);
-							$('#yakbar_login_logout_btn').html('Log Out');
+
+							// $('#yakbar_login_logout_btn').html('Log Out');
 							$('#yakbar_user_img').show();
 
 							// get request info for display in yakbar
 							// yakbar_friend_req_count,
-							// yakbar_message_count, yakbar_notify_count
+							// yakbar_approval_count, yakbar_notify_count
+							$('.notifycount').hide();
 							get_req_msg_note_counts();
 
 						}
@@ -241,12 +313,6 @@ $(document)
 					// TO DO
 					$('#yakbar_notify_btn').click(function(e) {
 						console.log("yakbar_notify_btn next  button clicked");
-
-						return false;
-					});
-
-					$('.yakbar_message_btn').click(function(e) {
-						console.log("yakbar_message_btn next  button clicked");
 
 						return false;
 					});
@@ -273,6 +339,14 @@ $(document)
 						return false;
 					});
 
+					$('.profile_link').click(function(e) {
+						console.log("profile_link clicked");
+
+						friend_profile_handler($userid);
+
+						return false;
+					});
+
 					$('.signup_btn').click(function(e) {
 						console.log("signup_btn clicked");
 
@@ -287,6 +361,7 @@ $(document)
 
 						return false;
 					});
+
 					$('#login_next_btn').click(function(e) {
 						console.log("login next  button clicked");
 						$('.error').hide();
@@ -294,6 +369,13 @@ $(document)
 						loginHandler();
 
 						return false;
+					});
+
+					$('#login').keypress(function(e) {
+						if (e.which == 13) {
+							jQuery(this).blur();
+							jQuery('#login_next_btn').focus().click();
+						}
 					});
 
 					$('#signup1_next_btn').click(function(e) {
@@ -714,6 +796,14 @@ $(document)
 						return false;
 					});
 
+					$('.yakbar_request_btn').click(function(e) {
+						console.log("yakbar_request_btn clicked");
+
+						load_approvals();
+
+						return false;
+					});
+
 					$('.yakbar_friend_req_btn').click(
 							function(e) {
 								console.log("yakbar_friend_req_btn clicked");
@@ -728,10 +818,85 @@ $(document)
 					$('.activity_btn').click(function(e) {
 						console.log("notification_btn clicked");
 
-						get_recent_weirdoids();
+						get_user_activity();
+						// get activity data for user and all my friends
+						// get_activity_data(friends[fid],
+						// friend_profile_success_handler,
+						// std_failure_handler);
 
 						return false;
 					});
+
+					$('#hq_friends_btn').click(function(e) {
+						console.log("hq_friends_btn clicked");
+
+						get_friend_list();
+
+						return false;
+					});
+
+					$('.friend_profile_btn')
+							.live(
+									'click',
+									function(e) {
+										e.preventDefault();
+										var fid = $(this).attr('fid');
+
+										if (typeof friends[fid] == 'undefined') {
+											alert("No friend in friends list for index "
+													+ fid);
+											return false;
+										}
+
+										var target_id = friends[fid];
+
+										console
+												.log("friend profile button clicked "
+														+ fid
+														+ " target_id "
+														+ target_id);
+
+										friend_profile_handler(target_id);
+
+										return false;
+									});
+
+					$('.profilebtn')
+							.live(
+									'click',
+									function(e) {
+										e.preventDefault();
+										var user_post = $(this).data(
+												'user_post');
+										if (user_post == undefined) {
+											alert("undefined user_post for button");
+											return false;
+										}
+
+										var target_id = user_post.user_id;
+
+										console
+												.log("activity profile button clicked - target_id "
+														+ target_id);
+
+										friend_profile_handler(target_id);
+
+										return false;
+									});
+
+					$('.commentor').live(
+							'click',
+							function(e) {
+								e.preventDefault();
+								var target_id = $(this).attr('commentor_id');
+
+								console.log("commentor profile button clicked "
+										+ target_id);
+
+								friend_profile_handler(target_id);
+
+								return false;
+							});
 
 					// add friend
 					$('#add_friend_next_btn').click(function(e) {
@@ -753,73 +918,138 @@ $(document)
 						return false;
 					});
 					
-					// friend management handlers
-					$('.kidapprovebtn, .kidrejectbtn, .kidrejectflagbtn, .kidemailparentbtn').live('click', function(e)  {
-						e.preventDefault();
-						console.log("friend mgmt button clicked " + this.id);
-						
-						kid_friendmgmt_handler(e,this);
-
-						return false;
-					});
+					// post approval handlers
 					
-					$('.approvebtn, .rejectbtn').live('click', function(e)  {
-						e.preventDefault();
-						console.log("friend mgmt button clicked " + this.id);
-						
-						friendmgmt_handler(e,this);
-
-						return false;
-					});
 					
-					// set up status message typeahead
-					$( "#userstatus" ).autocomplete({
-	         			source: userStatusMessages,
-	         			select: function(event, ui) {
-	                        $('#userstatus').val(ui.item.label);
-	                        $('#userstatus_val').val(ui.item.user_status_id);
-	                    }
-	         		});
-					
-					$('#userstatus_post_btn').live('click', function(e) {
-						
-						// get the value from the hidden field userstatus_val
-						var user_status_id = $('#userstatus_val').val();
-						console.log("selected status msg # " + user_status_id);
-					});
-					
-					// post comment, like and other button handlers
-					$('.likebtn').live('click', function(e) {
-						e.preventDefault();
-						var likeit = $(this).html() == 'Like';
-						var user_post = $(this).data('user_post');
-						console.log("clicked like " + user_post.user_post_id);
-						likebtn_handler(user_post, likeit);
-						$(this).html(likeit ? 'Unlike' : 'Like');
-						// if (user_post.likecount_id) {
-						// var likecount_id = user_post.likecount_id;
-						// var likecount = $('#' + likecount_id).html();
-						// if (likeit) {
-						// // TODO increment count
-						//
-						// likecount++;
-						// } else {
-						//
-						// likecount--;
-						// }
-						// $('#' + likecount_id).html(likecount);
-						// }
-					});
-					$('.commentbtn').live(
+					$('.approve_button').live(
 							'click',
 							function(e) {
 								e.preventDefault();
-								var user_post = $(this).data('user_post');
-								console.log("clicked comment "
-										+ user_post.user_post_id);
-								commentbtn_handler(user_post);
+								console
+										.log("post approval button clicked "
+												+ this.id);
 
+								
+								approve_post_handler(e, this, 1);
+
+								return false;
 							});
+
+					$('.deny_button').live(
+							'click',
+							function(e) {
+								e.preventDefault();
+								console
+										.log("post approval button clicked "
+												+ this.id);
+
+								
+								approve_post_handler(e, this, 0);
+
+								return false;
+							});
+
+					// friend management handlers
+					$(
+							'.kidapprovebtn, .kidrejectbtn, .kidrejectflagbtn, .kidemailparentbtn')
+							.live(
+									'click',
+									function(e) {
+										e.preventDefault();
+										console
+												.log("friend mgmt button clicked "
+														+ this.id);
+
+										kid_friendmgmt_handler(e, this);
+
+										return false;
+									});
+
+					$('.approvebtn, .rejectbtn').live('click', function(e) {
+						e.preventDefault();
+						console.log("friend mgmt button clicked " + this.id);
+
+						friendmgmt_handler(e, this);
+
+						return false;
+					});
+
+					// set up status message typeahead
+					$("#userstatus")
+							.autocomplete(
+									{
+										source : "../yak/controllers/search_status_messages.php",
+										select : function(event, ui) {
+											$('#userstatus').val(ui.item.label);
+											$('#userstatus_val')
+													.val(ui.item.id);
+										}
+									});
+
+					$('#userstatus_post_btn').live('click', function(e) {
+
+						// get the value from the hidden field userstatus_val
+						var user_status_id = $('#userstatus_val').val();
+						console.log("selected status msg # " + user_status_id);
+						post_status_message(user_status_id);
+					});
+
+					// post comment, like and other button handlers
+					$('.likebtn')
+							.live(
+									'click',
+									function(e) {
+										e.preventDefault();
+										var likeit = $(this).html() == 'Like';
+										var user_post = $(this).data(
+												'user_post');
+										if (user_post) {
+											console.log("clicked like "
+													+ user_post.user_post_id);
+											likebtn_handler(user_post, likeit);
+										} else
+											console
+													.log("clicked like but no user_post data");
+
+										$(this)
+												.html(
+														likeit ? 'Unlike'
+																: 'Like');
+										// if (user_post.likecount_id) {
+										// var likecount_id =
+										// user_post.likecount_id;
+										// var likecount = $('#' +
+										// likecount_id).html();
+										// if (likeit) {
+										// // TODO increment count
+										//
+										// likecount++;
+										// } else {
+										//
+										// likecount--;
+										// }
+										// $('#' +
+										// likecount_id).html(likecount);
+										// }
+									});
+					$('.commentbtn')
+							.live(
+									'click',
+									function(e) {
+										e.preventDefault();
+										var user_post = $(this).data(
+												'user_post');
+
+										if (user_post) {
+											console.log("clicked comment "
+													+ user_post.user_post_id);
+										} else
+											console
+													.log("clicked comment but no user_post data!");
+
+										commentbtn_handler(user_post);
+
+									});
 
 					$('.otherbtn').live('click', function(e) {
 						e.preventDefault();
@@ -1363,16 +1593,15 @@ function setupFriendRequests(json) {
 
 		html += '<div class="friend_req_relationship">' + initiator_fname
 				+ ' says they know you as ' + k.relationship + '</div>';
-		
-		html += '<div class="friend_req_status_div"> Status: <div class="friend_req_status">' + reqstatus + '</div></div>';
+
+		html += '<div class="friend_req_status_div"> Status: <div class="friend_req_status">'
+				+ reqstatus + '</div></div>';
 
 		html += '<div class="approve_friend_btns">';
 		html += '<a href="#" class="approvebtn small button" id="'
-				+ approve_reqid
-				+ '">Approve</a>';
+				+ approve_reqid + '">Approve</a>';
 		html += '<a href="#" class="rejectbtn small button" id="'
-				+ reject_reqid
-				+ '">Reject</a>';
+				+ reject_reqid + '">Reject</a>';
 		html += '</div>';
 
 		$('#friend_requests').append(html + "</div></li>");
@@ -1394,7 +1623,7 @@ function setupFriendRequests(json) {
 		var reject_reqid = 'rejectkidfriendreq_' + k.user_friend_id;
 		var flag_reqid = 'flagkidfriendreq_' + k.user_friend_id;
 		var email_reqid = 'emailkidfriendreq_' + k.user_friend_id;
-		
+
 		var html = '<li id="' + reqid + '" class="kidfriendrequest">';
 		var isFriend1Initiator = (k.initiating_friend_id == k.friend1_id);
 		var initiator_id = k.friend1_id;
@@ -1419,24 +1648,20 @@ function setupFriendRequests(json) {
 			k.relationship = 'Not Specified';
 		html += '<div class="friend_req_relationship">' + initiator_fname
 				+ ' says they know each other as ' + k.relationship + '</div>';
-		
-		html += '<div class="friend_req_status_div"> Status: <div class="friend_req_status">' + reqstatus + '</div></div>';
+
+		html += '<div class="friend_req_status_div"> Status: <div class="friend_req_status">'
+				+ reqstatus + '</div></div>';
 
 		html += '<div class="approve_friend_btns">';
 		html += '<a href="#" class="kidapprovebtn small button" id="'
-				+ approve_reqid
-				+ '">Approve</a>';
+				+ approve_reqid + '">Approve</a>';
 		html += '<a href="#" class="kidrejectbtn small button" id="'
-				+ reject_reqid
-				+ '">Reject</a>';
+				+ reject_reqid + '">Reject</a>';
 		html += '<a href="#" class="kidrejectflagbtn small button" id="'
-				+ flag_reqid
-				+ '">Reject and Flag Request as Suspect</a>';
+				+ flag_reqid + '">Reject and Flag Request as Suspect</a>';
 		html += '<a href="#" class="kidemailparentbtn small button" id="'
-			+ email_reqid
-			+ '">Email other Parent</a>';
+				+ email_reqid + '">Email other Parent</a>';
 		html += '</div>';
-		
 
 		$('#kid_friend_requests').append(html + "</li>");
 		$('#' + reqid).data('kidfriendrequest', k);
@@ -1608,15 +1833,9 @@ function get_req_msg_note_counts() {
 						console.log("got req_msg_note_counts!");
 
 						// put data on page
-						$('div#yakbar_friend_req_count').each(function() {
-							$(this).html(json.friend_req_count);
-						});
-						$('div#yakbar_message_count').each(function() {
-							$(this).html(json.message_count);
-						});
-						$('div#yakbar_notify_count').each(function() {
-							$(this).html(json.notify_count);
-						});
+						reset_yakbar_friend_req_count(json.friend_req_count);
+						reset_yakbar_request_count(json.approval_count);
+						reset_yakbar_notify_count(json.notify_count);
 
 					} else {
 
@@ -1638,6 +1857,35 @@ function get_req_msg_note_counts() {
 								+ xhr.status + " " + xhr.statusText);
 				}
 			});
+}
+
+function reset_yakbar_notify_count(cnt) {
+	$('div#yakbar_notify_count').each(function() {
+		if (cnt > 0) {
+			$(this).html(cnt).show();
+		} else
+			$(this).hide();
+	});
+}
+
+function reset_yakbar_friend_req_count(cnt) {
+	$('div#yakbar_friend_req_count').each(function() {
+
+		if (cnt > 0) {
+			$(this).html(cnt).show();
+		} else
+			$(this).hide();
+	});
+}
+
+function reset_yakbar_request_count(cnt) {
+	$('div#yakbar_request_count').each(function() {
+
+		if (cnt > 0) {
+			$(this).html(cnt).show();
+		} else
+			$(this).hide();
+	});
 }
 
 function addedChildHandler(json) {
@@ -1701,76 +1949,202 @@ function addChildOnYak(new_kid, addedChildHandler, addedChildFailureHandler) {
 
 }
 
+function load_notifications_success_handler(json) {
+	console.log("got notifications!");
+
+	// put data on page
+	var item = '';
+	jQuery
+			.each(
+					json.notifications,
+					function() {
+						var notification = $(this)[0];
+						var avatar = notification.avatar;
+						if (avatar == null || avatar.length == 0)
+							avatar = "./img/avatar_0.jpg";
+
+						var options = notification.options;
+						if (typeof options != undefined) {
+							console.log("notification options: " + options);
+						}
+
+						// TODO: parse optional data
+						item += '<li><div class="row"><div class="notification_div eight columns centered ">';
+
+						item += '<div class="one columns notification_avatar_div"><img class="" src="'
+								+ avatar + '" /></div>';
+
+						item += '<div class="notification_body nine columns">';
+						item += notification.message;
+						item += '</div>';
+
+						item += '<div class="notification_clock_div one columns"><img src="./img/icon_datetime.png" ></div>';
+
+						item += '<div class="one columns notification_date">';
+						item += notification.created_delta;
+						item += '</div>';
+
+						item += '</div></div></li>';
+
+					});
+
+	$('#notifications_list').empty().html(item);
+	reset_yakbar_notify_count(0);
+
+	// goto #notifications
+	$.mobile.changePage($('#notifications'), {
+		transition : "fade",
+		type : "post"
+	});
+}
+
 function load_notifications() {
 
 	// get notifications
+	var inputdata = {
+		user_id : $userid
+	};
 
-	$
-			.ajax({
-				url : '../yak/controllers/get_user_notifications.php',
-				type : 'post',
-				dataType : 'json',
-				data : {
-					user_id : $userid
-				},
-				success : function(json) {
-					// process the result
-					if (json.errorcode == 0) {
-						console.log("got notifications!");
+	post_ajax('../yak/controllers/get_user_notifications.php', inputdata,
+			load_notifications_success_handler, std_failure_handler);
 
-						// put data on page
-						var item = '';
-						jQuery
-								.each(
-										json.notifications,
-										function() {
-											var notification = $(this)[0];
+}
 
-											item += '<li><div><img class="notification_avatar" src="img/pic_jenb.jpg" /> ';
-											item += '<div class="notification_body">';
-											item += '<h1>'
-													+ notification.notification_code
-													+ '</h>';
-											item += '</div>';
-											item += '<div class="notification_text">';
-											item += '<p>'
-													+ notification.notification_const
-													+ ' This is the text of notification'
-													+ '</p>';
-											item += '</div>';
-											item += '<div class="notification_date">';
-											item += '<p>'
-													+ notification.created
-													+ '</p>';
-											item += '</div>';
-											item += '</div></li>';
+function load_approvals_success_handler(json) {
+	console.log("got approvals!");
 
-										});
-						$('#notifications_list').empty().html(item);
+	// put data on page
+	var item = '';
+	jQuery
+			.each(
+					json.notifications,
+					function() {
+						var notification = $(this)[0];
 
-						// goto #notifications
-						$.mobile.changePage($('#notifications'), {
-							transition : "fade",
-							type : "post"
-						});
+						var avatar = notification.avatar;
+						if (avatar == null)
+							avatar = "./img/avatar_0.jpg";
 
-					} else {
+						var options = jQuery.parseJSON(notification.options);
+//						if (typeof options != undefined) {
+//							console.log("notification options: " + options);
+//						}
 
-						serverAlert("Error retrieving user notifications", json);
-						console.log("Error retrieving user notifications");
-						console.log(json.errormsg);
+						// TODO: parse optional data
+						item += '<li><div class="row"><div class="notification_div eight columns centered ">';
 
-					}
-				},
-				failure : function(data) {
-					alert("Failure retrieving user notifications");
-				},
-				complete : function(xhr, data) {
-					if (xhr.status != 0 && xhr.status != 200)
-						alert('Error calling server to retrieve user notifications. Status='
-								+ xhr.status + " " + xhr.statusText);
-				}
-			});
+						item += '<div class="one columns notification_avatar_div"><img class="" src="'
+								+ avatar + '" /></div>';
+
+						item += '<div class="notification_body nine columns">';
+
+						item += '<div class="notification_body_message twelve columns">';
+						item += notification.message;
+						item += '</div>';
+
+						// TODO: based on type of approval required, show one or
+						// more buttons
+						// kid's content (status message and weirdoid can be
+						// approved or denied
+						// kid's comments and likes can be be denied
+
+						console.log("notification_const :"
+								+ options.notification_const);
+						var show_approve_btn = false;
+						var show_deny_btn = false;
+						var approve_data = [];
+
+						switch (options.notification_const) {
+							case 'CHILD_POSTED_CONTENT':
+								// get the type of content
+								if (options.post_type_id == 1) // weirdoid
+								{
+									var imgname = options.imgname;
+									var fname = options.fname;
+									var lname = options.lname;
+									console.log("imgname = " + imgname + " fname "+ fname);
+									item += '<div class="approval_weirdoid_div twelve columns">';
+									item += '<div class="approval_weirdoid three columns"><img src="' + imgname + '"></div>';
+									item += '<div class="approval_weirdoid_name three columns">' + fname + ' ' + lname + '</div>';
+									item += '<div class="six columns"></div>';
+									item += '</div>';
+									show_approve_btn = true;
+									show_deny_btn = true;
+									approve_data["user_post_id"] = options.user_post_id;
+									
+								} 
+								break;
+							case 'CHILD_CHANGED_STATUS' :
+									// status message
+									var msg = options.msg;
+//									item += '<div class="approval_status_div twelve columns">';
+//									item += '<div class="approval_status three columns">' + msg + '</div>';
+//									item += '<div class="nine columns"></div>';
+//									item += '</div>';
+									//show_approve_btn = true;
+									show_deny_btn = true;
+									approve_data["user_post_id"] = options.user_post_id;
+					
+								break;
+							default:
+	
+								break;
+						}
+
+						if (options.is_parent_actionable > 0
+								&& (show_approve_btn || show_deny_btn)) {
+
+							item += '<div class="approval_buttons_div twelve columns">';
+							if (show_approve_btn)
+								item += '<a href="#" class="approve_button small radius red button" upid="' + options.user_post_id + '">Approve</a>';
+							if (show_deny_btn)
+								item += '<a href="#" class="deny_button small radius red button" upid="' + options.user_post_id + '">Deny</a>';
+							item += '<div class="approval_status two columns">' + get_approved_status_value(options.is_approved)  + '</div>';
+							item += '</div>';
+
+						}
+
+						item += '</div>'; // notification_body
+
+						item += '<div class="notification_clock_div one columns"><img src="./img/icon_datetime.png" ></div>';
+
+						item += '<div class="one columns notification_date">';
+						item += notification.created_delta;
+						item += '</div>';
+
+						item += '</div></li>';
+
+					});
+	$('#approvals_list').empty().html(item);
+	reset_yakbar_request_count(0);
+
+	// goto #notifications
+	$.mobile.changePage($('#approvals'), {
+		transition : "fade",
+		type : "post"
+	});
+}
+
+function get_approved_status_value(is_approved) 
+{
+	var approved_status = "Pending";
+	if (is_approved == 1)
+		approved_status = "Approved";
+	else if (is_approved == 0)
+		approved_status = "Denied";
+	return approved_status;
+}
+
+function load_approvals() {
+
+	// get notifications
+	var inputdata = {
+		user_id : $userid
+	};
+
+	post_ajax('../yak/controllers/get_child_approval_requests.php', inputdata,
+			load_approvals_success_handler, std_failure_handler);
+
 }
 
 function checkdate(value) {
@@ -1847,9 +2221,20 @@ function gotoHome(userid, fname) {
 	// return false;
 	// }
 
+	$('.yakbar_user_fname').html($yaklogin);
+	var tmp_id = Math.floor(Math.random() * 4);
+	var avatar = "./img/avatar_" + tmp_id + ".jpg";
+	if ($my_avatar == null)
+		$my_avatar = avatar;
+	else
+		avatar = $my_avatar;
+
+	$('.yakbar_user_img').attr('src', avatar);
+
 	$.mobile.changePage($("#hq"), {
 		transition : "fade",
 		type : "post",
+		allowSamePageTransition : true,
 		data : {
 			userid : userid,
 			userfname : fname
@@ -1867,6 +2252,7 @@ function logoutYak() {
 	$userid = null;
 	$userfname = null;
 	$is_logged_in = false;
+	$yaklogin = null;
 
 	$('#yakbar_login_logout_btn').html('Log In');
 	$('#yakbar_user_img').hide();
@@ -1900,7 +2286,11 @@ function loginToYak(name, password, successcb, failurecb) {
 				if (json.userid) {
 					$userid = json.userid;
 					$userfname = json.fname;
+					$yaklogin = json.yaklogin;
 					$is_parent = (json.is_parent > 0);
+					$my_avatar = json.avatar;
+					highlight_avatar($my_avatar);
+					$is_kid = json.is_kid;
 				}
 
 				if (successcb) {
@@ -1951,310 +2341,383 @@ function resetAllDateSelectors() {
 
 }
 
-function get_recent_weirdoids() {
+function get_user_activity_success_handler(json) {
+	console.log("Retrieved list of posts in get_user_activity_success_handler");
+
+	var target_div = $('#weirdoid_post_list');
+
+	display_user_posts(target_div, 'activity', json);
+
+	// goto
+	$.mobile.changePage($('#activity'), {
+		transition : "fade",
+		type : "post"
+	});
+
+}
+
+function get_profile_activity_success_handler(json) {
+
+	console
+			.log("Retrieved list of posts in get_profile_activity_success_handler");
+
+	// set up info about user
+	var is_friend = false;
+
+	if (json.user_data) {
+		if (json.user_data["is_friend"])
+			is_friend = parseInt(json.user_data["is_friend"]) > 0;
+
+		$('#profile_avatar').attr('src', json.user_data["avatar"]);
+		$('#profile_yaklogin').text(json.user_data["yaklogin"]);
+		$('#profile_friend_count').text(Math.floor(Math.random() * 21));
+		// $('#profile_photo_count').text(Math.floor(Math.random() * 13));
+		$('#profile_likes_count').text(Math.floor(Math.random() * 57));
+	}
+
+	var target_div = $('#profile_weirdoid_post_list');
+	if (is_friend)
+		display_user_posts(target_div, 'profile', json);
+	else
+		console.log("Don't show posts for non-friend "
+				+ json.user_data["yaklogin"]);
+
+	// goto
+	$.mobile.changePage($('#profile'), {
+		transition : "fade",
+		type : "post"
+	});
+
+}
+
+function SortByUnixTimestampDesc(a, b) {
+	var ats = a.unix_created;
+	var bts = b.unix_created;
+
+	return ((ats < bts) ? 1 : ((ats > bts) ? -1 : 0));
+}
+
+function display_user_posts(target_div, id_prefix, json) {
+
+	console.log("in display_user_posts");
+
+	// sort the posts by datetime
+	var posts = [];
+
+	if (json.gallery) {
+
+		jQuery.each(json.gallery, function(objidx) {
+
+			var post = [];
+			post["post_type_id"] = this.post_type_id;
+			post["unix_created"] = this.unix_created;
+			post["objidx"] = objidx;
+			post["object"] = this;
+			posts.push(post);
+		});
+	}
+
+	if (json.status_updates) {
+
+		jQuery.each(json.status_updates, function(objidx) {
+
+			var post = [];
+			post["post_type_id"] = this.post_type_id;
+			post["unix_created"] = this.unix_created;
+			post["objidx"] = objidx;
+			post["object"] = this;
+			posts.push(post);
+		});
+	}
+
+	// sort them
+	posts.sort(SortByUnixTimestampDesc);
+
+	target_div.empty();
+
+	if (posts.length == 0) {
+		target_div.append("<h1>No Posts Found</h1>");
+		return;
+	}
+
+	for ( var x = 0; x < posts.length; x++) {
+		var nxtpost = posts[x];
+
+		display_post(target_div, id_prefix, nxtpost.object, x,
+				parseInt(nxtpost.post_type_id));
+	}
+
+}
+
+function display_status_msg_post(target_div, message) {
+	console.log("displaying user status message post for: " + message.yaklogin
+			+ " msg: " + message.message);
+
+	myhtml = '<div class="status_msg_post">' + message.message + '</div>';
+
+	return myhtml;
+}
+
+function display_post_header(profile_btn_id, avatar, yaklogin, daysago, hrsago,
+		minsago, secsago) {
+	var myhtml = '';
+	myhtml += '<div class="posthdr row">';
+	myhtml += '<div class="two mobile-one columns"><a href="#" class="profilebtn" id="'
+			+ profile_btn_id + '"><img src="' + avatar + '"/></a></div>';
+	myhtml += '<div class="six mobile-two columns">' + yaklogin + '</div>';
+	myhtml += '<div class="two mobile-one columns"><img src="./img/icon_datetime.png" class="icon_datetime"></div>';
+
+	var tunit = '';
+	if (daysago && daysago > 0) {
+		tunit = daysago + 'd';
+	} else if (hrsago && hrsago > 0) {
+		tunit = hrsago + 'h';
+	} else if (minsago && minsago > 0) {
+		tunit = minsago + 'm';
+	} else if (secsago && secsago > 0)
+		tunit = secsago + 's';
+
+	myhtml += '<div class="two mobile-one columns gallery-age">' + tunit
+			+ '</div>';
+
+	myhtml += '</div>'; // post header
+	return myhtml;
+}
+
+function display_post(target_div, id_prefix, post, objidx, post_type_id) {
 
 	var docroot = "../weirdoids/";
 	// var docroot = "http://yrcreative.com/clients/yakbooks/weirdoids/";
 	// var docroot = "http://yak.com/yakbooks/weirdoids/";
-	$('#weirdoid_post_list').empty();
 
-	// get the images
-	$
-			.ajax({
-				url : '../weirdoids/server/get_recent_weirdoids.php',
-				type : 'post',
-				dataType : 'json',
-				data : {
-					userid : $userid
-				}, // store,
-				success : function(json) {
-					// process the result
-					if (json.errorcode == 0) {
-						console.log("Retrieved list of images in gallery");
+	var likecount = 0;
+	var yaklogin = post.yaklogin; // TODO
+	// get
+	// correct
+	// name
+	var like_btn_id = id_prefix + '_like_' + objidx;
+	var comment_btn_id = id_prefix + '_comment_' + objidx;
+	var other_btn_id = id_prefix + '_other_' + objidx;
+	var likecount_id = id_prefix + '_likecount_' + objidx;
+	var post_id = id_prefix + '_post_' + objidx;
+	var profile_btn_id = id_prefix + '_profile_btn_id_' + objidx;
 
-						if (json.gallery) {
+	if (post['likes'])
+		likecount = post['likes'];
 
-							jQuery
-									.each(
-											json.gallery,
-											function(imgno) {
-												// create image
-												nxtimg = this;
-												var likecount = 0;
-												var fname = 'Brian'; //TODO get correct name
-												var like_btn_id = 'like_'
-														+ imgno;
-												var comment_btn_id = 'comment_'
-														+ imgno;
-												var other_btn_id = 'other_'
-														+ imgno;
-												var likecount_id = 'likecount_'
-														+ imgno;
-												var weirdoid_post_id = 'weirdoid_post_'
-														+ imgno;
+	var myhtml = '<li><div class="post_post" id="' + post_id + '">';
 
-												if (nxtimg['likes'])
-													likecount = nxtimg['likes'];
+	// TODO: put avatar in header of post
+	myhtml += display_post_header(profile_btn_id, post.avatar, yaklogin,
+			post.daysago, post.hrsago, post.minsago, post.secsago);
 
-												var myhtml = '<li><div class="weirdoid_post" id="'
-														+ weirdoid_post_id
-														+ '">';
+	// post content
+	switch (post_type_id) {
+	case 1:
+		// weirdoid
+		myhtml += '<img src="' +  post["url"]
+				+ '" class="gallery-image" ><br>';
 
-												// TODO: put avatar in header of
-												// weirdoid_post
-												myhtml += '<div class="posthdr row">';
-												myhtml += '<div class="two mobile-one columns"><img src="img/pic_briank.jpg"/></div>';
-													myhtml += '<div class="six mobile-two columns">'+ fname + '</div>';
-												myhtml += '<div class="two mobile-one columns"><img src="img/icon_datetime.png" class="icon_datetime"></div>';
-												
-												if (nxtimg.daysago
-														&& nxtimg.daysago > 0) {
-													myhtml += '<div class="two mobile-one columns gallery-age">'
-															+ nxtimg.daysago
-															+ ' days ago by '
-															+ nxtimg.yaklogin
-															+ '</div>';
-												} else if (nxtimg.hrsago) {
-													myhtml += '<div class="two mobile-one columns gallery-age">'
-															+ nxtimg.hrsago
-															+ ' hours ago by '
-															+ nxtimg.yaklogin
-															+ '</div>';
-												} else if (nxtimg.minsago) {
-													myhtml += '<div class=" two mobile-one columns gallery-age">'
-															+ nxtimg.minsago
-															+ ' minutes ago by '
-															+ nxtimg.yaklogin
-															+ '</div>';
-												}
-												myhtml += '</div>'; // post
-												// header
+		var wholename = "";
+		if (post.fname && post.fname.length > 0)
+			wholename += post.fname;
+		if (post.lname && post.lname.length > 0) {
+			if (wholename.length > 0) {
+				wholename += ' ';
+			}
+			wholename += post.lname;
+		}
+		if (wholename.length > 0)
+			myhtml += '<div class="gallery-name">' + wholename + '</div>';
+		break;
+	case 2:
+		// status msg
+		myhtml += display_status_msg_post(target_div, post);
+		break;
+	default:
+		console.log("unknown post type: " + nxtpost.post_type_id);
+		alert("unknown post type: " + nxtpost.post_type_id);
+		break;
+	}
 
-												myhtml += '<img src="'
-														+ docroot
-														+ nxtimg["url"]
-														+ '" class="gallery-image" ><br>';
+	// post comments
+	myhtml += display_post_comments(post, like_btn_id, comment_btn_id,
+			other_btn_id, likecount_id, likecount);
 
-												var wholename = "";
-												if (nxtimg.fname
-														&& nxtimg.fname.length > 0)
-													wholename += nxtimg.fname;
-												if (nxtimg.lname
-														&& nxtimg.lname.length > 0) {
-													if (wholename.length > 0) {
-														wholename += ' ';
-													}
-													wholename += nxtimg.lname;
-												}
-												if (wholename.length > 0)
-													myhtml += '<div class="gallery-name">'
-															+ wholename
-															+ '</div>';
+	// complete post div and li
+	myhtml += '</div></li>';
 
-												myhtml += '<div class="like_comment_btns">';
-												var btntext = (nxtimg.user_liked_already > 0) ? 'Unlike'
-														: 'Like';
-												myhtml += '<a href="#" class="likebtn small button" id="'
-														+ like_btn_id
-														+ '">'
-														+ btntext + '</a>';
-												myhtml += '<a href="#" class="commentbtn small button" id="'
-														+ comment_btn_id
-														+ '">Comment</a>';
-												myhtml += '<a href="#" class="otherbtn small button" id="'
-														+ other_btn_id
-														+ '">...</a>';
-												myhtml += '</div>';
+	target_div.append(myhtml);
 
-												myhtml += '<div class="post_likes_comments" >';
+	post.likecount_id = likecount_id;
+	post.post_id = post_id;
+	post.like_btn_id = like_btn_id;
 
-												myhtml += '<div class="post_likes row">';
-												myhtml += '<div class="three mobile-one columns ">';
-												myhtml += '<img src="img/icon_like.png" />';
-												myhtml += '</div>';
-												myhtml += '<div class="nine mobile-three columns ">';
-												myhtml		+= '<span id="'+ likecount_id + '">' +  likecount + '</span>';
-												myhtml		+= '<span> Likes</span></div>';
-												myhtml += '</div>';
-
-												// 
-												myhtml += '<div class="post_comments row comment">';
-
-												myhtml += '<div class="two mobile-one columns ">';
-												myhtml += '<img src="img/icon_comment.png" />';
-												myhtml += '</div><div class="nine mobile-four columns">';
-												myhtml += '<ul class="post_comments_list">';
-
-												if (nxtimg['comments']) {
-													var comments = nxtimg['comments'];
-													if (!comments)
-														comments = [];
-
-													for ( var i = 0; i < comments.length; i++) {
-														var comment = comments[i];
-
-														// iterate through
-														// comments
-														myhtml += get_comment_html(comment);
-													}
-												}
-
-												myhtml += '</ul>';
-
-												myhtml += '</div></div>';
-
-												myhtml += '</div></li>';
-
-												$('#weirdoid_post_list')
-														.append(myhtml);
-
-												this.likecount_id = likecount_id;
-												this.weirdoid_post_id = weirdoid_post_id;
-												this.like_btn_id = like_btn_id;
-
-												$('#' + like_btn_id).data(
-														'user_post', this);
-												$('#' + comment_btn_id).data(
-														'user_post', this);
-												$('#' + other_btn_id).data(
-														'user_post', this);
-
-											});
-						}
-						// goto #notifications
-						$.mobile.changePage($('#activity'), {
-							transition : "fade",
-							type : "post"
-						});
-					} else {
-						serverAlert("Gallery retrieval failure", json);
-					}
-				},
-				failure : function(data) {
-					serverAlert("Gallery retrieval failure", data);
-					console.log("Gallery retrieval failure");
-					if ($srcPage != null)
-						gotoPage($srcPage);
-				},
-				complete : function(xhr, data) {
-					if (xhr.status != 0 && xhr.status != 200)
-						alert('Error calling server to Gallery retrieval. Status='
-								+ xhr.status + " " + xhr.statusText);
-				}
-			});
+	$('#' + like_btn_id).data('user_post', post);
+	$('#' + comment_btn_id).data('user_post', post);
+	$('#' + other_btn_id).data('user_post', post);
+	$('#' + profile_btn_id).data('user_post', post);
 }
 
-function refresh_weirdoid_activity(user_post) {
+function display_post_comments(post, like_btn_id, comment_btn_id, other_btn_id,
+		likecount_id, likecount) {
+	var myhtml = '<div class="like_comment_btns">';
+	var btntext = (post.user_liked_already > 0) ? 'Unlike' : 'Like';
+	myhtml += '<a href="#" class="likebtn small button" id="' + like_btn_id
+			+ '">' + btntext + '</a>';
+	myhtml += '<a href="#" class="commentbtn small button" id="'
+			+ comment_btn_id + '">Comment</a>';
+	myhtml += '<a href="#" class="otherbtn small button" id="' + other_btn_id
+			+ '">...</a>';
+	myhtml += '</div>';
 
-	// get the images
-	$
-			.ajax({
-				url : '../weirdoids/server/refresh_weirdoid_activity.php',
-				type : 'post',
-				dataType : 'json',
-				data : {
-					user_post_id : user_post.user_post_id,
-					userid : $userid
-				},
-				success : function(json) {
-					// process the result
-					if (json.errorcode == 0) {
-						console
-								.log("Retrieved activity data for this user_post");
-						console.log("$current_user_post = "
-								+ $current_user_post.user_post_id
-								+ ' user_post_id ' + user_post.user_post_id);
-						if (json.user_post_data) {
+	myhtml += '<div class="post_likes_comments" >';
 
-							var user_post_data = json.user_post_data;
+	myhtml += '<div class="post_likes row">';
+	myhtml += '<div class="three mobile-one columns ">';
+	myhtml += '<img src="img/icon_like.png" />';
+	myhtml += '</div>';
+	myhtml += '<div class="nine mobile-three columns ">';
+	myhtml += '<span id="' + likecount_id + '">' + likecount + '</span>';
+	myhtml += '<span> Likes</span></div>';
+	myhtml += '</div>';
 
-							if (!$current_user_post) {
-								alert("no current user post selected.");
-								return;
-							}
+	// 
+	myhtml += '<div class="post_comments row comment">';
 
-							// get the update like count and comments
-							if (user_post_data['likes'])
-								likecount = user_post_data['likes'];
+	myhtml += '<div class="two mobile-one columns ">';
+	myhtml += '<img src="img/icon_comment.png" />';
+	myhtml += '</div><div class="nine mobile-four columns">';
+	myhtml += '<ul class="post_comments_list">';
 
-							// find the associated div
-							if (!$current_user_post.weirdoid_post_id) {
-								alert("no current weirdoid_post_id.");
-								return;
-							}
+	if (post['comments']) {
+		var comments = post['comments'];
+		if (!comments)
+			comments = [];
 
-							var wdiv = $('#'
-									+ $current_user_post.weirdoid_post_id);
+		for ( var i = 0; i < comments.length; i++) {
+			var comment = comments[i];
 
-							// update the like count
-							if (!$current_user_post.likecount_id) {
-								alert("no current likecount_id.");
-								return;
-							}
-							$('#' + $current_user_post.likecount_id).html(
-									likecount);
+			// iterate through
+			// comments
+			myhtml += get_comment_html(comment);
+		}
+	}
 
-							if (!user_post_data['user_liked_already']) {
-								alert("no current user_liked_already.");
-								return;
-							} else {
-								var btntext = (user_post_data['user_liked_already'] > 0) ? 'Unlike'
-										: 'Like';
-								$('#' + $current_user_post.like_btn_id).text(
-										btntext);
-							}
+	myhtml += '</ul>';
 
-							// find the comments, empty them
-							var clist = wdiv.find('.post_comments_list:first');
-							if (!clist) {
-								alert("no current clist.");
-								return;
-							}
-							clist.empty();
+	myhtml += '</div></div>';
 
-							// loop through comments
+	return myhtml;
 
-							var myhtml = ' ';
-							var comments = [];
+}
 
-							if (user_post_data['comments']) {
-								comments = user_post_data['comments'];
-								if (!comments)
-									comments = [];
+function get_user_activity() {
 
-								for ( var i = 0; i < comments.length; i++) {
-									var comment = comments[i];
+	$('#weirdoid_post_list').empty();
 
-									// iterate through
-									// comments
-									myhtml += get_comment_html(comment);
+	var inputdata = {
+		userid : $userid,
+		target_id : $userid,
+		getfriends : 1
+	};
 
-								}
+	post_ajax('../yak/controllers/get_user_activity.php', inputdata,
+			get_user_activity_success_handler, std_failure_handler);
 
-								clist.append(myhtml);
-							}
-						}
-					}
-					else
-						{
-						serverAlert("refresh_weirdoid_activity retrieval failure",
-								json);
-						console.log("refresh_weirdoid_activity retrieval failure");
-						}
-				},
-				failure : function(data) {
-					serverAlert("refresh_weirdoid_activity retrieval failure",
-							data);
-					console.log("refresh_weirdoid_activity retrieval failure");
-					if ($srcPage != null)
-						gotoPage($srcPage);
-				},
-				complete : function(xhr, data) {
-					if (xhr.status != 0 && xhr.status != 200)
-						alert('Error calling server to refresh_weirdoid_activity. Status='
-								+ xhr.status + " " + xhr.statusText);
-				}
-			});
+}
+
+function refresh_post_activity_success_handler(json) {
+	console.log("Retrieved activity data for this user_post");
+	// console.log("$current_user_post = " + $current_user_post.user_post_id
+	// + ' user_post_id ' + user_post.user_post_id);
+	if (json.user_post_data) {
+
+		var user_post_data = json.user_post_data;
+
+		if (!$current_user_post) {
+			alert("no current user post selected.");
+			return;
+		}
+
+		// get the update like count and comments
+		if (user_post_data['likes'])
+			likecount = user_post_data['likes'];
+
+		// find the associated div
+		if (!$current_user_post.post_id) {
+			alert("no current post_id.");
+			return;
+		}
+
+		var wdiv = $('#' + $current_user_post.post_id);
+
+		// update the like count
+		if (!$current_user_post.likecount_id) {
+			alert("no current likecount_id.");
+			return;
+		}
+		$('#' + $current_user_post.likecount_id).html(likecount);
+
+		if (!user_post_data['user_liked_already']) {
+			alert("no current user_liked_already.");
+			return;
+		} else {
+			var btntext = (user_post_data['user_liked_already'] > 0) ? 'Unlike'
+					: 'Like';
+			$('#' + $current_user_post.like_btn_id).text(btntext);
+		}
+
+		// find the comments, empty them
+		var clist = wdiv.find('.post_comments_list:first');
+		if (!clist) {
+			alert("no current clist.");
+			return;
+		}
+		clist.empty();
+
+		// loop through comments
+
+		var myhtml = ' ';
+		var comments = [];
+
+		if (user_post_data['comments']) {
+			comments = user_post_data['comments'];
+			if (!comments)
+				comments = [];
+
+			for ( var i = 0; i < comments.length; i++) {
+				var comment = comments[i];
+
+				// iterate through
+				// comments
+				myhtml += get_comment_html(comment);
+
+			}
+
+			clist.append(myhtml);
+		}
+	}
+}
+
+function refresh_post_activity(user_post) {
+
+	var inputdata = {
+		user_post_id : user_post.user_post_id,
+		userid : $userid
+	};
+
+	post_ajax('../yak/controllers/refresh_post_activity.php', inputdata,
+			refresh_post_activity_success_handler, std_failure_handler);
+}
+
+function likebtn_handler_success_handler(json) {
+	var likes = '?';
+
+	if (json.likes)
+		likes = json.likes;
+
+	$('#' + $current_user_post.likecount_id).html(likes);
 }
 
 function likebtn_handler(user_post, likeit) {
@@ -2268,41 +2731,14 @@ function likebtn_handler(user_post, likeit) {
 
 	$current_user_post = user_post;
 
-	$.ajax({
-		url : '../yak/controllers/like_post.php',
-		type : 'post',
-		dataType : 'json',
-		data : {
-			userid : $userid,
-			user_post_id : user_post.user_post_id,
-			like : likeit
-		},
-		success : function(json) {
-			// process the result
-			if (json.errorcode == 0) {
-				console.log("Liked or unliked post!");
-				var likes = '?';
+	var inputdata = {
+		userid : $userid,
+		user_post_id : user_post.user_post_id,
+		like : likeit
+	};
 
-				if (json.likes)
-					likes = json.likes;
-
-				$('#' + $current_user_post.likecount_id).html(likes);
-
-			} else {
-
-				serverAlert("failure likeing or unlikeing a post", json);
-
-			}
-		},
-		failure : function(data) {
-			alert("likeing or unlikeing a post failure");
-		},
-		complete : function(xhr, data) {
-			if (xhr.status != 0 && xhr.status != 200)
-				alert('Error calling server to like or unlike a post. Status='
-						+ xhr.status + " " + xhr.statusText);
-		}
-	});
+	post_ajax('../yak/controllers/like_post.php', inputdata,
+			likebtn_handler_success_handler, std_failure_handler);
 }
 
 var $current_user_post = null;
@@ -2310,9 +2746,11 @@ var $current_user_post = null;
 function commentbtn_handler(user_post) {
 
 	// TOOD get comment for this user_post.user_post_id
-	$current_user_post = user_post;
+	if (user_post != null) {
+		$current_user_post = user_post;
 
-	$('#getCommentsModal').reveal();
+		$('#getCommentsModal').reveal();
+	}
 
 }
 
@@ -2323,13 +2761,20 @@ function get_comment_html(comment) {
 
 		comment_html += '<li class="post_comment">';
 		comment_html += '<div class="ten mobile-three columns ">';
-		if (comment['fname'])
-			comment_html += '<a href="#">' + comment['fname'] + '</a>';
+		if (comment['yaklogin'])
+			comment_html += '<a href="#" class="commentor" commentor_id="'
+					+ comment['user_id'] + '">' + comment['yaklogin'] + '</a>';
 		comment_html += ' ' + comment['comment_text'];
 
 		comment_html += '</div></li>';
 	}
 	return comment_html;
+}
+
+function post_scripted_comment_success_handler(json) {
+	console.log("posted scripted comment!");
+
+	refresh_post_activity($current_user_post);
 }
 
 function post_scripted_comment(scripted_comment) {
@@ -2346,37 +2791,15 @@ function post_scripted_comment(scripted_comment) {
 		return;
 	}
 
-	$.ajax({
-		url : '../yak/controllers/post_scripted_comment.php',
-		type : 'post',
-		dataType : 'json',
-		data : {
-			userid : $userid,
-			user_post_id : $current_user_post.user_post_id,
-			scripted_comment_id : scripted_comment.scripted_comment_id
-		},
-		success : function(json) {
-			// process the result
-			if (json.errorcode == 0) {
-				console.log("posted scripted comment!");
+	var inputdata = {
+		userid : $userid,
+		user_post_id : $current_user_post.user_post_id,
+		scripted_comment_id : scripted_comment.scripted_comment_id
+	};
 
-				refresh_weirdoid_activity($current_user_post);
+	post_ajax('../yak/controllers/post_scripted_comment.php', inputdata,
+			post_scripted_comment_success_handler, std_failure_handler);
 
-			} else {
-
-				serverAlert("failure posting scripted comment", json);
-
-			}
-		},
-		failure : function(data) {
-			alert(" posting scripted comment failure");
-		},
-		complete : function(xhr, data) {
-			if (xhr.status != 0 && xhr.status != 200)
-				alert('Error calling server to  post scripted comment. Status='
-						+ xhr.status + " " + xhr.statusText);
-		}
-	});
 }
 
 function otherbtn_handler(user_post) {
@@ -2385,55 +2808,47 @@ function otherbtn_handler(user_post) {
 
 }
 
+function get_scripted_comments_success_handler(json) {
+	if (json.scripted_comments) {
+
+		jQuery.each(json.scripted_comments, function(idx) {
+			// create image
+			var sc = this;
+
+			var anchor_id = 'sc_' + idx;
+			// var scripted_comment_id = -1;
+
+			if (sc['scripted_comment_id'])
+				scripted_comment_id = sc['scripted_comment_id'];
+
+			var myhtml = '<li class="getCommentsListItem">';
+			myhtml += '<a class="getCommentsAnchor"	href="#" id="' + anchor_id
+					+ '" >' + sc['comment_text'] + '</a></li>';
+			$('#getCommentsList').append(myhtml);
+
+			$('#' + anchor_id).data('scripted_comment', this);
+		});
+	}
+}
+
 function get_scripted_comments() {
 
 	$('#getCommentsList').empty();
 
-	// get the images
-	$.ajax({
-		url : '../yak/controllers/get_scripted_comments.php',
-		type : 'post',
-		dataType : 'json',
-		success : function(json) {
-			// process the result
-			if (json.errorcode == 0) {
-				console.log("Retrieved list of scripted_comments");
+	var inputdata = null;
+	var options = {
+		function_name : "get_scripted_comments"
+	};
 
-				if (json.scripted_comments) {
+	post_ajax('../yak/controllers/get_scripted_comments.php', inputdata,
+			get_scripted_comments_success_handler, std_failure_handler, options);
+}
 
-					jQuery.each(json.scripted_comments, function(idx) {
-						// create image
-						var sc = this;
+function add_friend_handler_success_handler(json) {
+	console.log("Made friend request!");
 
-						var anchor_id = 'sc_' + idx;
-						var scripted_comment_id = -1;
-
-						if (sc['scripted_comment_id'])
-							scripted_comment_id = sc['scripted_comment_id'];
-
-						var myhtml = '<li class="getCommentsListItem">';
-						myhtml += '<a class="getCommentsAnchor"	href="#" id="'
-								+ anchor_id + '" >' + sc['comment_text']
-								+ '</a></li>';
-						$('#getCommentsList').append(myhtml);
-
-						$('#' + anchor_id).data('scripted_comment', this);
-					});
-				}
-			}
-		},
-		failure : function(data) {
-			serverAlert("Scripted Comments failure", json);
-			console.log("Scripted Comments failure");
-			if ($srcPage != null)
-				gotoPage($srcPage);
-		},
-		complete : function(xhr, data) {
-			if (xhr.status != 0 && xhr.status != 200)
-				alert('Error calling server to Scripted Comments. Status='
-						+ xhr.status + " " + xhr.statusText);
-		}
-	});
+	alert("Friend Request made!");
+	$("#friendlogin_id").val("");
 }
 
 function add_friend_handler() {
@@ -2450,155 +2865,118 @@ function add_friend_handler() {
 		return false;
 	}
 
-	$.ajax({
-		url : '../yak/controllers/add_friend.php',
-		type : 'post',
-		dataType : 'json',
-		data : {
-			login : name,
-			userid : $userid
-		},
-		success : function(json) {
-			// process the result
-			if (json.errorcode == 0) {
-				console.log("Made friend request!");
+	var inputdata = {
+		login : name,
+		userid : $userid
+	};
 
-				alert("Friend Request made!");
-				$("#friendlogin_id").val("");
-
-			} else {
-				serverAlert("Friend Request error", json);
-			}
-		},
-		failure : function(data) {
-			alert("Error adding friend: ", data);
-			console.log("Failure checking unique user name.");
-		},
-		complete : function(xhr, data) {
-			if (xhr.status != 0 && xhr.status != 200)
-				alert('Error calling server to add friend. Status='
-						+ xhr.status + " " + xhr.statusText);
-		}
-	});
+	post_ajax('../yak/controllers/add_friend.php', inputdata,
+			add_friend_handler_success_handler, std_failure_handler);
 
 	return false;
 
 }
 
-var userStatusMessages = [{ label: "I'm playing Weirdoids", user_status_id: "1" },{ label: "Yak is fun!", user_status_id: "2" },
-                          { label: "What's going on?", user_status_id: "3" },{ label: "Hello everyone!", user_status_id: "4" },
-                          { label: "Who wants to play?", user_status_id: "5" },{ label: "What a great day!", user_status_id: "6" },
-                          { label: "Wowzers", user_status_id: "7" },{ label: "Moo.", user_status_id: "8" },
-                          { label: "Hmm...", user_status_id: "9" },
-                          { label: "What's up?", user_status_id: "10" },{ label: "=)", user_status_id: "11" },
-                          { label: "Hi!", user_status_id: "12" }];
+/*
+ * 
+ * var userStatusMessages = [ { label : "I'm playing Weirdoids", user_status_id :
+ * "1" }, { label : "Yak is fun!", user_status_id : "2" }, { label : "What's
+ * going on?", user_status_id : "3" }, { label : "Hello everyone!",
+ * user_status_id : "4" }, { label : "Who wants to play?", user_status_id : "5" }, {
+ * label : "What a great day!", user_status_id : "6" }, { label : "Wowzers",
+ * user_status_id : "7" }, { label : "Moo.", user_status_id : "8" }, { label :
+ * "Hmm...", user_status_id : "9" }, { label : "What's up?", user_status_id :
+ * "10" }, { label : "=)", user_status_id : "11" }, { label : "Hi!",
+ * user_status_id : "12" } ];
+ */
 
 var currentFriendRequestContainer = null;
 
+function friendmgmt_handler_success_handler(json) {
+	console.log("Friend mgmt cmd handled successfully!");
+
+	// TODO change current status of friend, update window
+	if (json.friendstatus) {
+		// find status box
+		if (currentFriendRequestContainer != null) {
+			currentFriendRequestContainer.find('.friend_req_status').text(
+					json.friendstatus);
+		}
+	}
+
+}
+
 function friendmgmt_handler(evt, evtbtn) {
-	
+
 	currentFriendRequestContainer = null;
-	
+
 	var btn = $(evtbtn);
-	
+
 	console.log("in friendmgmt_handler" + btn);
-	
+
 	var container = btn.closest('li');
 	if (!container) {
 		alert("null friend request container");
 		return;
 	}
-	
+
 	var fr_req = container.data('friendrequest');
 	if (!fr_req) {
 		alert("null friend request data");
 		return;
 	}
-	
+
 	currentFriendRequestContainer = container;
-	
+
 	var cmd = 'Approve';
 	if (btn.hasClass('rejectbtn'))
 		cmd = 'Reject';
 
-	
 	// send data to server
+	var inputdata = {
+		userid : $userid,
+		fr_req : fr_req,
+		cmd : cmd
+	};
 
-	$.ajax({
-		url : '../yak/controllers/approve_friend.php',
-		type : 'post',
-		dataType : 'json',
-		data : {
-			userid : $userid,
-			fr_req : fr_req,
-			cmd : cmd
-		},
-		success : function(json) {
-			// process the result
-			if (json.errorcode == 0) {
-				console.log("Friend mgmt cmd handled successfully!");
-
-				// TODO change current status of friend, update window
-				if (json.friendstatus)
-					{
-						// find status box
-						if (currentFriendRequestContainer != null)
-							{
-							currentFriendRequestContainer.find('.friend_req_status').text(json.friendstatus);
-							}
-					}
-
-			} else {
-				serverAlert("Friend Request error", json);
-			}
-		},
-		failure : function(data) {
-			alert("Error adding friend: ", data);
-			console.log("Failure checking unique user name.");
-		},
-		complete : function(xhr, data) {
-			if (xhr.status != 0 && xhr.status != 200)
-				alert('Error calling server to add friend. Status='
-						+ xhr.status + " " + xhr.statusText);
-		}
-	});
-
+	post_ajax('../yak/controllers/approve_friend.php', inputdata,
+			friendmgmt_handler_success_handler, std_failure_handler);
 
 }
+
 function kid_friendmgmt_handler(evt, evtbtn) {
-	
+
 	currentFriendRequestContainer = null;
-	
+
 	var btn = $(evtbtn);
-	
+
 	console.log("in kid_friendmgmt_handler" + btn);
-	
+
 	var container = btn.closest('li');
 	if (!container) {
 		alert("null friend request container");
 		return;
 	}
-	
+
 	var fr_req = container.data('kidfriendrequest');
 	if (!fr_req) {
 		alert("null kid friend request data");
 		return;
 	}
-	
+
 	currentFriendRequestContainer = container;
-	
+
 	var cmd = 'Approve';
 	if (btn.hasClass('kidrejectbtn'))
 		cmd = 'Reject';
 	else if (btn.hasClass('kidrejectflagbtn'))
 		cmd = 'RejectFlag';
-	else if (btn.hasClass('kidemailparentbtn'))
-	{
+	else if (btn.hasClass('kidemailparentbtn')) {
 		cmd = 'EmailParent';
-		
-		//TODO call email client
+
+		// TODO call email client
 	}
-	
+
 	// send data to server
 
 	$.ajax({
@@ -2616,14 +2994,14 @@ function kid_friendmgmt_handler(evt, evtbtn) {
 				console.log("Friend mgmt cmd handled successfully!");
 
 				// TODO change current status of friend, update window
-				if (json.friendstatus)
-					{
-						// find status box
-						if (currentFriendRequestContainer != null)
-							{
-							currentFriendRequestContainer.find('.friend_req_status').text(json.friendstatus);
-							}
+				if (json.friendstatus) {
+					// find status box
+					if (currentFriendRequestContainer != null) {
+						currentFriendRequestContainer
+								.find('.friend_req_status').text(
+										json.friendstatus);
 					}
+				}
 
 			} else {
 				serverAlert("Friend Request error", json);
@@ -2640,5 +3018,342 @@ function kid_friendmgmt_handler(evt, evtbtn) {
 		}
 	});
 
+}
 
+var friends = null;
+
+function get_friend_list_success_handler(json) {
+	console.log("got friends!");
+
+	// put data on page
+	var item = '';
+	var fid = 0;
+	friends = [];
+
+	jQuery.each(json.friends, function() {
+		var friend = $(this)[0];
+		if (friend.avatar == null) {
+			// TODO - figure out default avatar
+			var tmp_id = Math.floor(Math.random() * 4);
+			friend.avatar = "./img/avatar_" + tmp_id + ".jpg";
+		}
+		item += '<li><a href="#" class="friend_profile_btn" fid="' + fid
+				+ '"><img src="' + friend.avatar + '" />' + friend.yaklogin
+				+ '</a></li>';
+		friends.push(friend.user_id);
+		fid++;
+	});
+	$('#friend_list').empty().html(item);
+
+	// goto #notifications
+	$.mobile.changePage($('#friends'), {
+		transition : "fade",
+		type : "post"
+	});
+
+}
+
+function std_failure_handler(json, options) {
+
+	var funcname = "unknown server function";
+	var opt_msg = "";
+	if (typeof options != 'undefined') {
+		if (options.function_name != null)
+			funcname = options.function_name;
+		if (options.bad_msg)
+			opt_msg = options.bad_msg;
+	}
+
+	var emsg = "Call to " + funcname + " server returned error. " + opt_msg;
+
+	serverAlert(emsg, json);
+	console.log(emsg);
+	console.log(json.errormsg);
+
+}
+
+function std_success_handler(json, options) {
+
+	var funcname = "unknown server function";
+	var good_msg = "";
+	if (typeof options != 'undefined') {
+		if (options.function_name != null)
+			funcname = options.function_name;
+		if (options.good_msg)
+			good_msg = options.good_msg;
+	}
+	var emsg = "Call to " + funcname + " server succeeded. " + good_msg;
+
+	console.log(emsg);
+}
+
+function get_friend_list() {
+	friends = null;
+
+	// get activity data for user
+
+	var inputdata = {
+		user_id : $userid
+	};
+
+	post_ajax('../yak/controllers/get_friend_list.php', inputdata,
+			get_friend_list_success_handler, std_failure_handler);
+
+}
+
+function friend_profile_handler(target_id) {
+
+	console.log("in friend_profile_handler " + target_id);
+
+	if (typeof friends == 'undefined')
+		friends = [];
+
+	// get activity data for friend only
+
+	$('#profile_weirdoid_post_list').empty();
+
+	var inputdata = {
+		userid : $userid,
+		target_id : target_id,
+		getfriends : 0
+	};
+
+	post_ajax('../yak/controllers/get_user_activity.php', inputdata,
+			get_profile_activity_success_handler, std_failure_handler);
+
+	// get_activity_data(friends[fid], friend_profile_success_handler,
+	// std_failure_handler);
+
+}
+
+function friend_profile_success_handler(json) {
+	// TODO put data on profile page
+
+	// goto #profile
+	$.mobile.changePage($('#profile'), {
+		transition : "fade",
+		type : "post"
+	});
+}
+
+// function get_activity_data(target_id, success_handler, failure_handler) {
+// // send data to server
+// var inputdata = {
+// userid : $userid,
+// target_id : target_id
+// };
+//
+// post_ajax('../yak/controllers/get_activity_data.php', inputdata,
+// success_handler, failure_handler);
+//
+// }
+
+function post_ajax(url, inputdata, success_handler, failure_handler, options) {
+	// send data to server
+
+	if (typeof inputdata == 'undefined')
+		inputdata = {};
+
+	$.ajax({
+		url : url,
+		type : 'post',
+		dataType : 'json',
+		data : inputdata,
+		success : function(json) {
+			// process the result
+			if (json.errorcode == 0) {
+				console.log("post_ajax handled successfully!");
+
+				// TODO change current status of friend, update window
+				if (success_handler) {
+					return success_handler(json, options);
+				}
+
+			} else {
+				serverAlert("post_ajax server reported error", json);
+				if (failure_handler) {
+					return failure_handler(json, options);
+				}
+			}
+		},
+		failure : function(data) {
+			alert("Failure reported for post_ajax: ", data);
+			console.log("Failure post_ajax.");
+		},
+		complete : function(xhr, data) {
+			if (xhr.status != 0 && xhr.status != 200)
+				alert('Error calling server to post_ajax. Status=' + xhr.status
+						+ " " + xhr.statusText);
+		}
+	});
+
+}
+
+function get_fastlogins() {
+
+	// get default fast logins
+	$
+			.ajax({
+				url : "fastlogins.json",
+				type : 'post',
+				dataType : 'json',
+				success : function(json) {
+					// process the result
+					var user_pwds = json.fastlogins;
+					var html = "";
+					for ( var i = 0; i < user_pwds.length; i++) {
+						html += '<li data-icon="false"><a href="#" class="fastlogin_name">'
+								+ user_pwds[i] + '</a></li>';
+					}
+					$('.fastlogin_ul').empty().append(html);
+
+					$('.fastlogin_name')
+							.click(
+									function(e) {
+										e.preventDefault();
+										console.log("fastlogin_name clicked");
+
+										var txt = $(this).text();
+										var arrayOfStrings = txt.split("|");
+										var login = arrayOfStrings[0];
+										var password = (arrayOfStrings.length > 1) ? arrayOfStrings[1]
+												: "ddd";
+
+										new_user = new Object();
+										new_user.login = login;
+										new_user.password = password;
+
+										resetGlobal();
+										resetScreens();
+
+										loginToYak(new_user.login,
+												new_user.password, gotoHome,
+												loginFailure);
+										$('body').trigger('hideOpenMenus');
+										return false;
+									});
+				},
+				failure : function(data) {
+					alert("Failure reported getting fastlogins: ", data);
+					console.log("Failure fastlogins.");
+				},
+				complete : function(xhr, data) {
+					if (xhr.status != 0 && xhr.status != 200)
+						alert('Error calling server to get  fastlogins. Status='
+								+ xhr.status + " " + xhr.statusText);
+				}
+			});
+
+}
+
+function onBefore(curr, next, opts) {
+
+	var slidesrc = $(next).find('img').attr('src');
+	if ($my_avatar != null) {
+		if (slidesrc != null && slidesrc == $my_avatar) {
+			$(next).addClass('highlight_avatar');
+			return;
+
+		}
+	}
+	$(next).removeClass('highlight_avatar');
+}
+
+function highlight_avatar(avatar) {
+
+	$('.avatar_image').each(function() {
+
+		var selected_avatar = $(this).find('img').attr('src');
+		if (avatar == selected_avatar) {
+			$(this).addClass('highlight_avatar');
+		} else {
+			$(this).removeClass('highlight_avatar');
+		}
+	});
+}
+
+function set_user_avatar(avatar) {
+	friends = null;
+
+	// get activity data for user
+
+	var inputdata = {
+		user_id : $userid,
+		avatar : avatar
+	};
+
+	var options = {
+		function_name : "get_scripted_comments",
+		good_msg : "Set user avatar"
+	};
+	post_ajax('../yak/controllers/set_user_avatar.php', inputdata,
+			std_success_handler, std_failure_handler, options);
+
+}
+
+function post_status_message_success_handler(json, options) {
+	get_user_activity();
+}
+
+function post_status_message(scripted_status_message_id) {
+
+	var inputdata = {
+		user_id : $userid,
+		scripted_status_message_id : scripted_status_message_id
+	};
+
+	var options = {
+		function_name : "post_status_message",
+		good_msg : "Posted user status message."
+	};
+
+	post_ajax('../yak/controllers/post_status_message.php', inputdata,
+			post_status_message_success_handler, std_failure_handler, options);
+}
+
+
+function approve_post_handler(e, btn, is_approved) {
+
+	var inputdata = {
+		user_id : $userid,
+		cmd : is_approved,
+		user_post_id : $(btn).attr("upid")
+	};
+
+	var approval_status = 'Pending';
+	
+	var options = {
+		function_name : "approve_post",
+		good_msg : "Approved/denied child's post.",
+		approval_status_div : $(btn).parent().find('.approval_status'),
+		is_approved : is_approved
+		
+	};
+
+	post_ajax('../yak/controllers/approve_post.php', inputdata,
+			approve_post_success_handler, std_failure_handler, options);
+}
+
+
+function approve_post_success_handler(json, options) {
+
+	var funcname = "unknown server function";
+	var good_msg = "";
+	if (typeof options != 'undefined') {
+		if (options.function_name != null)
+			funcname = options.function_name;
+		if (options.good_msg)
+			good_msg = options.good_msg;
+		
+		// udpate approval status
+		if (options.approval_status_div)
+			{
+				
+				options.approval_status_div.text(get_approved_status_value(options.is_approved));
+			}
+	}
+	var emsg = "Call to " + funcname + " server succeeded. " + good_msg;
+
+	console.log(emsg);
+	
 }

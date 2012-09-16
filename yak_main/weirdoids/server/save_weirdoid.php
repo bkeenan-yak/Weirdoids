@@ -5,10 +5,13 @@ session_start();
 header('Content-Type: application/json');
 
 //Include database connection details
+
 require_once('../../yak/controllers/db_functions.php');
 require_once('weirdoid.php');
 require_once('weirdoid_sprite.php');
 require_once('weirdoid_easteregg.php');
+require_once('../../yak/controllers/notifications.php');
+
 
 //Array to store validation errors
 $errmsg_arr = array();
@@ -32,13 +35,18 @@ $obj=json_decode(stripslashes($json));
 $userid = clean($obj->userid);
 
 // make sure user exists
-$qry="SELECT * FROM users WHERE user_id='$userid'";
+$is_kid = 0;
+
+$qry="SELECT * , case when bday > date_sub(CURRENT_TIMESTAMP, INTERVAL 13 YEAR) then 1 else 0 end as is_kid  FROM users WHERE user_id='$userid'";
+
 $result=mysql_query($qry);
 
 //Check whether the query was successful or not
 if($result) {
 	if(mysql_num_rows($result) == 1) {
-		//Login Successful
+		$row = mysql_fetch_assoc($result);
+		if ($row)
+			$is_kid = $row["is_kid"];
 	}else if (mysql_error($link)) {
 		//Login failed
 		//header("location: login-failed.php");
@@ -68,6 +76,7 @@ if($result) {
 	echo json_encode($istatus);
 	die();
 }
+
 
 // store the weirdoid and each sprite
 $weirdoid = new Weirdoid();
@@ -130,8 +139,6 @@ $elements = array($head, $body, $leg, $xtra, $bkgd);
 // add in all the easter eggs
 $arr = $obj->eastereggs;
 
-//print_r($arr);
-
 $eggs = array();
 
 foreach($arr as $easteregg) {
@@ -149,7 +156,6 @@ foreach($arr as $easteregg) {
    
 };
 
- //var_dump($eggs);
  
 try {
 	mysql_query('SET AUTOCOMMIT=0');
@@ -276,7 +282,7 @@ try {
 	
 	
 	// TODO ADD zindex
-	
+
 	// add post
 	$qry = sprintf("insert into user_post (post_type_id,poster_user_id, referenced_content_id) values (1,%d,%d)",
 			mysql_real_escape_string($userid),
@@ -302,9 +308,26 @@ try {
 		}
 	}
 	
+	$user_post_id = mysql_insert_id();
+	
+	// TODO: put in notification for self???
+	
+	
 	mysql_query('COMMIT');
 	mysql_query('SET AUTOCOMMIT=1');
 
+	if ($is_kid > 0)
+	{
+	
+		$options = array();
+		$options['poster'] = $userid;
+		$options['user_weirdoid_id'] = $user_weirdoid_id;
+		$options['user_post_id'] = $user_post_id;
+
+		add_notification(Notification::CHILD_POSTED_CONTENT, $userid, $options);
+
+	}
+	
 	$istatus["errorcode"] = 0;
 	$istatus["errormsg"] = "Stored weirdoid.";
 	$istatus["user_weirdoid_id"] = $user_weirdoid_id;

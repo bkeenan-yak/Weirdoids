@@ -493,6 +493,10 @@ input:-moz-placeholder {
 	
 }
 
+.post_comments_list {
+	list-style-type: none;
+}
+
 .post_comment  a {
 	color: black;
 	
@@ -508,4 +512,46 @@ input:-moz-placeholder {
 }
 .disabled {
     opacity: 0.25;
+}
+
+#notifications_list, #approvals_list {
+	list-style-type: none;
+}
+#avatar_cycle a { display: block; width: 200px; height: 200px; top: 0; left: 0 }
+#avatar_cycle { width: 200px; height: 200px;}
+.highlight_avatar { border: 4px solid blue;}
+
+.icon_datetime {
+	
+}
+
+.notification_avatar_div {
+	
+}
+
+.notification_avatar_div img{
+	width: 100px !important;
+	height: auto;
+}
+
+.notification_date {
+	color: grey;
+}
+
+.notification_clock_div {
+	
+}
+
+.notification_clock_div img {
+	width: auto !important;
+	height: 30px;
+}
+
+.notification_div {
+	background: white !important;
+	text-align: 
+}
+
+.notification_body {
+	
 }

@@ -10,13 +10,14 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
 <link rel="stylesheet"
 	href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-	<link type="text/css" href="css/jquery-ui-1.8.21.custom.css" rel="Stylesheet" />	
-	
+<link type="text/css" href="css/jquery-ui-1.8.21.custom.css"
+	rel="Stylesheet" />
+
 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 <script
 	src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-	
+
 
 <script type="text/javascript" src="js/jquery-ui-1.8.21.custom.min.js"></script>
 <script src="js/jqm.page.params.js"></script>
@@ -55,30 +56,35 @@
 </head>
 <body>
 
-	
 
 
-	
+
+
 
 	<div data-role="page" id="home">
-	
-		<div id="mainnav" class="container trans"
-				data-role="header">
-				<div class="row">
-					<div class="four columns">
-						<a href="#home"><img src="img/logo_yaklg.png" /> </a>
-					</div>
-		
-					<div class="eight columns mainnav padding">
-						<strong class="right"> <a href="#"
-							class=" radius medium red button signup_btn">Sign Up</a> <a
-							href="#" class="yaklogin_btn radius medium dkteal button">Log
-								In</a>
-						</strong>
-					</div>
-		
+
+		<div id="mainnav" class="container trans" data-role="header">
+			<div class="row">
+				<div class="four columns">
+					<a href="#home"><img src="img/logo_yaklg.png" /> </a>
+				</div>
+
+				<div class="eight columns mainnav padding">
+					<strong class="right"> <a href="#"
+						class=" radius medium red button signup_btn">Sign Up</a> <a
+						href="#" class="yaklogin_btn radius medium dkteal button">Log
+							In</a>
+					</strong>
+					<ul class="fastlogin right" id="dmenu-right" data-role="menu">
+						<li><span data-role="button" data-icon="arrow-d"
+							data-iconpos="right">U</span>
+							<ul data-role="listview" class="fastlogin_ul" data-inset="true">
+
+							</ul></li>
+					</ul>
 				</div>
 			</div>
+		</div>
 
 		<div id="extranav" class="nav">
 			<a id="prev0" href="#">Prev</a> <a id="next0" href="#">Next</a>
@@ -112,34 +118,33 @@
 		</div>
 
 
-		
-
-			
-
-			
-
-			<div class="pipe"></div>
 
 
-			<div class="cta">
-				
-					<div class="row">
 
-						<div class="seven columns">
-							<h2>The safe place to graze.</h2>
-							<h4>Sign up now to start having fun, for free!</h4>
-							<a href="#" class="large  radius button red signup_btn">Sign
-								Up</a>
-						</div>
-						<div class="five columns">
-							<div class="platforms">
-								<img src="img/gfx_platforms.png" />
-							</div>
-						</div>
+
+
+
+		<div class="pipe"></div>
+
+
+		<div class="cta">
+
+			<div class="row">
+
+				<div class="seven columns">
+					<h2>The safe place to graze.</h2>
+					<h4>Sign up now to start having fun, for free!</h4>
+					<a href="#" class="large  radius button red signup_btn">Sign Up</a>
+				</div>
+				<div class="five columns">
+					<div class="platforms">
+						<img src="img/gfx_platforms.png" />
 					</div>
-				
+				</div>
 			</div>
-		
+
+		</div>
+
 		<!-- /content -->
 
 		<div data-role="footer" id="ftr" data-position="fixed">
@@ -175,48 +180,34 @@
 
 	<div id="login" data-role="page" data-rel="dialog">
 
-	
-
-
 		<div class="interior">
 
 			<div class="row">
 				<div class="six columns centered panel">
 
 					<form class="nice">
+						<h2>Log In</h2>
+						<div class="row">
+							<div class="four columns">
+								<img src="img/signup_yak.png" />
+							</div>
+							<div class="eight columns">
+								<label>Username</label> <input id="login_id" type="text"
+									placeholder="Username"> <label class="error"
+									for="login_id" id="login_id_error">This field is
+									required.</label> <label>Password</label> <input type="password"
+									id="login_password" placeholder="Password"> <label
+									class="error" for="login_password" id="login_password_error">This
+									field is required.</label> <a href="#" id="login_next_btn"
+									rel="external" data-theme="a"
+									class=" radius large dkteal button">Log In</a>
 
-						
-							<h2>Log In</h2>
-							<div class="row">
-								<div class="four columns">
-									<img src="img/signup_yak.png" />
-								</div>
-								<div class="eight columns">
-									<label>Username</label>
-									<input id="login_id" type="text" placeholder="Username"> 
-									
-									
-								
-									
-									
-									<label class="error" for="login_id" id="login_id_error">This field is
-										required.</label>
-										
-										<label>Password</label>
-										<input type="password" id="login_password" placeholder="Password">
-										
-										<label class="error" for="login_password" id="login_password_error">This
-										field is required.</label>
-										
-										<a href="#" id="login_next_btn" rel="external" data-theme="a"
-										class=" radius large dkteal button">Log In</a>
-
-									<div class="row">
-										<a href="#forgotpass">Forgot your password?</a>
-									</div>
+								<div class="row">
+									<a href="#forgotpass">Forgot your password?</a>
 								</div>
 							</div>
-						
+						</div>
+
 					</form>
 				</div>
 			</div>
@@ -236,24 +227,24 @@
 
 					<form class="nice">
 
-						
-							<h2>Forgot your password?</h2>
-							<p>No problem! Just enter your Yak username</p>
-							<div class="row">
-								<div class="four columns">
-									<img src="img/signup_username.png" />
-								</div>
-								<div class="eight columns">
-									<label for="standardNiceInput">Yak Username</label> <input
-										class="input-text" type="text" placeholder="Username">
 
-									<a href="#forgotpasssuccess" rel="external" data-theme="a"
-										class=" radius large dkteal button">Send</a>
-
-
-								</div>
+						<h2>Forgot your password?</h2>
+						<p>No problem! Just enter your Yak username</p>
+						<div class="row">
+							<div class="four columns">
+								<img src="img/signup_username.png" />
 							</div>
-						
+							<div class="eight columns">
+								<label for="standardNiceInput">Yak Username</label> <input
+									class="input-text" type="text" placeholder="Username">
+
+								<a href="#forgotpasssuccess" rel="external" data-theme="a"
+									class=" radius large dkteal button">Send</a>
+
+
+							</div>
+						</div>
+
 					</form>
 				</div>
 			</div>
@@ -1618,115 +1609,121 @@
 
 	</div>
 
-
-
 	<div data-role="page" id="hq" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-			data-position="fixed">
+		<div id="yakbar" data-role="header" data-position="fixed">
 
-
-			
-				<div class="row">
-					<div class="two mobile-one columns">
-						<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
-					</div>
-					<div class="eight mobile-two columns leftnav">
-						<div class="leftnavitem">
-							<a href="#" class="notification_btn">
-								<div id="yakbar_notify_count" class="notifycount"></div> <img
-								src="img/icon_notifications.png" />
-							</a>
-						</div>
-						<div class="leftnavitem disabled">
-							<a href="#" class="yakbar_message_btn">
-								<div class="yakbar_message_count" class="notifycount"></div> <img
-								src="img/icon_messages.png" />
-							</a>
-						</div>
-						<div class="leftnavitem">
-							<a href="#" class="yakbar_friend_req_btn">
-								<div id="yakbar_friend_req_count" class="notifycount"></div>
-								<img src="img/icon_friendrequest.png" />
-							</a>
-						</div>
-						<div class="leftnavitem">
-							<a href="#" class="add_friend_btn" id="yakbar_add_friend_btn">
-								<img src="img/icon_friendrequest.png" />
-							</a>
-						</div>
-					</div>
-					<div class="two mobile-one columns rightnav">
-						<a href="#profile">
-							 <span id="yakbar_user_fname" class="rightnavitem"></span>
+			<div class="row">
+				<div class="two mobile-one columns">
+					<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
+				</div>
+				<div class="eight mobile-two columns leftnav">
+					<div class="leftnavitem">
+						<a href="#" class="notification_btn">
+							<div id="yakbar_notify_count" class="notifycount"></div> <img
+							src="img/icon_notifications.png" />
 						</a>
-						<div class="rightnavitem">
+					</div>
+					<div class="leftnavitem disabled">
+						<a href="#" class="yakbar_request_btn">
+							<div id="yakbar_request_count" class="notifycount"></div> <img
+							src="img/icon_approvals.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_friend_req_btn">
+							<div id="yakbar_friend_req_count" class="notifycount"></div> <img
+							src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+
+				</div>
+				<div class="two mobile-one columns rightnav">
+					<a href="#" class="profile_link">
+						<div class="profilesm">
+							<img class="yakbar_user_img" src="img/pic_briank.jpg" />
+						</div> <span class="yakbar_user_fname" class="rightnavitem"></span>
+					</a>
+
+					<ul class="fastlogin right" id="dmenu-right" data-role="menu">
+						<li><span data-role="button" data-icon="arrow-d"
+							data-iconpos="right">U</span>
+							<ul data-role="listview" class="fastlogin_ul" data-inset="true">
+
+							</ul></li>
+					</ul>
+					<!-- div class="rightnavitem">
 							<a href="index.html" rel="external" id="yakbar_login_logout_btn">Log
 								In</a>
-						</div>
-					</div>
+						</div -->
 				</div>
-			
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="twelve columns" id="hqicons">
+				<ul class="block-grid five-up">
+
+					<li><a href="#" class="activity_btn"><img
+							src="img/appicon_activity.png" />
+							<p>Activity</p> </a></li>
+					<li class="disabled"><a href="#apps"><img
+							src="img/appicon_apps.png" />
+							<p>Apps</p> </a></li>
+					<li class="disabled"><a href="#pages"><img
+							src="img/appicon_pages.png" />
+							<p>Pages</p> </a></li>
+					<li><a href="#" class="profile_link"><img
+							src="img/appicon_profile.png" />
+							<p>Profile</p> </a></li>
+
+
+					<li><a href="#" id="hq_friends_btn"><img
+							src="img/appicon_friends.png" />
+							<p>Friends</p> </a></li>
+					<li class="disabled"><a href="#"><img
+							src="img/appicon_yaktube.png" />
+							<p>Yaktube</p> </a></li>
+					<li class="disabled"><a href="#"><img
+							src="img/appicon_photos.png" />
+							<p>Photos</p> </a></li>
+
+					<li><a href="#avatars"><img src="img/appicon_friends.png" />
+							<p>Avatars</p> </a></li>
+					<li><a href="http://yrcreative.com/clients/yakbooks/weirdoids"
+						target="blank"><img src="img/appicon_weirdoids.png" />
+							<p>Weirdoids</p></a></li>
+					<li class="disabled"><img src="img/appicon_cupcakr.png" />
+						<p>Cupcakr</p></li>
+					<li class="disabled"><img src="img/appicon_sophisticrits.png" />
+						<p>Sophisticrits</p></li>
+					<li class="disabled"><img src="img/appicon_oucherz.png" />
+						<p>Oucherz</p></li>
+					<li class="disabled"><img src="img/appicon_mallmakeover.png" />
+						<p>Mall Makeover</p></li>
+					<li class="disabled"><img src="img/appicon_tophatapple.png" />
+						<p>Top Hat Apple</p></li>
+					<li class="disabled"><a href="#parentctrl"><img
+							src="img/appicon_parentctrl.png" />
+							<p>Parent Ctrl</p> </a></li>
+					<li><a href="#" class="notification_btn"><img
+							src="img/appicon_notifications.png" />
+							<p>Notifications</p> </a></li>
+					<li class="disabled"><a href="#credits"><img
+							src="img/appicon_credits.png" />
+							<p>Credits</p> </a></li>
+					<li><a href="#settings"><img
+							src="img/appicon_settings.png" />
+							<p>Settings</p> </a></li>
+				</ul>
+			</div>
 
 		</div>
 
-		
-			<div class="row">
-				<div class="twelve columns" id="hqicons">
-					<ul class="block-grid five-up">
 
-						<li><a href="#" class="activity_btn"><img
-								src="img/appicon_activity.png" />
-								<p>Activity</p> </a></li>
-						<li class="disabled"><a href="#apps"><img src="img/appicon_apps.png" />
-								<p>Apps</p> </a></li>
-						<li class="disabled"><a href="#pages"><img src="img/appicon_pages.png" />
-								<p>Pages</p> </a></li>
-						<li><a href="#profile"><img src="img/appicon_profile.png" />
-								<p>Profile</p> </a></li>
-						
-						
-						<li><a href="#friends"><img src="img/appicon_friends.png" />
-								<p>Friends</p> </a></li>
-						<li class="disabled"><a href="#"><img src="img/appicon_yaktube.png" />
-								<p>Yaktube</p> </a></li>
-						<li class="disabled"><a href="#"><img src="img/appicon_photos.png" />
-										<p>Photos</p> </a></li>
-
-						<li><a href="#avatars"><img src="img/appicon_friends.png" />
-								<p>Avatars</p> </a></li>
-						<li>
-						<a href="http://yrcreative.com/clients/yakbooks/weirdoids"
-							target="blank"><img src="img/appicon_weirdoids.png" />
-								<p>Weirdoids</p></a></li>
-						<li class="disabled"><img src="img/appicon_cupcakr.png" />
-							<p>Cupcakr</p></li>
-						<li class="disabled"><img src="img/appicon_sophisticrits.png" />
-							<p>Sophisticrits</p></li>
-						<li class="disabled"><img src="img/appicon_oucherz.png" />
-							<p>Oucherz</p></li>
-						<li class="disabled"><img src="img/appicon_mallmakeover.png" />
-							<p>Mall Makeover</p></li>
-						<li class="disabled"><img src="img/appicon_tophatapple.png" />
-							<p>Top Hat Apple</p></li>
-						<li class="disabled"><a href="#parentctrl"><img
-								src="img/appicon_parentctrl.png" />
-								<p>Parent Ctrl</p> </a></li>
-						<li><a href="#" class="notification_btn"><img
-								src="img/appicon_notifications.png" />
-								<p>Notifications</p> </a></li>
-						<li class="disabled"><a href="#credits"><img src="img/appicon_credits.png" />
-								<p>Credits</p> </a></li>
-						<li><a href="#settings"><img
-								src="img/appicon_settings.png" />
-								<p>Settings</p> </a></li>
-					</ul>
-				</div>
-
-			</div>
-		
-
-		<div data-role="footer" data-position="fixed" id="yakftr" class="show-for-small">
+		<div data-role="footer" data-position="fixed" id="yakftr"
+			class="show-for-small">
 			<ul class="block-grid five-up">
 				<li class="selected"><a href="#hq"><img
 						src="img/ftricon_home.png" /> </a></li>
@@ -1736,8 +1733,8 @@
 				</li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /> </a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" />
-				</a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /> </a></li>
 			</ul>
 		</div>
 
@@ -1745,77 +1742,77 @@
 
 	<div data-role="page" id="activity" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-		
-					
-						<div class="row">
-							<div class="two mobile-one columns">
-								<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
-							</div>
-							<div class="eight mobile-two columns leftnav">
-								<div class="leftnavitem">
-									<a href="#" class="notification_btn">
-										<div id="yakbar_notify_count" class="notifycount"></div> <img
-										src="img/icon_notifications.png" />
-									</a>
-								</div>
-								<div class="leftnavitem disabled">
-									<a href="#" class="yakbar_message_btn">
-										<div class="yakbar_message_count" class="notifycount"></div> <img
-										src="img/icon_messages.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="yakbar_friend_req_btn">
-										<div id="yakbar_friend_req_count" class="notifycount"></div>
-										<img src="img/icon_friendrequest.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="add_friend_btn" id="yakbar_add_friend_btn">
-										<img src="img/icon_friendrequest.png" />
-									</a>
-								</div>
-							</div>
-							<div class="two mobile-one columns rightnav">
-								<a href="#profile">
-									<div class="profilesm">
-										<img id="yakbar_user_img" src="img/pic_briank.jpg" />
-									</div> <span id="yakbar_user_fname" class="rightnavitem"></span>
-								</a>
-								<div class="rightnavitem">
+		<div id="yakbar" data-role="header" data-position="fixed">
+			<div class="row">
+				<div class="two mobile-one columns">
+					<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
+				</div>
+				<div class="eight mobile-two columns leftnav">
+					<div class="leftnavitem">
+						<a href="#" class="notification_btn">
+							<div id="yakbar_notify_count" class="notifycount"></div> <img
+							src="img/icon_notifications.png" />
+						</a>
+					</div>
+					<div class="leftnavitem disabled">
+						<a href="#" class="yakbar_request_btn">
+							<div id="yakbar_request_count" class="notifycount"></div> <img
+							src="img/icon_approvals.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_friend_req_btn">
+							<div id="yakbar_friend_req_count" class="notifycount"></div> <img
+							src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+
+				</div>
+				<div class="two mobile-one columns rightnav">
+					<a href="#" class="profile_link">
+						<div class="profilesm">
+							<img class="yakbar_user_img" src="img/pic_briank.jpg" />
+						</div> <span class="yakbar_user_fname" class="rightnavitem"></span>
+					</a>
+					<ul class="fastlogin right" id="dmenu-right" data-role="menu">
+						<li><span data-role="button" data-icon="arrow-d"
+							data-iconpos="right">U</span>
+							<ul data-role="listview" class="fastlogin_ul" data-inset="true">
+
+							</ul></li>
+					</ul>
+					<!-- div class="rightnavitem">
 									<a href="index.html" rel="external" id="yakbar_login_logout_btn">Log
 										In</a>
-								</div>
-							</div>
-						</div>
-					
-		
+								</div -->
 				</div>
-			<div class="row">
-				<div class="twelve columns">
+			</div>
 
-					<h3>Latest Activity</h3>
+
+		</div>
+		<div class="row">
+			<div class="twelve columns">
+
+				<h3>Latest Activity</h3>
+				<hr />
+				<div>
+					<a href="#status" class="small button">Update Status</a>
 					<hr />
-					<div>
-						<a href="#status" class="small button">Update Status</a>
-						<hr />
-					</div>
 				</div>
 			</div>
-		
-			<div id="activity_div"></div>
+		</div>
 
-			<div class="row">
-				<div class="twelve columns">
-					<ul id="weirdoid_post_list" class="block-grid mobile three-up">
-					</ul>
-				</div>
+		<div id="activity_div"></div>
+
+		<div class="row">
+			<div class="twelve columns">
+				<ul id="weirdoid_post_list" class="block-grid mobile three-up">
+				</ul>
 			</div>
+		</div>
 
-		<div data-role="footer" data-position="fixed" id="yakftr" class="show-for-small">
+		<div data-role="footer" data-position="fixed" id="yakftr"
+			class="show-for-small">
 			<ul class="block-grid five-up">
 				<li class="selected"><a href="#hq"><img
 						src="img/ftricon_home.png" /> </a></li>
@@ -1825,8 +1822,8 @@
 				</li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /> </a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" />
-				</a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /> </a></li>
 			</ul>
 		</div>
 
@@ -1834,65 +1831,64 @@
 
 	<div data-role="page" id="status" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-			data-position="fixed">
+		<div id="yakbar" data-role="header" data-position="fixed">
 
 
-			
-				<div class="row">
-					<div class="two phone-one columns">
-						<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
-					</div>
-					<div class="three phone-two columns leftnav">
-						<div class="leftnavitem">
-							<a href="#" class="notification_btn">
-								<div id="yakbar_notify_count" class="notifycount"></div> <img
-								src="img/icon_notifications.png" />
-							</a>
-						</div>
-						<div class="leftnavitem">
-							<a href="#">
-								<div class="yakbar_message_count" class="notifycount"></div> <img
-								src="img/icon_messages.png" />
-							</a>
-						</div>
-						<div class="leftnavitem">
-							<a href="#" class="yakbar_friend_req_btn">
-								<div id="yakbar_friend_req_count" class="notifycount"></div>
-								<img src="img/icon_friendrequest.png" />
-							</a>
-						</div>
 
-
-					</div>
-					<div class="two columns phone-one rightnav">
-						<a href="#profile">
-							<div class="profilesm">
-								<img id="yakbar_user_img" src="img/pic_briank.jpg" />
-							</div> <span id="yakbar_user_fname" class="rightnavitem">Brian</span>
+			<div class="row">
+				<div class="two phone-one columns">
+					<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
+				</div>
+				<div class="three phone-two columns leftnav">
+					<div class="leftnavitem">
+						<a href="#" class="notification_btn">
+							<div id="yakbar_notify_count" class="notifycount"></div> <img
+							src="img/icon_notifications.png" />
 						</a>
-						<div class="rightnavitem">
-							<a href="index.html" rel="external">Log</a>
-						</div>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_request_btn">
+							<div id="yakbar_request_count" class="notifycount"></div> <img
+							src="img/icon_approvals.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_friend_req_btn">
+							<div id="yakbar_friend_req_count" class="notifycount"></div> <img
+							src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+
+
+				</div>
+				<div class="two columns phone-one rightnav">
+					<a href="#" class="profile_link">
+						<div class="profilesm">
+							<img class="yakbar_user_img" src="img/pic_briank.jpg" />
+						</div> <span class="yakbar_user_fname" class="rightnavitem">Brian</span>
+					</a>
+					<div class="rightnavitem">
+						<a href="index.html" rel="external">Log</a>
 					</div>
 				</div>
-			
+			</div>
+
 
 		</div>
 		<div class="row">
-		<div class="twelve columns centered">
-		<form class="nice1Tab">
-			<div class="ui-widget">
-				<label for="userstatus">Tags: </label>
-					<input id="userstatus"> <input
-									id="userstatus_val" name="userstatus_val" type="hidden" /> 
-				</div>
-			<a href="#" id="userstatus_post_btn" class="large button">Post</a>
-		</form>
-		</div>
+			<div class="twelve columns centered">
+				<form class="nice1Tab">
+					<div class="ui-widget">
+						<label for="userstatus">Tags: </label> <input id="userstatus">
+						<input id="userstatus_val" name="userstatus_val" type="hidden" />
+					</div>
+					<a href="#" id="userstatus_post_btn" class="large button">Post</a>
+				</form>
+			</div>
 		</div>
 
-		<div data-role="footer" data-position="fixed" id="yakftr" class="show-for-small">
+		<div data-role="footer" data-position="fixed" id="yakftr"
+			class="show-for-small">
 			<ul class="block-grid five-up">
 				<li class="selected"><a href="#hq"><img
 						src="img/ftricon_home.png" /> </a></li>
@@ -1902,16 +1898,12 @@
 				</li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /> </a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" />
-				</a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /> </a></li>
 			</ul>
 		</div>
 
 	</div>
-
-
-
-	
 
 	<div data-role="page" id="loading" class="contentctr">
 		<div class="loading">
@@ -1952,11 +1944,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
-
 
 		<div class="container">
 			<div class="row">
@@ -2158,13 +2145,7 @@
 				</div>
 
 			</div>
-
-
 		</div>
-
-
-
-
 	</div>
 
 	<div data-role="page" id="appdetail" class="contentctr">
@@ -2218,8 +2199,6 @@
 
 			</div>
 		</div>
-
-
 
 		<div class="container">
 			<div class="row">
@@ -2287,20 +2266,13 @@
 				</li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /> </a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" />
-				</a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /> </a></li>
 			</ul>
 		</div>
 
 
 	</div>
-
-
-
-	</div>
-
-
-
 
 	<div data-role="page" id="pages" class="contentctr">
 
@@ -2361,13 +2333,7 @@
 
 			</div>
 		</div>
-
-
-
-
 	</div>
-
-
 
 	<div data-role="page" id="pagedetail" class="contentctr">
 
@@ -2400,12 +2366,10 @@
 								<h2>Weirdoids</h2>
 								<a href="#" class="small blue button radius">Like</a>
 								<ul class="block-grid four-up">
-									<li class="countstats"><a href="#likes">
+									<li class="countstats"><a href="#">
 											<h4>54</h4> Likes
 									</a></li>
-									<li class="countstats"><a href="#photovideo">
-											<h4>54</h4> Photos/Videos
-									</a></li>
+
 								</ul>
 
 							</div>
@@ -2453,7 +2417,72 @@
 									</div>
 								</div>
 
+								<div class="container comments">
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment lastcomment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="box">
+							<div class="panel activity">
 
+								<div class="container author">
+									<div class="row">
+										<div class="three phone-one columns">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="five phone-one columns username">Brian</div>
+										<div class="four phone-one columns datetime">
+											<img src="img/icon_datetime.png" /> 10m
+										</div>
+									</div>
+								</div>
+
+
+								<div class="container">
+									<img src="img/fpo_example.jpg" />
+
+								</div>
+
+								<div class="container posttxt">
+									<h4>Weirdo Birdman</h4>
+									<a href="#">10 likes</a>
+									<div class="container">
+										<a href="#" class="tiny radius button">Like</a> <a href="#"
+											class="tiny radius button">Comment</a> <a href="#"
+											class="tiny radius button">...</a>
+									</div>
+								</div>
 
 								<div class="container comments">
 									<div class="row comment">
@@ -2489,11 +2518,139 @@
 										</div>
 									</div>
 								</div>
+							</div>
+						</li>
+						<li class="box">
+							<div class="panel activity">
+
+								<div class="container author">
+									<div class="row">
+										<div class="three phone-one columns">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="five phone-one columns username">Brian</div>
+										<div class="four phone-one columns datetime">
+											<img src="img/icon_datetime.png" /> 10m
+										</div>
+									</div>
+								</div>
 
 
+								<div class="container">
+									<img src="img/fpo_example.jpg" />
 
+								</div>
 
+								<div class="container posttxt">
+									<h4>Weirdo Birdman</h4>
+									<a href="#">10 likes</a>
+									<div class="container">
+										<a href="#" class="tiny radius button">Like</a> <a href="#"
+											class="tiny radius button">Comment</a> <a href="#"
+											class="tiny radius button">...</a>
+									</div>
+								</div>
 
+								<div class="container comments">
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment lastcomment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="box">
+							<div class="panel activity">
+
+								<div class="container author">
+									<div class="row">
+										<div class="three phone-one columns">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="five phone-one columns username">Brian</div>
+										<div class="four phone-one columns datetime">
+											<img src="img/icon_datetime.png" /> 10m
+										</div>
+									</div>
+								</div>
+
+								<div class="container">
+									<img src="img/fpo_example.jpg" />
+
+								</div>
+
+								<div class="container posttxt">
+									<h4>Weirdo Birdman</h4>
+									<a href="#">10 likes</a>
+									<div class="container">
+										<a href="#" class="tiny radius button">Like</a> <a href="#"
+											class="tiny radius button">Comment</a> <a href="#"
+											class="tiny radius button">...</a>
+									</div>
+								</div>
+
+								<div class="container comments">
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+									<div class="row comment lastcomment">
+										<div class="two phone-one columns ">
+											<img src="img/pic_briank.jpg" />
+										</div>
+										<div class="ten phone-three columns ">
+											<a href="#">jlbrowni</a> Yeak ok this is a comment
+										</div>
+									</div>
+								</div>
 							</div>
 						</li>
 						<li class="box">
@@ -2563,292 +2720,54 @@
 										</div>
 									</div>
 								</div>
-
-
-
-
-
-							</div>
-						</li>
-						<li class="box">
-							<div class="panel activity">
-
-								<div class="container author">
-									<div class="row">
-										<div class="three phone-one columns">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="five phone-one columns username">Brian</div>
-										<div class="four phone-one columns datetime">
-											<img src="img/icon_datetime.png" /> 10m
-										</div>
-									</div>
-								</div>
-
-
-								<div class="container">
-									<img src="img/fpo_example.jpg" />
-
-								</div>
-
-								<div class="container posttxt">
-									<h4>Weirdo Birdman</h4>
-									<a href="#">10 likes</a>
-									<div class="container">
-										<a href="#" class="tiny radius button">Like</a> <a href="#"
-											class="tiny radius button">Comment</a> <a href="#"
-											class="tiny radius button">...</a>
-									</div>
-								</div>
-
-
-
-								<div class="container comments">
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment lastcomment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-								</div>
-
-
-
-
-
-							</div>
-						</li>
-						<li class="box">
-							<div class="panel activity">
-
-								<div class="container author">
-									<div class="row">
-										<div class="three phone-one columns">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="five phone-one columns username">Brian</div>
-										<div class="four phone-one columns datetime">
-											<img src="img/icon_datetime.png" /> 10m
-										</div>
-									</div>
-								</div>
-
-
-								<div class="container">
-									<img src="img/fpo_example.jpg" />
-
-								</div>
-
-								<div class="container posttxt">
-									<h4>Weirdo Birdman</h4>
-									<a href="#">10 likes</a>
-									<div class="container">
-										<a href="#" class="tiny radius button">Like</a> <a href="#"
-											class="tiny radius button">Comment</a> <a href="#"
-											class="tiny radius button">...</a>
-									</div>
-								</div>
-
-
-
-								<div class="container comments">
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment lastcomment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-								</div>
-
-
-
-
-
-							</div>
-						</li>
-						<li class="box">
-							<div class="panel activity">
-
-								<div class="container author">
-									<div class="row">
-										<div class="three phone-one columns">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="five phone-one columns username">Brian</div>
-										<div class="four phone-one columns datetime">
-											<img src="img/icon_datetime.png" /> 10m
-										</div>
-									</div>
-								</div>
-
-
-								<div class="container">
-									<img src="img/fpo_example.jpg" />
-
-								</div>
-
-								<div class="container posttxt">
-									<h4>Weirdo Birdman</h4>
-									<a href="#">10 likes</a>
-									<div class="container">
-										<a href="#" class="tiny radius button">Like</a> <a href="#"
-											class="tiny radius button">Comment</a> <a href="#"
-											class="tiny radius button">...</a>
-									</div>
-								</div>
-
-
-
-								<div class="container comments">
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-									<div class="row comment lastcomment">
-										<div class="two phone-one columns ">
-											<img src="img/pic_briank.jpg" />
-										</div>
-										<div class="ten phone-three columns ">
-											<a href="#">jlbrowni</a> Yeak ok this is a comment
-										</div>
-									</div>
-								</div>
-
-
-
-
-
 							</div>
 						</li>
 
 					</ul>
 				</div>
-
-
-
 			</div>
-
-
-
-
 		</div>
-
-
-
 	</div>
 
 	<div data-role="page" id="likes" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-					<div class="container">
-						<div class="row">
-							<div class="one mobile-one columns">
-								<a href="#hq" class="small radius blue button">&lt;</a>
-							</div>
-							<div class="eleven mobile-four columns">Settings</div>
-						</div>
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+			<div class="container">
+				<div class="row">
+					<div class="one mobile-one columns">
+						<a href="#hq" class="small radius blue button">&lt;</a>
 					</div>
+					<div class="eleven mobile-four columns">Settings</div>
 				</div>
-
-		
-
-		
-			<div class="row">
-				<div class="twelve columns">
-					<ul class="block-grid five-up">
-						<li><a href="#pagedetail"><img
-								src="img/page_weirdoids.jpg" /></a></li>
-						<li><a href="#pagedetail"><img
-								src="img/page_weirdoids.jpg" /></a></li>
-						<li><a href="#pagedetail"><img
-								src="img/page_weirdoids.jpg" /></a></li>
-						<li><a href="#pagedetail"><img
-								src="img/page_weirdoids.jpg" /></a></li>
-						<li><a href="#pagedetail"><img
-								src="img/page_weirdoids.jpg" /></a></li>
-						<li><a href="#pagedetail"><img
-								src="img/page_weirdoids.jpg" /></a></li>
-						<li><a href="#pagedetail"><img
-								src="img/page_weirdoids.jpg" /></a></li>
-					</ul>
-				</div>
-
 			</div>
-		
+		</div>
+
+
+
+
+		<div class="row">
+			<div class="twelve columns">
+				<ul class="block-grid five-up">
+					<li><a href="#pagedetail"><img
+							src="img/page_weirdoids.jpg" /></a></li>
+					<li><a href="#pagedetail"><img
+							src="img/page_weirdoids.jpg" /></a></li>
+					<li><a href="#pagedetail"><img
+							src="img/page_weirdoids.jpg" /></a></li>
+					<li><a href="#pagedetail"><img
+							src="img/page_weirdoids.jpg" /></a></li>
+					<li><a href="#pagedetail"><img
+							src="img/page_weirdoids.jpg" /></a></li>
+					<li><a href="#pagedetail"><img
+							src="img/page_weirdoids.jpg" /></a></li>
+					<li><a href="#pagedetail"><img
+							src="img/page_weirdoids.jpg" /></a></li>
+				</ul>
+			</div>
+
+		</div>
+
 
 
 
@@ -2857,55 +2776,60 @@
 
 	<div data-role="page" id="profile" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-		
-					
-						<div class="row">
-							<div class="two mobile-one columns">
-								<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
-							</div>
-							<div class="eight mobile-two columns leftnav">
-								<div class="leftnavitem">
-									<a href="#" class="notification_btn">
-										<div id="yakbar_notify_count" class="notifycount"></div> <img
-										src="img/icon_notifications.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="yakbar_message_btn">
-										<div class="yakbar_message_count" class="notifycount"></div> <img
-										src="img/icon_messages.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="yakbar_friend_req_btn">
-										<div id="yakbar_friend_req_count" class="notifycount"></div>
-										<img src="img/icon_friendrequest.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+
+
+			<div class="row">
+				<div class="two mobile-one columns">
+					<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
+				</div>
+				<div class="eight mobile-two columns leftnav">
+					<div class="leftnavitem">
+						<a href="#" class="notification_btn">
+							<div id="yakbar_notify_count" class="notifycount"></div> <img
+							src="img/icon_notifications.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_request_btn">
+							<div id="yakbar_request_count" class="notifycount"></div> <img
+							src="img/icon_approvals.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_friend_req_btn">
+							<div id="yakbar_friend_req_count" class="notifycount"></div> <img
+							src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+					<!-- div class="leftnavitem">
 									<a href="#" class="add_friend_btn" id="yakbar_add_friend_btn">
-										<img src="img/icon_friendrequest.png" />
+										<img src="img/icon_friendreqs.png" />
 									</a>
-								</div>
-							</div>
-							<div class="two mobile-one columns rightnav">
-								<a href="#profile">
-									<div class="profilesm">
-										<img id="yakbar_user_img" src="img/pic_briank.jpg" />
-									</div> <span id="yakbar_user_fname" class="rightnavitem"></span>
-								</a>
-								<div class="rightnavitem">
+								</div-->
+				</div>
+				<div class="two mobile-one columns rightnav">
+					<a href="#" class="profile_link">
+						<div class="profilesm">
+							<img class="yakbar_user_img" src="img/pic_briank.jpg" />
+						</div> <span class="yakbar_user_fname" class="rightnavitem"></span>
+					</a>
+					<ul class="fastlogin right" id="dmenu-right" data-role="menu">
+						<li><span data-role="button" data-icon="arrow-d"
+							data-iconpos="right">U</span>
+							<ul data-role="listview" class="fastlogin_ul" data-inset="true">
+							</ul></li>
+					</ul>
+					<!-- div class="rightnavitem">
 									<a href="index.html" rel="external" id="yakbar_login_logout_btn">Log
 										In</a>
-								</div>
-							</div>
-						</div>
-					
-		
+								</div -->
 				</div>
+			</div>
+
+
+		</div>
 
 		<div class="container">
 			<div class="row">
@@ -2916,20 +2840,124 @@
 					<div class="container panel">
 						<div class="row">
 							<div class="three phone-one columns">
-								<img src="img/pic_briank.jpg" />
+								<img id="profile_avatar" src="img/pic_briank.jpg" />
 							</div>
 							<div class="eight phone-three columns end">
-								<h2>yrletter</h2>
-								
+								<h2 id="profile_yaklogin"></h2>
+
 
 								<ul class="block-grid four-up">
-									<li class="countstats"><a href="#friends">
+									<li class="countstats"><a href="#">
+											<h4 id="profile_friend_count"></h4> Friends
+									</a></li>
+
+									<li class="countstats disabled"><a href="#">
+											<h4 id="profile_likes_count"></h4> Likes
+									</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div id="profile_ friend_activity_div"></div>
+
+		<div class="row">
+			<div class="twelve columns">
+				<ul id="profile_weirdoid_post_list"
+					class="block-grid mobile three-up">
+				</ul>
+			</div>
+		</div>
+
+
+		<div data-role="footer" data-position="fixed" id="yakftr"
+			class="hide-on-desktops">
+			<ul class="block-grid five-up">
+				<li><a href="#hq"><img src="img/ftricon_home.png" /></a></li>
+				<li class="selected activity_btn"><a href="#"><img
+						src="img/ftricon_activity.png" /></a></li>
+				<li><a href="#status"><img src="img/ftricon_post.png" /></a></li>
+				<li><a href="#photocamera"><img
+						src="img/ftricon_photovid.png" /></a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /></a></li>
+			</ul>
+		</div>
+
+
+	</div>
+
+
+
+	<div data-role="page" id="friend" class="contentctr">
+
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+
+
+			<div class="row">
+				<div class="two mobile-one columns">
+					<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
+				</div>
+				<div class="eight mobile-two columns leftnav">
+					<div class="leftnavitem">
+						<a href="#" class="notification_btn">
+							<div id="yakbar_notify_count" class="notifycount"></div> <img
+							src="img/icon_notifications.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_request_btn">
+							<div id="yakbar_request_count" class="notifycount"></div> <img
+							src="img/icon_approvals.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_friend_req_btn">
+							<div id="yakbar_friend_req_count" class="notifycount"></div> <img
+							src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+				</div>
+				<div class="two mobile-one columns rightnav">
+					<a href="#" class="profile_link">
+						<div class="profilesm">
+							<img class="yakbar_user_img" src="img/pic_briank.jpg" />
+						</div> <span class="yakbar_user_fname" class="rightnavitem"></span>
+					</a>
+
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="twelve columns">
+
+
+					<div class="container panel">
+						<div class="row">
+							<div class="three phone-one columns">
+								<img src="img/avatar_1.jpg" />
+							</div>
+							<div class="eight phone-three columns end">
+								<h2>friendusername</h2>
+								<a href="#" class="small blue button">Friends</a>
+
+								<ul class="block-grid four-up">
+									<li class="countstats"><a href="#s">
 											<h4>54</h4> Friends
 									</a></li>
-									<li class="countstats disabled"><a href="#photovideo">
-											<h4>54</h4> Photos/Videos
-									</a></li>
-									<li class="countstats disabled"><a href="#likes">
+
+									<li class="countstats disabled"><a href="#">
 											<h4>54</h4> Likes
 									</a></li>
 								</ul>
@@ -3640,14 +3668,16 @@
 					<li><a href="#status"><img src="img/ftricon_post.png" /></a></li>
 					<li><a href="#photocamera"><img
 							src="img/ftricon_photovid.png" /></a></li>
-					<li><a href="#profile"><img src="img/ftricon_profile.png" /></a></li>
+					<li><a href="#" class="profile_link"><img
+							src="img/ftricon_profile.png" /></a></li>
 				</ul>
 			</div>
 
 
 		</div>
 
-		<div data-role="footer" data-position="fixed" id="yakftr" class="show-for-small">
+		<div data-role="footer" data-position="fixed" id="yakftr"
+			class="show-for-small">
 			<ul class="block-grid five-up">
 				<li class="selected"><a href="#hq"><img
 						src="img/ftricon_home.png" /> </a></li>
@@ -3657,873 +3687,60 @@
 				</li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /> </a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" />
-				</a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /> </a></li>
 			</ul>
 		</div>
 
 	</div>
-	
-	<div data-role="page" id="friend" class="contentctr">
-	
-			<div id="yakbar" data-role="header"
-						data-position="fixed">
-			
-			
-						
-							<div class="row">
-								<div class="two mobile-one columns">
-									<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
-								</div>
-								<div class="eight mobile-two columns leftnav">
-									<div class="leftnavitem">
-										<a href="#" class="notification_btn">
-											<div id="yakbar_notify_count" class="notifycount"></div> <img
-											src="img/icon_notifications.png" />
-										</a>
-									</div>
-									<div class="leftnavitem">
-										<a href="#" class="yakbar_message_btn">
-											<div class="yakbar_message_count" class="notifycount"></div> <img
-											src="img/icon_messages.png" />
-										</a>
-									</div>
-									<div class="leftnavitem">
-										<a href="#" class="yakbar_friend_req_btn">
-											<div id="yakbar_friend_req_count" class="notifycount"></div>
-											<img src="img/icon_friendrequest.png" />
-										</a>
-									</div>
-									<div class="leftnavitem">
-										<a href="#" class="add_friend_btn" id="yakbar_add_friend_btn">
-											<img src="img/icon_friendrequest.png" />
-										</a>
-									</div>
-								</div>
-								<div class="two mobile-one columns rightnav">
-									<a href="#profile">
-										<div class="profilesm">
-											<img id="yakbar_user_img" src="img/pic_briank.jpg" />
-										</div> <span id="yakbar_user_fname" class="rightnavitem"></span>
-									</a>
-									<div class="rightnavitem">
-										<a href="index.html" rel="external" id="yakbar_login_logout_btn">Log
-											In</a>
-									</div>
-								</div>
-							</div>
-						
-			
-					</div>
-	
-			<div class="container">
-				<div class="row">
-	
-					<div class="twelve columns">
-	
-	
-						<div class="container panel">
-							<div class="row">
-								<div class="three phone-one columns">
-									<img src="img/avatar_1.jpg" />
-								</div>
-								<div class="eight phone-three columns end">
-									<h2>friendusername</h2>
-									<a href="#" class="small blue button">Friends</a>
-	
-									<ul class="block-grid four-up">
-										<li class="countstats"><a href="#friends">
-												<h4>54</h4> Friends
-										</a></li>
-										<li class="countstats disabled"><a href="#photovideo">
-												<h4>54</h4> Photos/Videos
-										</a></li>
-										<li class="countstats disabled"><a href="#likes">
-												<h4>54</h4> Likes
-										</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-	
-					</div>
-	
-				</div>
-			</div>
-	
-			<div class="container">
-				<div class="row">
-					<div class="twelve columns">
-	
-						<ul class="block-grid mobile four-up">
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-							<li class="box">
-								<div class="panel activity">
-	
-									<div class="container author">
-										<div class="row">
-											<div class="six phone-two columns">
-												<div class="profilesm">
-													<img src="img/pic_briank.jpg" />
-												</div>
-												<span class="profilename">Brian</span>
-											</div>
-	
-											<div class="six phone-two columns datetime">
-												<img src="img/icon_datetime.png" /> 10m
-											</div>
-										</div>
-									</div>
-	
-	
-									<div class="container postimg">
-										<img src="img/fpo_example.jpg" />
-									</div>
-	
-									<div class="container posttxt">
-										<h4>Weirdo Birdman</h4>
-										<span class="postcount"><a href="#">10 likes</a></span> <span
-											class="postcount"><a href="#">10 comments</a></span>
-										<div class="container">
-											<a href="#" class="tiny radius button">Like</a> <a href="#"
-												class="tiny radius button">Comment</a> <a href="#"
-												class="tiny radius button">...</a>
-										</div>
-									</div>
-	
-	
-	
-									<div class="container comments">
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment">
-											<div class="two phone-one columns ">
-												<img src="img/pic_briank.jpg" />
-											</div>
-											<div class="ten phone-three columns ">
-												<a href="#">jlbrowni</a> Yeak ok this is a comment
-											</div>
-										</div>
-										<div class="row comment lastcomment">
-											<div class="two phone-one columns "></div>
-											<div class="ten phone-three columns ">
-												<a href="#">All 34 comments</a>
-											</div>
-										</div>
-									</div>
-	
-	
-	
-	
-	
-								</div>
-							</li>
-	
-						</ul>
-					</div>
-	
-	
-	
-				</div>
-	
-	
-				<div data-role="footer" data-position="fixed" id="yakftr"
-					class="hide-on-desktops">
-					<ul class="block-grid five-up">
-						<li><a href="#hq"><img src="img/ftricon_home.png" /></a></li>
-						<li class="selected activity_btn"><a href="#"><img
-								src="img/ftricon_activity.png" /></a></li>
-						<li><a href="#status"><img src="img/ftricon_post.png" /></a></li>
-						<li><a href="#photocamera"><img
-								src="img/ftricon_photovid.png" /></a></li>
-						<li><a href="#profile"><img src="img/ftricon_profile.png" /></a></li>
-					</ul>
-				</div>
-	
-	
-			</div>
-	
-			<div data-role="footer" data-position="fixed" id="yakftr" class="show-for-small">
-				<ul class="block-grid five-up">
-					<li class="selected"><a href="#hq"><img
-							src="img/ftricon_home.png" /> </a></li>
-					<li><a href="#" class="activity_btn"><img
-							src="img/ftricon_activity.png" /> </a></li>
-					<li><a href="#status"><img src="img/ftricon_post.png" /> </a>
-					</li>
-					<li><a href="#photocamera"><img
-							src="img/ftricon_photovid.png" /> </a></li>
-					<li><a href="#profile"><img src="img/ftricon_profile.png" />
-					</a></li>
-				</ul>
-			</div>
-	
-		</div>
 
-<div data-role="page" id="notfriend" class="contentctr">
+	<div data-role="page" id="notfriend" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-		
-					
-						<div class="row">
-							<div class="two mobile-one columns">
-								<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
-							</div>
-							<div class="eight mobile-two columns leftnav">
-								<div class="leftnavitem">
-									<a href="#" class="notification_btn">
-										<div id="yakbar_notify_count" class="notifycount"></div> <img
-										src="img/icon_notifications.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="yakbar_message_btn">
-										<div class="yakbar_message_count" class="notifycount"></div> <img
-										src="img/icon_messages.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="yakbar_friend_req_btn">
-										<div id="yakbar_friend_req_count" class="notifycount"></div>
-										<img src="img/icon_friendrequest.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+
+
+			<div class="row">
+				<div class="two mobile-one columns">
+					<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
+				</div>
+				<div class="eight mobile-two columns leftnav">
+					<div class="leftnavitem">
+						<a href="#" class="notification_btn">
+							<div id="yakbar_notify_count" class="notifycount"></div> <img
+							src="img/icon_notifications.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_request_btn">
+							<div id="yakbar_request_count" class="notifycount"></div> <img
+							src="img/icon_approvals.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_friend_req_btn">
+							<div id="yakbar_friend_req_count" class="notifycount"></div> <img
+							src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+					<!-- div class="leftnavitem">
 									<a href="#" class="add_friend_btn" id="yakbar_add_friend_btn">
-										<img src="img/icon_friendrequest.png" />
+										<img src="img/icon_friendreqs.png" />
 									</a>
-								</div>
-							</div>
-							<div class="two mobile-one columns rightnav">
-								<a href="#profile">
-									<div class="profilesm">
-										<img id="yakbar_user_img" src="img/pic_briank.jpg" />
-									</div> <span id="yakbar_user_fname" class="rightnavitem"></span>
-								</a>
-								<div class="rightnavitem">
-									<a href="index.html" rel="external" id="yakbar_login_logout_btn">Log
-										In</a>
-								</div>
-							</div>
-						</div>
-					
-		
+								</div-->
 				</div>
+				<div class="two mobile-one columns rightnav">
+					<a href="#" class="profile_link">
+						<div class="profilesm">
+							<img class="yakbar_user_img" src="img/pic_briank.jpg" />
+						</div> <span class="yakbar_user_fname" class="rightnavitem"></span>
+					</a>
+
+				</div>
+			</div>
+
+
+		</div>
 
 		<div class="container">
 			<div class="row">
@@ -4541,13 +3758,11 @@
 								<a href="#" class="small blue button">Add Friend</a>
 
 								<ul class="block-grid four-up">
-									<li class="countstats"><a href="#friends">
+									<li class="countstats"><a href="#">
 											<h4>54</h4> Friends
 									</a></li>
-									<li class="countstats disabled"><a href="#photovideo">
-											<h4>54</h4> Photos/Videos
-									</a></li>
-									<li class="countstats disabled"><a href="#likes">
+
+									<li class="countstats disabled"><a href="#">
 											<h4>54</h4> Likes
 									</a></li>
 								</ul>
@@ -4560,9 +3775,10 @@
 			</div>
 		</div>
 
-		
 
-		<div data-role="footer" data-position="fixed" id="yakftr" class="show-for-small">
+
+		<div data-role="footer" data-position="fixed" id="yakftr"
+			class="show-for-small">
 			<ul class="block-grid five-up">
 				<li class="selected"><a href="#hq"><img
 						src="img/ftricon_home.png" /> </a></li>
@@ -4572,8 +3788,8 @@
 				</li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /> </a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" />
-				</a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /> </a></li>
 			</ul>
 		</div>
 
@@ -4581,117 +3797,111 @@
 
 	<div data-role="page" id="friends" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-		
-					
-						<div class="row">
-							<div class="two mobile-one columns">
-								<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
-							</div>
-							<div class="eight mobile-two columns leftnav">
-								<div class="leftnavitem">
-									<a href="#" class="notification_btn">
-										<div id="yakbar_notify_count" class="notifycount"></div> <img
-										src="img/icon_notifications.png" />
-									</a>
-								</div>
-								<div class="leftnavitem disabled">
-									<a href="#" class="yakbar_message_btn">
-										<div class="yakbar_message_count" class="notifycount"></div> <img
-										src="img/icon_messages.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="yakbar_friend_req_btn">
-										<div id="yakbar_friend_req_count" class="notifycount"></div>
-										<img src="img/icon_friendrequest.png" />
-									</a>
-								</div>
-								<div class="leftnavitem">
-									<a href="#" class="add_friend_btn" id="yakbar_add_friend_btn">
-										<img src="img/icon_friendrequest.png" />
-									</a>
-								</div>
-							</div>
-							<div class="two mobile-one columns rightnav">
-								<a href="#profile">
-									<div class="profilesm">
-										<img id="yakbar_user_img" src="img/pic_briank.jpg" />
-									</div> <span id="yakbar_user_fname" class="rightnavitem"></span>
-								</a>
-								<div class="rightnavitem">
-									<a href="index.html" rel="external" id="yakbar_login_logout_btn">Log
-										In</a>
-								</div>
-							</div>
-						</div>
-					
-		
-				</div>
+		<div id="yakbar" data-role="header" data-position="fixed">
 
-		
 
-		
+
 			<div class="row">
-				<div class="twelve columns">
-					<ul class="block-grid five-up">
-						<li><a href="#friend"><img src="img/avatar_0.jpg" />FriendUsername</a></li>
-						<li><a href="#friend"><img src="img/avatar_1.jpg" />FriendUsername</a></li>
-						<li><a href="#friend"><img src="img/avatar_2.jpg" />FriendUsername</a></li>
-						<li><a href="#friend"><img src="img/avatar_3.jpg" />FriendUsername</a></li>
-						<li><a href="#friend"><img src="img/avatar_4.jpg" />FriendUsername</a></li>
-						<li><a href="#friend"><img src="img/avatar_0.jpg" />FriendUsername</a></li>
+				<div class="two mobile-one columns">
+					<a href="#hq" rel="external"><img src="img/logo_yak.png" /> </a>
+				</div>
+				<div class="eight mobile-two columns leftnav">
+					<div class="leftnavitem">
+						<a href="#" class="notification_btn">
+							<div id="yakbar_notify_count" class="notifycount"></div> <img
+							src="img/icon_notifications.png" />
+						</a>
+					</div>
+					<div class="leftnavitem disabled">
+						<a href="#" class="yakbar_request_btn">
+							<div id="yakbar_request_count" class="notifycount"></div> <img
+							src="img/icon_approvals.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="yakbar_friend_req_btn">
+							<div id="yakbar_friend_req_count" class="notifycount"></div> <img
+							src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+					<div class="leftnavitem">
+						<a href="#" class="add_friend_btn" id="yakbar_add_friend_btn">
+							<img src="img/icon_friendreqs.png" />
+						</a>
+					</div>
+				</div>
+				<div class="two mobile-one columns rightnav">
+					<a href="#" class="profile_link">
+						<div class="profilesm">
+							<img class="yakbar_user_img" src="img/pic_briank.jpg" />
+						</div> <span class="yakbar_user_fname" class="rightnavitem"></span>
+					</a>
+					<ul class="fastlogin right" id="dmenu-right" data-role="menu">
+						<li><span data-role="button" data-icon="arrow-d"
+							data-iconpos="right">U</span>
+							<ul data-role="listview" class="fastlogin_ul" data-inset="true">
+							</ul></li>
 					</ul>
 				</div>
-
 			</div>
-	
 
 
+		</div>
 
+		<div class="row">
+			<div class="twelve columns">
+				<ul class="block-grid five-up" id="friend_list">
 
+				</ul>
+			</div>
+
+		</div>
 
 	</div>
-	
+
 	<div data-role="page" id="avatars" class="contentctr">
-	
-			<div id="yakbar" data-role="header"
-						data-position="fixed">
-			
-						<div class="container">
-							<div class="row">
-								<div class="one mobile-one columns">
-									<a href="#hq" class="small radius blue button">&lt;</a>
-								</div>
-								<div class="eleven mobile-four columns">Avatars</div>
-							</div>
-						</div>
-					</div>
-	
-			
-	
-			
+
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+			<div class="container">
 				<div class="row">
-					<div class="twelve columns">
-						<ul class="block-grid five-up">
-							<li><a href="#"><img src="img/avatar_0.jpg" /></a></li>
-							<li><a href="#"><img src="img/avatar_1.jpg" /></a></li>
-							<li><a href="#"><img src="img/avatar_2.jpg" /></a></li>
-							<li><a href="#"><img src="img/avatar_3.jpg" /></a></li>
-							<li><a href="#"><img src="img/avatar_4.jpg" /></a></li>
-						</ul>
+					<div class="one mobile-one columns">
+						<a href="#hq" class="small radius blue button">&lt;</a>
 					</div>
-	
+					<div class="eleven mobile-four columns">Avatars</div>
 				</div>
-		
-	
-	
-	
-	
-	
+			</div>
 		</div>
+
+		<div class="row">
+			<div class="two columns nav">
+				<a id="avatars_prev" href="#">Prev</a>
+			</div>
+
+
+
+			<div class="eight columns" id="avatar_cycle">
+				<a href="#" class="avatar_image"><img width="200" height="200"
+					src="img/avatar_0.jpg" /></a> 
+					<a href="#" class="avatar_image"><img
+					width="200" height="200" src="img/avatar_1.jpg" /></a> 
+					<a href="#"
+					class="avatar_image"><img width="200" height="200"
+					src="img/avatar_2.jpg" /></a> 
+					<a href="#" class="avatar_image"><img
+					width="200" height="200" src="img/avatar_3.jpg" /></a> 
+					<a href="#"
+					class="avatar_image"><img width="200" height="200"
+					src="img/avatar_4.jpg" /></a>
+				
+			</div>
+
+			<div class="two columns nav">
+				<a id="avatars_next" href="#">Next</a>
+			</div>
+		</div>
+
+	</div>
 
 	<div data-role="page" id="yaktube" class="contentctr">
 
@@ -4843,10 +4053,10 @@
 								</div>
 								<div class="ten columns">
 									<p>
-										<a href="#profile">Brian</a> this is the best live song i've
-										ever heard. and im 87 years old and been to 1000's of
-										concerts. kidding. im 19 in my first year of uni, just
-										finished my last exam, only one left on my rez floor and
+										<a href="#" class="profile_link">Brian</a> this is the best
+										live song i've ever heard. and im 87 years old and been to
+										1000's of concerts. kidding. im 19 in my first year of uni,
+										just finished my last exam, only one left on my rez floor and
 										pretty much my building.
 									</p>
 								</div>
@@ -4858,10 +4068,10 @@
 								</div>
 								<div class="ten columns">
 									<p>
-										<a href="#profile">Brian</a> this is the best live song i've
-										ever heard. and im 87 years old and been to 1000's of
-										concerts. kidding. im 19 in my first year of uni, just
-										finished my last exam, only one left on my rez floor and
+										<a href="#" class="profile_link">Brian</a> this is the best
+										live song i've ever heard. and im 87 years old and been to
+										1000's of concerts. kidding. im 19 in my first year of uni,
+										just finished my last exam, only one left on my rez floor and
 										pretty much my building.
 									</p>
 								</div>
@@ -4925,8 +4135,8 @@
 				</li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /> </a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" />
-				</a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /> </a></li>
 			</ul>
 		</div>
 
@@ -5102,15 +4312,6 @@
 			</div>
 		</div>
 
-
-
-
-
-
-
-
-
-
 	</div>
 
 
@@ -5118,38 +4319,61 @@
 
 		<div id="yakbar" data-role="header" data-position="fixed">
 
-				<div class="row">
-					<div class="one mobile-one columns">
-						<a href="#hq" class="small radius blue button">&lt;</a>
-					</div>
-					<div class="eleven mobile-four columns">Notifications</div>
-				</div>		
+			<div class="row">
+				<div class="one mobile-one columns">
+					<a href="#hq" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="eleven mobile-four columns">Notifications</div>
+			</div>
 		</div>
 		<div class="row">
-				<div class="twelve columns">
+			<div class="twelve columns">
 
 
-					<div class="panel">
-						<div>
-							<ul id="notifications_list">
-							</ul>
-						</div>
-
-
+				<div class="panel">
+					<div>
+						<ul id="notifications_list">
+						</ul>
 					</div>
+
+
 				</div>
 			</div>
+		</div>
+
+	</div>
+
+	<div data-role="page" id="approvals" class="contentctr">
+
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+			<div class="row">
+				<div class="one mobile-one columns">
+					<a href="#hq" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="eleven mobile-four columns">Approvals</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="twelve columns">
 
 
+				<div class="panel">
+					<div>
+						<ul id="approvals_list">
+						</ul>
+					</div>
 
 
-		
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 	<div data-role="page" id="credits" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-			data-position="fixed">
+		<div id="yakbar" data-role="header" data-position="fixed">
 
 			<div class="container">
 				<div class="row">
@@ -5175,10 +4399,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 	</div>
 
 	<div data-role="page" id="parentctrl" class="contentctr">
@@ -5264,9 +4484,6 @@
 
 						</div>
 					</div>
-
-
-
 				</div>
 			</div>
 		</div>
@@ -5281,590 +4498,507 @@
 				<li><a href="#status"><img src="img/ftricon_post.png" /></a></li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /></a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" /></a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /></a></li>
 			</ul>
 		</div>
 
 	</div>
 
-
-
-
-
-
 	<div data-role="page" id="settings" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-			data-position="fixed">
-
-			
-				<div class="row">
-					<div class="one mobile-one columns">
-						<a href="#hq" class="small radius blue button">&lt;</a>
-					</div>
-					<div class="eleven mobile-four columns">Settings</div>
-				</div>
-			
-		</div>
-
-
+		<div id="yakbar" data-role="header" data-position="fixed">
 
 
 			<div class="row">
-				<div class="twelve columns">
+				<div class="one mobile-one columns">
+					<a href="#hq" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="eleven mobile-four columns">Settings</div>
+			</div>
 
-					
-						<div class="row panel">
-							<div class="eleven mobile-four columns">Find Facebook Friends
-							</div>
-							<div class="one mobile-one columns">
-								<a href="#findfbfriends" class="small button">&gt;</a>
-							</div>
-						</div>
-						
-						<div class="row panel">
-							<div class="eleven mobile-four columns">Find Yak Friends</div>
-							<div class="one mobile-one columns">
-								<a href="#addFriend" class="small button">&gt;</a>
-							</div>
-						</div>
+		</div>
 
-					
-						
+		<div class="row">
+			<div class="twelve columns">
 
-						<div class="row panel">
-							<div class="eleven mobile-four columns">
-								<p>Edit Profile</p>
-							</div>
-							<div class="one mobile-one columns">
-								<a href="#editprofilekid" class="small button">&gt;</a>
-							</div>
-						</div>
-						
-						
-						<div class="row panel">
-							<div class="eleven mobile-four columns">
-								<p>Applications</p>
-							</div>
-							<div class="one mobile-one columns">
-								<a href="#appsettings" class="small button">&gt;</a>
-							</div>
-						</div>
-						
-					
-						
-						<div class="row panel">
-							<div class="eleven mobile-four columns">
-								<p>About</p>
-							</div>
-							<div class="one mobile-one columns">
-								<a href="#aboutinfo" class="small button">&gt;</a>
-							</div>
-						</div>
-						
-						
-						
-						<div class="row panel">
-							<div class="eleven mobile-four columns">
-								<p>Log Out</p>
-							</div>
-							<div class="one mobile-one columns">
-								<a href="#home" class="small button">&gt;</a>
-							</div>
-						</div>
-						
+
+				<div class="row panel">
+					<div class="eleven mobile-four columns">Find Facebook Friends
 					</div>
-					
-						
-					
+					<div class="one mobile-one columns">
+						<a href="#findfbfriends" class="small button">&gt;</a>
+					</div>
+				</div>
+
+				<div class="row panel">
+					<div class="eleven mobile-four columns">Find Yak Friends</div>
+					<div class="one mobile-one columns">
+						<a href="#addFriend" class="small button">&gt;</a>
+					</div>
+				</div>
+
+				<div class="row panel">
+					<div class="eleven mobile-four columns">
+						<p>Edit Profile</p>
+					</div>
+					<div class="one mobile-one columns">
+						<a href="#editprofilekid" class="small button">&gt;</a>
+					</div>
+				</div>
+
+
+				<div class="row panel">
+					<div class="eleven mobile-four columns">
+						<p>Applications</p>
+					</div>
+					<div class="one mobile-one columns">
+						<a href="#appsettings" class="small button">&gt;</a>
+					</div>
+				</div>
 
 
 
+				<div class="row panel">
+					<div class="eleven mobile-four columns">
+						<p>About</p>
+					</div>
+					<div class="one mobile-one columns">
+						<a href="#aboutinfo" class="small button">&gt;</a>
+					</div>
+				</div>
+
+
+
+				<div class="row panel">
+					<div class="eleven mobile-four columns">
+						<p>Log Out</p>
+					</div>
+					<div class="one mobile-one columns">
+						<a href="#home" class="small button">&gt;</a>
+					</div>
 				</div>
 
 			</div>
+		</div>
 
-
-
-
+	</div>
 
 	</div>
 
 	<div data-role="page" id="editprofilekid" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-					
-						<div class="row">
-							<div class="one mobile-one columns">
-								<a href="#settings" class="small radius blue button">&lt;</a>
-							</div>
-							<div class="eleven mobile-four columns">Edit Profile</div>
-						</div>
-					
-				</div>
+		<div id="yakbar" data-role="header" data-position="fixed">
 
-		
+
 			<div class="row">
-				<div class="twelve columns">
+				<div class="one mobile-one columns">
+					<a href="#settings" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="eleven mobile-four columns">Edit Profile</div>
+			</div>
 
-					<div class="panel">
-						<h3>Information</h3>
+		</div>
 
-						<div class="row">
-							<div class="two phone-one columns">Username</div>
-							<div class="ten phone-three columns">
-								<input type="text" class="medium input-text" id="mediumInput"
-									value="username">
-							</div>
+		<div class="row">
+			<div class="twelve columns">
+
+				<div class="panel">
+					<h3>Information</h3>
+
+					<div class="row">
+						<div class="two phone-one columns">Username</div>
+						<div class="ten phone-three columns">
+							<input type="text" class="medium input-text" id="mediumInput"
+								value="username">
 						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-on columns">Email</div>
-							<div class="ten phone-three columns">
-								<input type="text" class="medium input-text" id="mediumInput"
-									value="email@address.com">
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-on columns">DOB</div>
-							<div class="ten phone-three columns">8/23/1982</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-on columns">Gender</div>
-							<div class="ten phone-three columns">
-								<select id="niceDropdown">
-									<option>Male</option>
-									<option>Female</option>
-								</select>
-							</div>
-						</div>
-						<hr>
-						<a href="#" class="small button">Change Info</a>
 					</div>
-
-					<div class="panel">
-						<h3>Parent Info</h3>
-
-						<div class="row">
-							<div class="two phone-one columns">Username</div>
-							<div class="ten phone-three columns">parentusername</div>
+					<hr>
+					<div class="row">
+						<div class="two phone-on columns">Email</div>
+						<div class="ten phone-three columns">
+							<input type="text" class="medium input-text" id="mediumInput"
+								value="email@address.com">
 						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-on columns">Email</div>
-							<div class="ten phone-three columns">Email@address.com</div>
-						</div>
-						<hr>
-
-						<a href="#" class="small button">Option?</a>
 					</div>
-
-					<div class="panel">
-						<h3>Parent Info</h3>
-
-						<div class="row">
-							<div class="two phone-one columns">Email</div>
-							<div class="ten phone-three columns">
-								<input type="text" class="medium input-text" id="mediumInput"
-									value="email@address.com">
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="twelve phone-four columns">Parent not yet
-								verified.</div>
-						</div>
-
-						<a href="#" class="small button">Resend Email</a>
+					<hr>
+					<div class="row">
+						<div class="two phone-on columns">DOB</div>
+						<div class="ten phone-three columns">8/23/1982</div>
 					</div>
-
-
-
-
-
-
-					<div class="panel">
-						<h3>Connected Accounts</h3>
-
-						
-							<div class="row">
-								<div class="one phone-one columns">
-									<img src="img/icon_facebook.png" />
-								</div>
-
-								<div class="eight phone-two columns">
-									<p>You are connected to Facebook as Brian Keenan</p>
-								</div>
-
-								<div class="two phone-one columns end">
-									<a href="#" class="small button">Revoke Access</a>
-								</div>
-
-							</div>
-
-
-
-						
+					<hr>
+					<div class="row">
+						<div class="two phone-on columns">Gender</div>
+						<div class="ten phone-three columns">
+							<select id="niceDropdown">
+								<option>Male</option>
+								<option>Female</option>
+							</select>
+						</div>
 					</div>
-
-
-
+					<hr>
+					<a href="#" class="small button">Change Info</a>
 				</div>
 
+				<div class="panel">
+					<h3>Parent Info</h3>
+
+					<div class="row">
+						<div class="two phone-one columns">Username</div>
+						<div class="ten phone-three columns">parentusername</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="two phone-on columns">Email</div>
+						<div class="ten phone-three columns">Email@address.com</div>
+					</div>
+					<hr>
+
+					<a href="#" class="small button">Option?</a>
+				</div>
+
+				<div class="panel">
+					<h3>Parent Info</h3>
+
+					<div class="row">
+						<div class="two phone-one columns">Email</div>
+						<div class="ten phone-three columns">
+							<input type="text" class="medium input-text" id="mediumInput"
+								value="email@address.com">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="twelve phone-four columns">Parent not yet
+							verified.</div>
+					</div>
+
+					<a href="#" class="small button">Resend Email</a>
+				</div>
+
+				<div class="panel">
+					<h3>Connected Accounts</h3>
+
+
+					<div class="row">
+						<div class="one phone-one columns">
+							<img src="img/icon_facebook.png" />
+						</div>
+
+						<div class="eight phone-two columns">
+							<p>You are connected to Facebook as Brian Keenan</p>
+						</div>
+
+						<div class="two phone-one columns end">
+							<a href="#" class="small button">Revoke Access</a>
+						</div>
+
+					</div>
+				</div>
 			</div>
-		
-
-
-
-
+		</div>
 	</div>
 
 	<div data-role="page" id="editprofileparent" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-					
-						<div class="row">
-							<div class="one mobile-one columns">
-								<a href="#settings" class="small radius blue button">&lt;</a>
-							</div>
-							<div class="eleven mobile-four columns">Edit Profile</div>
-						</div>
-					
-				</div>
+		<div id="yakbar" data-role="header" data-position="fixed">
 
-		
+
 			<div class="row">
-				<div class="twelve columns">
+				<div class="one mobile-one columns">
+					<a href="#settings" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="eleven mobile-four columns">Edit Profile</div>
+			</div>
 
-					<div class="panel">
-						<h2>Information</h2>
+		</div>
 
-						<div class="row">
-							<div class="two phone-one columns">Username</div>
-							<div class="ten phone-three columns">
-								<input type="text" class="medium input-text" id="mediumInput"
-									value="username">
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-on columns">Email</div>
-							<div class="ten phone-three columns">
-								<input type="text" class="medium input-text" id="mediumInput"
-									value="email@address.com">
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-on columns">DOB</div>
-							<div class="ten phone-three columns">8/23/1982</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-on columns">Gender</div>
-							<div class="ten phone-three columns">
-								<select id="niceDropdown">
-									<option>Male</option>
-									<option>Female</option>
-								</select>
-							</div>
-						</div>
-						<hr>
-						<a href="#" class="small button">Change Info</a>
-					</div>
 
-					<div class="panel">
-						<h2>Children</h2>
+		<div class="row">
+			<div class="twelve columns">
 
-						<div class="row">
-							<div class="two phone-one columns">
-								<img src="img/pic_briank.jpg" />
-							</div>
-							<div class="eight phone-two columns">
-								<p>
-									<strong>yrletter</strong>
-								</p>
-								<p>Brian</p>
-							</div>
-							<div class="two phone-one columns">
-								<a href="#" class="small button">Options?</a>
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="two phone-one columns">
-								<img src="img/pic_briank.jpg" />
-							</div>
-							<div class="eight phone-two columns">
-								<p>
-									<strong>yrletter</strong>
-								</p>
-								<p>Brian</p>
-							</div>
-							<div class="two phone-one columns">
-								<a href="#" class="small button">Options?</a>
-							</div>
+				<div class="panel">
+					<h2>Information</h2>
+
+					<div class="row">
+						<div class="two phone-one columns">Username</div>
+						<div class="ten phone-three columns">
+							<input type="text" class="medium input-text" id="mediumInput"
+								value="username">
 						</div>
 					</div>
-
-					<div class="panel">
-						<h2>Connected Accounts</h2>
-
-						
-							<div class="row">
-								<div class="one phone-one columns">
-									<img src="img/icon_facebook.png" />
-								</div>
-
-								<div class="eight phone-two columns">
-									<p>You are connected to Facebook as Brian Keenan</p>
-								</div>
-
-								<div class="two phone-one columns end">
-									<a href="#" class="small button">Revoke Access</a>
-								</div>
-
-							</div>
-
-
-
-						
+					<hr>
+					<div class="row">
+						<div class="two phone-on columns">Email</div>
+						<div class="ten phone-three columns">
+							<input type="text" class="medium input-text" id="mediumInput"
+								value="email@address.com">
+						</div>
 					</div>
-
-
-
+					<hr>
+					<div class="row">
+						<div class="two phone-on columns">DOB</div>
+						<div class="ten phone-three columns">8/23/1982</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="two phone-on columns">Gender</div>
+						<div class="ten phone-three columns">
+							<select id="niceDropdown">
+								<option>Male</option>
+								<option>Female</option>
+							</select>
+						</div>
+					</div>
+					<hr>
+					<a href="#" class="small button">Change Info</a>
 				</div>
 
+				<div class="panel">
+					<h2>Children</h2>
+
+					<div class="row">
+						<div class="two phone-one columns">
+							<img src="img/pic_briank.jpg" />
+						</div>
+						<div class="eight phone-two columns">
+							<p>
+								<strong>yrletter</strong>
+							</p>
+							<p>Brian</p>
+						</div>
+						<div class="two phone-one columns">
+							<a href="#" class="small button">Options?</a>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="two phone-one columns">
+							<img src="img/pic_briank.jpg" />
+						</div>
+						<div class="eight phone-two columns">
+							<p>
+								<strong>yrletter</strong>
+							</p>
+							<p>Brian</p>
+						</div>
+						<div class="two phone-one columns">
+							<a href="#" class="small button">Options?</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel">
+					<h2>Connected Accounts</h2>
+
+
+					<div class="row">
+						<div class="one phone-one columns">
+							<img src="img/icon_facebook.png" />
+						</div>
+
+						<div class="eight phone-two columns">
+							<p>You are connected to Facebook as Brian Keenan</p>
+						</div>
+
+						<div class="two phone-one columns end">
+							<a href="#" class="small button">Revoke Access</a>
+						</div>
+
+					</div>
+				</div>
 			</div>
-		
-
+		</div>
 	</div>
-
-	
 
 	<div data-role="page" id="aboutinfo" class="contentctr">
 
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-					
-						<div class="row">
-							<div class="one mobile-one columns">
-								<a href="#settings" class="small radius blue button">&lt;</a>
-							</div>
-							<div class="eleven mobile-four columns">About</div>
-						</div>
-					</div>
-				
+		<div id="yakbar" data-role="header" data-position="fixed">
 
-		
-		
+
 			<div class="row">
-			<div class="twelve columns centered">
-				<ul>
-				<li>Help</li>
-				<li>About</li>
-				<li>Terms of Service</li>
-				<li>Privacy</li>
-				</ul>
-
-	</div>		
-	</div>
-	
-	</div>
-	
-	<div data-role="page" id="appsettings" class="contentctr">
-	
-			<div id="yakbar" data-role="header"
-								data-position="fixed">
-					
-								
-									<div class="row">
-										<div class="one mobile-one columns">
-											<a href="#settings" class="small radius blue button">&lt;</a>
-										</div>
-										<div class="ten mobile-three columns">
-											Find Facebook Friends
-										</div>
-										<div class="one mobile-one columns">
-											<a href="#" class="small radius blue button">Follow All</a>
-										</div>
-									</div>
-								</div>
-			
-					<div class="row">
-						<div class="twelve columns centered">
-					<ul class="block-grid three-up">
-					  					<li>
-					  						<div class="row panel">
-					  							<div class="four columns">
-					  								<img src="img/appicon_weirdoids.png">
-					  							</div>
-					  							<div class="eight columns">
-					  								Weirdoids
-					  							</div>
-					  						</div>
-					  					</li>
-					  					<li>
-					  						<div class="row panel">
-					  							<div class="four columns">
-					  								<img src="img/appicon_weirdoids.png">
-					  							</div>
-					  							<div class="eight columns">
-					  								Weirdoids
-					  							</div>
-					  						</div>
-					  					</li>
-					  					<li>
-					  						<div class="row panel">
-					  							<div class="four columns">
-					  								<img src="img/appicon_weirdoids.png">
-					  							</div>
-					  							<div class="eight columns">
-					  								Weirdoids
-					  							</div>
-					  						</div>
-					  					</li>
-					  					<li>
-					  						<div class="row panel">
-					  							<div class="four columns">
-					  								<img src="img/appicon_weirdoids.png">
-					  							</div>
-					  							<div class="eight columns">
-					  								Weirdoids
-					  							</div>
-					  						</div>
-					  					</li>
-					  					<li>
-					  						<div class="row panel">
-					  							<div class="four columns">
-					  								<img src="img/appicon_weirdoids.png">
-					  							</div>
-					  							<div class="eight columns">
-					  								Weirdoids
-					  							</div>
-					  						</div>
-					  					</li>
-					  				</ul>
-					
-					
-						
-					</div>
-					</div>
-		
+				<div class="one mobile-one columns">
+					<a href="#settings" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="eleven mobile-four columns">About</div>
+			</div>
 		</div>
-
-	
-
-	<div data-role="page" id="findfbfriends" class="contentctr">
-
-		<div id="yakbar" data-role="header"
-					data-position="fixed">
-		
-					
-						<div class="row">
-							<div class="one mobile-one columns">
-								<a href="#settings" class="small radius blue button">&lt;</a>
-							</div>
-							<div class="ten mobile-three columns">
-								Find Facebook Friends
-							</div>
-							<div class="one mobile-one columns">
-								<a href="#" class="small radius blue button">Follow All</a>
-							</div>
-						</div>
-					</div>
 
 		<div class="row">
 			<div class="twelve columns centered">
-		<ul class="block-grid three-up">
-		  					<li>
-		  						<div class="row panel">
-		  							<div class="four columns">
-		  								<img src="img/pic_briank.jpg">
-		  							</div>
-		  							<div class="eight columns">
-		  								<p>
-		  									<strong>yrletter</strong>
-		  								</p>
-		  								<p>Brian</p>
-		  								<a href="#" class="small blue button radius">Follow</a>
-		  							</div>
-		  						</div>
-		  					</li>
-		  					<li>
-		  						<div class="row panel">
-		  							<div class="four columns">
-		  								<img src="img/pic_briank.jpg">
-		  							</div>
-		  							<div class="eight columns">
-		  								<p>
-		  									<strong>yrletter</strong>
-		  								</p>
-		  								<p>Brian</p>
-		  								<a href="#" class="small blue button radius">Follow</a>
-		  							</div>
-		  						</div>
-		  					</li>
-		  					<li>
-		  						<div class="row panel">
-		  							<div class="four columns">
-		  								<img src="img/pic_briank.jpg">
-		  							</div>
-		  							<div class="eight columns">
-		  								<p>
-		  									<strong>yrletter</strong>
-		  								</p>
-		  								<p>Brian</p>
-		  								<a href="#" class="small blue button radius">Follow</a>
-		  							</div>
-		  						</div>
-		  					</li>
-		  					<li>
-		  						<div class="row panel">
-		  							<div class="four columns">
-		  								<img src="img/pic_briank.jpg">
-		  							</div>
-		  							<div class="eight columns">
-		  								<p>
-		  									<strong>yrletter</strong>
-		  								</p>
-		  								<p>Brian</p>
-		  								<a href="#" class="small blue button radius">Follow</a>
-		  							</div>
-		  						</div>
-		  					</li>
-		  					<li>
-		  						<div class="row panel">
-		  							<div class="four columns">
-		  								<img src="img/pic_briank.jpg">
-		  							</div>
-		  							<div class="eight columns">
-		  								<p>
-		  									<strong>yrletter</strong>
-		  								</p>
-		  								<p>Brian</p>
-		  								<a href="#" class="small blue button radius">Follow</a>
-		  							</div>
-		  						</div>
-		  					</li>
-		  				</ul>
-		
-		
-			
-		</div>
+				<ul>
+					<li>Help</li>
+					<li>About</li>
+					<li>Terms of Service</li>
+					<li>Privacy</li>
+				</ul>
+
+			</div>
 		</div>
 
+	</div>
+
+	<div data-role="page" id="appsettings" class="contentctr">
+
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+
+			<div class="row">
+				<div class="one mobile-one columns">
+					<a href="#settings" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="ten mobile-three columns">Find Facebook Friends</div>
+				<div class="one mobile-one columns">
+					<a href="#" class="small radius blue button">Follow All</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="twelve columns centered">
+				<ul class="block-grid three-up">
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/appicon_weirdoids.png">
+							</div>
+							<div class="eight columns">Weirdoids</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/appicon_weirdoids.png">
+							</div>
+							<div class="eight columns">Weirdoids</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/appicon_weirdoids.png">
+							</div>
+							<div class="eight columns">Weirdoids</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/appicon_weirdoids.png">
+							</div>
+							<div class="eight columns">Weirdoids</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/appicon_weirdoids.png">
+							</div>
+							<div class="eight columns">Weirdoids</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div data-role="page" id="findfbfriends" class="contentctr">
+
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+
+			<div class="row">
+				<div class="one mobile-one columns">
+					<a href="#settings" class="small radius blue button">&lt;</a>
+				</div>
+				<div class="ten mobile-three columns">Find Facebook Friends</div>
+				<div class="one mobile-one columns">
+					<a href="#" class="small radius blue button">Follow All</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="twelve columns centered">
+				<ul class="block-grid three-up">
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/pic_briank.jpg">
+							</div>
+							<div class="eight columns">
+								<p>
+									<strong>yrletter</strong>
+								</p>
+								<p>Brian</p>
+								<a href="#" class="small blue button radius">Follow</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/pic_briank.jpg">
+							</div>
+							<div class="eight columns">
+								<p>
+									<strong>yrletter</strong>
+								</p>
+								<p>Brian</p>
+								<a href="#" class="small blue button radius">Follow</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/pic_briank.jpg">
+							</div>
+							<div class="eight columns">
+								<p>
+									<strong>yrletter</strong>
+								</p>
+								<p>Brian</p>
+								<a href="#" class="small blue button radius">Follow</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/pic_briank.jpg">
+							</div>
+							<div class="eight columns">
+								<p>
+									<strong>yrletter</strong>
+								</p>
+								<p>Brian</p>
+								<a href="#" class="small blue button radius">Follow</a>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="row panel">
+							<div class="four columns">
+								<img src="img/pic_briank.jpg">
+							</div>
+							<div class="eight columns">
+								<p>
+									<strong>yrletter</strong>
+								</p>
+								<p>Brian</p>
+								<a href="#" class="small blue button radius">Follow</a>
+							</div>
+						</div>
+					</li>
+				</ul>
 
 
 
-
+			</div>
+		</div>
 	</div>
 
 	<div data-role="page" id="comment" class="contentctr">
@@ -5903,7 +5037,8 @@
 						src="img/ftricon_post.png" /></a></li>
 				<li><a href="#photocamera"><img
 						src="img/ftricon_photovid.png" /></a></li>
-				<li><a href="#profile"><img src="img/ftricon_profile.png" /></a></li>
+				<li><a href="#" class="profile_link"><img
+						src="img/ftricon_profile.png" /></a></li>
 			</ul>
 		</div>
 
@@ -5932,8 +5067,6 @@
 			</div>
 
 		</div>
-
-
 
 		<img src="img/takephoto.jpg" />
 
@@ -5973,8 +5106,6 @@
 
 		</div>
 
-
-
 		<img src="img/takephoto.jpg" />
 
 
@@ -6013,8 +5144,6 @@
 
 		</div>
 
-
-
 		<div class="container">
 			<div class="row">
 				<div class="twelve columns">
@@ -6051,19 +5180,10 @@
 						</div>
 
 					</div>
-
-
-
-
-
 				</div>
 
 			</div>
 		</div>
-
-
-
-
 	</div>
 
 	<div id="getCommentsModal" class="reveal-modal">
@@ -6077,18 +5197,17 @@
 
 	<div id="addFriend" data-role="page" data-rel="dialog">
 
-	<div id="yakbar" data-role="header"
-				data-position="fixed">
-	
-				<div class="container">
-					<div class="row">
-						<div class="one mobile-one columns">
-							<a href="#hq" class="small radius blue button">&lt;</a>
-						</div>
-						<div class="eleven mobile-four columns">Add a Friend</div>
+		<div id="yakbar" data-role="header" data-position="fixed">
+
+			<div class="container">
+				<div class="row">
+					<div class="one mobile-one columns">
+						<a href="#hq" class="small radius blue button">&lt;</a>
 					</div>
+					<div class="eleven mobile-four columns">Add a Friend</div>
 				</div>
-			</div>	
+			</div>
+		</div>
 
 		<div class="container interior">
 
@@ -6104,17 +5223,17 @@
 									<img src="img/signup_yak.png" />
 								</div>
 								<div class="eight columns">
-									<label>Friend's Yakhq Login ID</label>
-									<input id="friendlogin_id"
-										type="text" placeholder="Username"> <label
-										class="error" for="friendlogin_id" id="friendlogin_id_error">This
-										field is required.</label> <label>How do you know this friend?</label>
-										<input id="friendRelationship"
+									<label>Friend's Yakhq Login ID</label> <input
+										id="friendlogin_id" type="text" placeholder="Username">
+									<label class="error" for="friendlogin_id"
+										id="friendlogin_id_error">This field is required.</label> <label>How
+										do you know this friend?</label> <input id="friendRelationship"
 										type="text" placeholder="Relationship"> <label
-										class="error" for="friendRelationship" id="friendRelationship_error">This
-										field is required.</label> <a href="#" id="add_friend_next_btn"
-										rel="external" data-theme="a"
-										class=" radius large dkteal button">Send Request</a>
+										class="error" for="friendRelationship"
+										id="friendRelationship_error">This field is required.</label>
+									<a href="#" id="add_friend_next_btn" rel="external"
+										data-theme="a" class=" radius large dkteal button">Send
+										Request</a>
 
 									<div class="row">
 										<a href="#searchFriend">Search for Friend</a>
@@ -6141,6 +5260,6 @@
 		</div>
 		<a class="close-reveal-modal">&#215;</a>
 	</div>
-	
+
 </body>
 </html>

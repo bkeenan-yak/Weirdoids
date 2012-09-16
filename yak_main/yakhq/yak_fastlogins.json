@@ -1,0 +1,10 @@
+{ "fastlogins": [ "yrletter|password", "yrchild|password",
+						"testingchild|password", "testingparent|password",
+						"testingchild|password", "otherparent|password",
+						"otherchild|password", "immaparent|password",
+						"immachild|password", "two_testparent|password",
+						"two_testchild|password",
+						"four_testparent|password",
+						"four_testchild|password", "aaa|ddd", "ddd|ddd",
+						"yak1|ddd", "yak2|ddd" ]
+}
