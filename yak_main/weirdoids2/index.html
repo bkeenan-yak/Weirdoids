@@ -11,42 +11,59 @@
 <link rel="apple-touch-icon" href="imgs/apple-touch-icon.png" />
 <title>Weirdoids Proto2</title>
 <link rel="icon" type="image/png" href="images/favicon.png" />
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.css" />
+
 <link rel="stylesheet" type="text/css" href="css/jcarousel.css" />
+<link rel="stylesheet" type="text/css" href="css/mobiscroll-2.1.custom.min.css" />
+
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+
+
 <link href="css/weirdoids.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/themes/weirdoidstheme.css" />
+
 <!--[if lt IE 9]>
 <link href="css/weirdoids.ie.css" rel="stylesheet" type="text/css" />
 <![endif]-->
 
 
-<script src="script/libs/jquery-1.6.4.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-<link rel="stylesheet" href="css/jquery.mobile-1.1.0.css" />
-<script src="script/libs/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.js"></script>
+<script src="js/jquery-ui-1.8.24.custom.min.js"></script>
 
+<!-- script	src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.1.0.min.js"></script-->
 
-<!-- jquery mobile 1.2 and UI 1.9
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css"/>
-<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
--->
 
 <script src="script/libs/jquery.cycle.all.js" type="text/javascript"></script>
+
+<script src="js/mobiscroll.core-2.1.js" type="text/javascript"></script>
+<script src="js/mobiscroll.jqm-2.1.js" type="text/javascript"></script>
+<script src="js/mobiscroll.select-2.1.js" type="text/javascript"></script>
+<script src="js/mobiscroll.datetime-2.1.js" type="text/javascript"></script>
+
 <script src="script/libs/jquery.waitforimages.js" type="text/javascript"></script>
 <script src="script/libs/jquery.cookies.2.2.0.min.js" type="text/javascript"></script>
-<script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.js" type="text/javascript"></script>
+
 <script src="script/libs/json2.js" type="text/javascript"></script>
+
 <!--[if IE]><script type="text/javascript" src="script/excanvas.js"></script><![endif]-->
+
 <script type="text/javascript" src="script/libs/jquery.jcarousel.min.js"></script>
-<script src="script/loadPack3.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="js/jqm.autoComplete-1.4.3.js"></script>
+
 <script src="script/user_data_mgmt.js" type="text/javascript"></script>
 <script src="script/prodmgmt.js" type="text/javascript"></script>
 <script src="script/weirdoids.js" type="text/javascript"></script>
 <script src="script/weirdoids_facebook.js" type="text/javascript"></script>
+<script src="script/weirdoids_home.js" type="text/javascript"></script>
+<script src="script/weirdoids_build.js" type="text/javascript"></script>
+<script src="script/weirdoids_drawing.js" type="text/javascript"></script>
+<script src="script/weirdoids_packs.js" type="text/javascript"></script>
+<script src="script/weirdoids_preview.js" type="text/javascript"></script>
+<script src="script/weirdoids_vault.js" type="text/javascript"></script>
+<script src="script/weirdoids_persist.js" type="text/javascript"></script>
+
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -66,58 +83,55 @@
 <body>
 	<div id="fb-root"></div>
 	<div id="wrapper">
-	
+
 		<div data-role="page" id="home">
-		
-		<div data-role="content">
-			
-		<div class="row">
-		<div class="ten columns centered center"> 
-		<div id="logo"><img src="img/logo_weirdoids.png"/></div> 
-		<div class="eight columns centered center grate">
-		<a href="#build" id="bldbtn" class="large success button build_button">Build</a>
-		<a href="#packs" class="large alert button">Packs</a>
-		<a href="#vault" class="large button">Vault</a>
-		
-		<a href="#gallery" class="large button">Gallery</a>
-		<a href="#badges" class="large button">Badges</a>
-		
-		</div>
-		</div>
-		</div>
-		
+
+			<div data-role="content">
+
+				<div class="row">
+					<div class="ten columns centered center">
+						<div id="logo">
+							<img src="img/logo_weirdoids.png" />
+						</div>
+						<div class="eight columns centered center grate">
+							<a href="#build" id="bldbtn" class="large success button build_button">Build</a> <a href="#packs"
+								class="large alert button">Packs</a> <a href="#vault" class="large button">Vault</a> <a href="#gallery"
+								class="large button">Gallery</a> <a href="#badges" class="large button">Badges</a>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div data-role="footer" data-position="fixed" id="ftr">
+				<div class="row">
+					<div class="two mobile-one columns center ">
+						<a href="#"><img src="img/ftricon_yakhq.png" /></a>
+					</div>
+					<div class="two mobile-one columns center">
+						<a href="#info"><img src="img/ftricon_info.png" /></a>
+					</div>
+					<div class="two mobile-one columns center">
+						<a href="#help"><img src="img/ftricon_help.png" /></a>
+					</div>
+					<div class="two mobile-one columns center">
+						<a href="#profile">Profile</a>
+					</div>
+					<div class="four mobile-one columns center">
+						<div id="homefooterbtns">
+							<a href="#" id="home_login_btn">Log In</a> <a href="#" id="home_signup_btn">Sign Up</a>
+						</div>
+						<div id="homefooterbtns_afterlogin">
+							<span id="user_name"></span> <a href="#" id="home_logout_btn">Logout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 
-		<div data-role="footer" data-position="fixed" id="ftr">
-		<div class="row">
-			<div class="two mobile-one columns center ">
-			 	<a href="#"><img src="img/ftricon_yakhq.png"/></a>
-			</div>
-			<div class="two mobile-one columns center">
-			 	<a href="#info"><img src="img/ftricon_info.png"/></a>
-			</div>
-			<div class="two mobile-one columns center">
-			 	<a href="#help"><img src="img/ftricon_help.png"/></a>
-			</div>
-			<div class="two mobile-one columns center">
-			 	<a href="#profile">Profile</a>
-			</div>
-			<div class="four mobile-one columns center">
-			 	<div id="homefooterbtns">	
-			 		<a href="#" id="home_login_btn">Log In</a>
-			 		<a href="#" id="home_signup_btn">Sign Up</a>		
-			 	</div>
-			 	<div id="homefooterbtns_afterlogin">
-			 		<span id="user_name"></span>
-			 		<a href="#" id="home_logout_btn">Logout</a>	
-			 	</div>
-			</div>
-		</div>
-		</div>
-		
-		</div>
 
-		
 
 		<div id="build" data-role="page" data-theme="a">
 
@@ -141,7 +155,7 @@
 				</div>
 			</div>
 			-->
-			
+
 
 			<div id="band_wrapper">
 				<div id="btn_prev_head" class="browser-nav-btn">
@@ -151,57 +165,70 @@
 					<a href="#" id="next_heads" class="browser-nav-btn"></a>
 				</div>
 
+				<div id="btn_prev_body" class="browser-nav-btn">
+					<a href="#" id="prev_body"></a>
+				</div>
+				<div id="btn_next_body" class="browser-nav-btn">
+					<a href="#" id="next_body" class="browser-nav-btn"></a>
+				</div>
+
+				<div id="btn_prev_leg" class="browser-nav-btn">
+					<a href="#" id="prev_leg"></a>
+				</div>
+				<div id="btn_next_leg" class="browser-nav-btn">
+					<a href="#" id="next_leg" class="browser-nav-btn"></a>
+				</div>
+
 				<div id="bands"></div>
 			</div>
 
 
-			<div data-role="footer" data-position="fixed" id="ftr"> 
-			<div class="row">
-				<div class="three mobile-one columns center ">
-				 	<a href="#home" id="cancelbtn"><img src="img/ftricon_cancel.png"/></a>
+			<div data-role="footer" data-position="fixed" id="ftr">
+				<div class="row">
+					<div class="three mobile-one columns center ">
+						<a href="#home" id="cancelbtn"><img src="img/ftricon_cancel.png" /></a>
+					</div>
+					<div class="two mobile-one columns center">
+						<a href="#packs"><img src="img/ftricon_packs.png" /></a>
+					</div>
+					<div class="two mobile-one columns center">
+						<a href="#" id="randombtn"><img src="img/ftricon_random.png" /></a>
+					</div>
+					<div class="two mobile-one columns center">
+						<a href="#backgrounds">Bkgd</a>
+					</div>
+					<div class="three mobile-one columns center">
+						<a href="#" id="donebtn"><img src="img/ftricon_check.png" /></a>
+					</div>
 				</div>
-				<div class="two mobile-one columns center">
-				 	<a href="#packs"><img src="img/ftricon_packs.png"/></a>
-				</div>
-				<div class="two mobile-one columns center">
-				 	<a href="#" id="randombtn"><img src="img/ftricon_random.png"/></a>
-				</div>
-				<div class="two mobile-one columns center">
-				 	<a href="#backgrounds">Bkgd</a>
-				</div>
-				<div class="three mobile-one columns center">
-				 	<a href="#" id="donebtn"><img src="img/ftricon_check.png"/></a>
-				</div>
-			</div>
 			</div>
 
 		</div>
 
-		<div id="packs" data-role="page" data-title="Select a Pack"
-			data-theme="a">
-			
-			<div data-role="header" id="hdr" data-position="fixed" >
-				
+		<div id="packs" data-role="page" data-title="Select a Pack" data-theme="a">
+
+			<div data-role="header" id="hdr" data-position="fixed">
+
 				<div class="row">
 					<div class="two mobile-one columns center purple">
-					 	<a href="#" data-rel="back"><img src="img/hdricon_back.png"/></a>
+						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="eight mobile-three columns center">
-					 	<h2>Packs</h2>
+						<h2>Packs</h2>
 					</div>
-					<div class="two mobile-one columns center">
-					 
-					</div>
+					<div class="two mobile-one columns center"></div>
 				</div>
+			</div>
+
+
+			<div class="content">
+				<div class="packgrid" id="packgrid">
+
+
+
+					<ul id="packlist" class="block-grid three-up mobile-five-up"></ul>
+
 				</div>
-
-
-			<div class="content packgrid">
-
-
-
-				<ul id="packlist"></ul>
-
 			</div>
 
 
@@ -210,8 +237,7 @@
 		<div id="buypreview" data-role="page" data-theme="a">
 
 			<div data-role="header" id="packshdr">
-				<a href="#" data-rel="back" data-icon="back" class="ui-btn-left"
-					data-theme="a">Back</a>
+				<a href="#" data-rel="back" data-icon="back" class="ui-btn-left" data-theme="a">Back</a>
 				<h1 id="buypreview_header_text" class="headertext">Buy a Pack</h1>
 			</div>
 			<!-- /header -->
@@ -259,92 +285,93 @@
 		</div>
 
 		<div id="vault" data-role="page" data-theme="a">
-			
-			<div data-role="header" id="hdr" data-position="fixed" >	
+
+			<div data-role="header" id="vaulthdr"  >
+				<div class="headercontent">
+					<div class="row" id="vaulthdr_row">
+						<div class="two mobile-one columns center purple">
+							<a href="#" id="vault_back_btn" data-rel="back"><img src="img/hdricon_back.png" /></a>
+						</div>
+						<div class="eight mobile-three columns center">
+							<h2>Vault</h2>
+						</div>
+						<div class="two mobile-one columns center">
+							<a href="#home">Home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="vaultcontent" data-role="content" class="content"></div>
+
+			<div id="vaultfooter">
+				<a href="#" data-role="button" class="ui-btn-left" id="btn_vault_prev" data-inline="true">Previous</a> <a href="#"
+					data-role="button" class="ui-btn-right" id="btn_vault_more" data-inline="true">More</a>
+			</div>
+		</div>
+
+		<div id="previewpage" data-role="page" data-theme="a">
+
+			<div data-role="header" id="hdr" data-position="fixed">
+
 				<div class="row">
 					<div class="two mobile-one columns center purple">
-					 	<a href="#" data-rel="back"><img src="img/hdricon_back.png"/></a>
+						<a href="#" id="cancelsave" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="eight mobile-three columns center">
-					 	<h2>Vault</h2>
-					</div>
-					<div class="two mobile-one columns center">	
-						<a href="#home">Home</a> 	
-					</div>
-				</div>
-				</div>
-			
-
-			<div id="vaultcontent" data-role="content" class="content">
-				<div class="ui-grid-b" id="vaultgrid" data-scroll="true"></div>
-			</div>
-			<div data-role="footer" data-position="fixed">
-				<a href="#" data-role="button" 	class="ui-btn-left" id="btn_vault_prev" data-inline="true">Previous</a>
-				<a href="#" data-role="button" class="ui-btn-right"	id="btn_vault_more" data-inline="true">More</a>
-			</div>
-		</div>
-
-<div id="previewpage" data-role="page" data-theme="a">
-
-<div data-role="header" id="hdr" data-position="fixed" >
-		
-		<div class="row">
-			<div class="two mobile-one columns center purple">
-			 	<a href="#" id="cancelsave" data-rel="back"><img src="img/hdricon_back.png"/></a>
-			</div>
-			<div class="eight mobile-three columns center">
-			 	<h2>Name It</h2>
-			</div>
-			<div class="two mobile-one columns center green">
-			 	<a href="#" class="logged-in-only savebtns"
-			 	id="btn_previewpage_save"><img src="img/hdricon_check.png"/></a>
-			</div>
-		</div>
-		</div>
-
-	<div data-role="content" class="content">
-		<div class="row">
-		<div class="nine columns centered">
-		
-		<div class="row" id="namectr">	
-			<form id="form1">	
-			<div class="nine mobile-four columns grate" id="fields">
-				<div class="six columns">
-					<input type="text" class="twelve" placeholder="Firstname">
-				</div>
-				<div class="six columns">
-					<input type="text" class="twelve" placeholder="Lastname">
-				</div>
-			</div>
-			<div class="three mobile-one columns" id="random">
-				<a href="#"><img src="img/gfx_random.png"/></a>
-			</div>
-			</form>		
-		 </div>	 
-		 </div>
-		 </div>
-	</div>
-
-</div>
-
-		<div id="previewshare" data-role="page" data-theme="a">
-			
-			
-			<div data-role="header" id="hdr" data-position="fixed" >
-				
-				<div class="row">
-					<div class="two mobile-one columns center purple">
-					 	<a href="#" data-rel="back"><img src="img/hdricon_back.png"/></a>
-					</div>
-					<div class="eight mobile-three columns center">
-					 	<h2>Share It</h2>
+						<h2>Name It</h2>
 					</div>
 					<div class="two mobile-one columns center green">
-					 	<a href="#vault"><img src="img/hdricon_check.png"/></a>
+						<a href="#" class="logged-in-only savebtns" id="btn_previewpage_save"><img src="img/hdricon_check.png" /></a>
 					</div>
 				</div>
+			</div>
+
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="nine columns centered">
+
+						<div class="row" id="namectr">
+							<div class="nine mobile-four columns grate" id="fields">
+								<div class="name_spinner six columns">
+									<select name="Firstname" id="Firstname" class="twelve" style="display: none" data-role="none"></select>
+
+
+								</div>
+								<div class="name_spinner six columns">
+									<select name="Lastname" id="Lastname" showLabel="false" class="twelve" data-role="none" style="display: none"></select>
+								</div>
+							</div>
+							<div class="three mobile-one columns" id="random">
+								<a href="#" id="random_name_btn"><img src="img/gfx_random.png" /></a>
+							</div>
+
+						</div>
+					</div>
 				</div>
-			
+			</div>
+
+		</div>
+
+		<div id="previewshare" data-role="page" data-theme="a">
+
+
+			<div data-role="header" id="hdr" data-position="fixed">
+
+				<div class="row">
+					<div class="two mobile-one columns center purple">
+						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="eight mobile-three columns center">
+						<h2>Share It</h2>
+					</div>
+					<div class="two mobile-one columns center green">
+						<a href="#vault"><img src="img/hdricon_check.png" /></a>
+					</div>
+				</div>
+			</div>
+
 			<!--
 			<div data-role="content" class="content" id="previewshare_content">
 				<div id="previewshare_body_wrapper" >	
@@ -359,17 +386,17 @@
 				</div>
 			</div>
 			-->
-			
+
 			<div data-role="content" class="content">
-			  <div class="row">
-			    <div class="eight columns centered"> 
-			     <div class="grate">
-				     <input type="text" class="expand input-text" id="expandedNiceInput" placeholder="Write your caption">
-			    	<label for="checkbox1"><input type="checkbox" id="checkbox1"> Facebook</label>
-			    	<label for="checkbox1"><input type="checkbox" id="checkbox1"> Email</label>
-			    </div>
-			    </div>  
-			  </div>
+				<div class="row">
+					<div class="eight columns centered">
+						<div class="grate">
+							<input type="text" class="expand input-text" id="expandedNiceInput" placeholder="Write your caption"> <label
+								for="checkbox1"><input type="checkbox" id="checkbox1"> Facebook</label> <label for="checkbox1"><input
+								type="checkbox" id="checkbox1"> Email</label>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<!--
@@ -386,311 +413,282 @@
 			-->
 
 		</div>
-		
+
 		<div id="preview" data-role="page" data-theme="a">
-					
-					
-					<!--
+
+
+			<!--
 					<div data-role="header" data-position="inline" id="previewshare_header" >
 						<a href="#" data-rel="back" data-icon="back" class="ui-btn-left">Back</a>
 						<h1>Preview</h1>
 						<a href="#vault" class="ui-btn-right">Vault</a>
 					</div>
 					-->
-					
-					<div data-role="header" id="hdr" data-position="fixed" >
-						
-						<div class="row">
-							<div class="three mobile-one columns center ">
-							 	<a href="#" data-rel="back"><img src="img/hdricon_back.png"/></a>
-							</div>
-							<div class="six mobile-three columns center">
-							 	<h2>Share It</h2>
-							</div>
-							<div class="three mobile-one columns center">
-							 	<a href="#vault"><img src="img/hdricon_check.png"/></a>
-							</div>
-						</div>
-						</div>
-					
-					<div data-role="content" class="content" id="previewshare_content">
-						<div id="previewshare_body_wrapper" >	
-						</div>
-						<div id="preview-share-weirdoid-name" class="preview-weirdoid-name">Weirdoid
-							Name</div>
-						<div id="saved_or_shared_msg_previewshare">
-							<h1></h1>
-						</div>
-						<div id="shared_msg_previewshare">
-							<h1></h1>
-						</div>
-					</div>
 
-					<div data-role="footer" data-position="fixed" id="previewshare_footer">
-						<div id="preview-share-buttons">
-							<a href="#" data-role="button" class="online-only"
-								id="btn_share_on_fb" data-icon="star" data-inline="true"
-								data-theme="c">Share on Facebook</a> <a href="#"
-								data-role="button" class="online-only" id="btn_post_gallery"
-								data-theme="d" data-icon="plus" data-inline="true">Share on
-								Yak</a>
-						</div>
+			<div data-role="header" id="hdr" data-position="fixed">
+
+				<div class="row">
+					<div class="three mobile-one columns center ">
+						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
-		
+					<div class="six mobile-three columns center">
+						<h2>Share It</h2>
+					</div>
+					<div class="three mobile-one columns center">
+						<a href="#vault"><img src="img/hdricon_check.png" /></a>
+					</div>
 				</div>
-		
+			</div>
+
+			<div data-role="content" class="content" id="previewshare_content">
+				<div id="previewshare_body_wrapper"></div>
+				<div id="preview-share-weirdoid-name" class="preview-weirdoid-name">Weirdoid Name</div>
+				<div id="saved_or_shared_msg_previewshare">
+					<h1></h1>
+				</div>
+				<div id="shared_msg_previewshare">
+					<h1></h1>
+				</div>
+			</div>
+
+			<div data-role="footer" data-position="fixed" id="previewshare_footer">
+				<div id="preview-share-buttons">
+					<a href="#" data-role="button" class="online-only" id="btn_share_on_fb" data-icon="star" data-inline="true"
+						data-theme="c">Share on Facebook</a> <a href="#" data-role="button" class="online-only" id="btn_post_gallery"
+						data-theme="d" data-icon="plus" data-inline="true">Share on Yak</a>
+				</div>
+			</div>
+
+		</div>
+
 		<div data-role="page" id="help">
-		
-		<div data-role="header" id="hdr" data-position="fixed" >	
-		<div class="row">
-		<div class="three mobile-one columns center ">
-		<a href="#home"><img src="img/hdricon_back.png"/></a>
-		</div>
-		<div class="six mobile-three columns center">
-		<h2>Help</h2>
-		</div>
-		<div class="three mobile-one columns center">
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="content" class="content">
-		<div class="row">
-		<div class="twelve columns centered">
-		Help
-		</div>
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="page" id="info">
-		
-		<div data-role="header" id="hdr" data-position="fixed" >	
-		<div class="row">
-		<div class="three mobile-one columns center purple">
-		<a href="#home"><img src="img/hdricon_back.png"/></a>
-		</div>
-		<div class="six mobile-three columns center">
-		<h2>Info</h2>
-		</div>
-		<div class="three mobile-one columns center">
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="content" class="content">
-		<div class="row">
-		<div class="twelve columns centered">
-		Info
-		</div>
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="page" id="gallery">
-		
-		<div data-role="header" id="hdr" data-position="fixed" >	
-		<div class="row">
-		<div class="three mobile-one columns center purple">
-		<a href="#home"><img src="img/hdricon_back.png"/></a>
-		</div>
-		<div class="six mobile-three columns center">
-		<h2>Gallery</h2>
-		</div>
-		<div class="three mobile-one columns center">
-		</div>
-		</div>
-		</div>
-		
-		<div class="row">
-		<div class="twelve columns centered">
-		<ul class="nav-bar">
-			<li class="active"><a href="#">Newest</a></li>
-		  	<li><a href="#">Most Popular</a></li>
-		  	<li><a href="#">Friends</a></li>
-		</ul>
-		</div>
-		</div>
-		
-		
-		<div data-role="content" class="content">
-		<div class="row">
-		<div class="twelve columns centered">
-			
-			<ul class="block-grid mobile three-up">
-				<li>
-					<div class="panel">
-						Avatar 2m
-						<img src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg"/>
-						Firstname Lastname
-						This is the caption I chose.
-						<div class="row">
-							<a href="#">Like</a>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="panel">
-						<img src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg"/>
-					</div>
-				</li>
-				<li>
-					<div class="panel">
-						<img src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg"/>
-					</div>
-				</li>			
-			</ul>
-			
-			
-		</div>
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="page" id="badges">
-		
-		<div data-role="header" id="hdr" data-position="fixed" >	
-		<div class="row">
-		<div class="two mobile-one columns center purple">
-			<a href="#home"><img src="img/hdricon_back.png"/></a>
-		</div>
-		<div class="eight mobile-three columns center">
-		<h2>Badges</h2>
-		</div>
-		<div class="two mobile-one columns center">
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="content" class="content">
-		<div class="row">
-		<div class="twelve columns centered">
-			<ul class="block-grid four-up">
-			  					<li><img src="img/badge_carny.png"/>Monster</li>
-			  					<li><img src="img/badge_castle.png"/>Monster</li>
-			  					<li><img src="img/badge_horror.png"/>Monster</li>
-			  					<li><img src="img/badge_monster.png"/>Monster</li>
-			  					<li><img src="img/badge_robot.png"/>Monster</li>
-			  					<li><img src="img/badge_wrestler.png"/>Monster</li>
-			  					<li><img src="img/badge_monster.png"/>Monster</li>
-			  					<li><img src="img/badge_monster.png"/>Monster</li>
-			  				</ul>
-		</div>
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="page" id="profile">
-		
-		<div data-role="header" id="hdr" data-position="fixed" >	
-		<div class="row">
-		<div class="three mobile-one columns center purple">
-			<a href="#home"><img src="img/hdricon_back.png"/></a>
-		</div>
-		<div class="six mobile-three columns center">
-		<h2>Profile</h2>
-		</div>
-		<div class="three mobile-one columns center">
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="content" class="content">
-		<div class="row">
-		<div class="twelve columns centered">
-		Avatar
-		Points
-		Redeem Points for Credits
-		Credits
-		#currentnum
-		Buy Credits
-		</div>
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="page" id="backgrounds">
-		
-		<div data-role="header" id="hdr" data-position="fixed" >	
-		<div class="row">
-		<div class="three mobile-one columns center ">
-		<a href="#" data-rel="back"><img src="img/hdricon_back.png"/></a>
-		</div>
-		<div class="six mobile-three columns center">
-		<h2>Backgrounds</h2>
-		</div>
-		<div class="three mobile-one columns center">
-		</div>
-		</div>
-		</div>
-		
-		<div data-role="content" class="content">
-		<div class="row">
-		<div class="twelve columns centered">
-			<ul class="block-grid four-up">
-				<li><img src="imgs/p3_bkgd_1.jpg"/></li>
-				<li><img src="imgs/p3_bkgd_1.jpg"/></li>
-				<li><img src="imgs/p3_bkgd_1.jpg"/></li>
-				<li><img src="imgs/p3_bkgd_1.jpg"/></li>
-				<li><img src="imgs/p3_bkgd_1.jpg"/></li>
-				<li><img src="imgs/p3_bkgd_1.jpg"/></li>
-			</ul>
-		</div>
-		</div>
-		</div>
-		</div>
-		
-		
 
-<div id="loginaccount" data-role="page" data-rel="dialog" data-theme="a">
+			<div data-role="header" id="hdr" data-position="fixed">
+				<div class="row">
+					<div class="three mobile-one columns center ">
+						<a href="#home"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="six mobile-three columns center">
+						<h2>Help</h2>
+					</div>
+					<div class="three mobile-one columns center"></div>
+				</div>
+			</div>
 
-	<div data-role="header" id="hdr" data-position="fixed" >	
-		<div class="row">
-			<div class="three mobile-one columns center purple">
-			 	<a href="#" data-rel="back"><img src="img/hdricon_back.png"/></a>
-			</div>
-			<div class="six mobile-three columns center">
-			 	<h2>Login with Yak</h2>
-			</div>
-			<div class="three mobile-one columns center">	 
-			</div>
-		</div>
-	</div>
-	<div data-role="content" class="content">
-		<div class="row">
-			<div class="twelve columns centered">
-				<div class="nine columns centered grate">
-					<form id="loginform" action="">
-					<fieldset>
-					<div data-role="fieldcontain">
-					<label for="username">Username</label> <input type="text"
-					name="login" id="username" value="ddd" /> <label class="error"
-					for="username" id="username_error">This field is
-					required.</label>
-					</div>
-					<div data-role="fieldcontain">
-					<label for="password">Password</label> <input type="password"
-					name="password" id="password" value="ddd" /><label
-					class="error" for="password" id="password_error">This
-					field is required.</label>
-					</div>
-					</fieldset>
-					</form>
-					
-					<div id="login_btn_div">
-					<a href="#" id="btn_login">Log In</a>
-					</div>
-					
-					
-					<a href="#forgotpassword">Forgot Password?</a>
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="twelve columns centered">Help</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-<!--here-->
+		<div data-role="page" id="info">
 
-<!--
+			<div data-role="header" id="hdr" data-position="fixed">
+				<div class="row">
+					<div class="three mobile-one columns center purple">
+						<a href="#home"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="six mobile-three columns center">
+						<h2>Info</h2>
+					</div>
+					<div class="three mobile-one columns center"></div>
+				</div>
+			</div>
+
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="twelve columns centered">Info</div>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="gallery">
+
+			<div data-role="header" id="hdr" data-position="fixed">
+				<div class="row">
+					<div class="three mobile-one columns center purple">
+						<a href="#home"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="six mobile-three columns center">
+						<h2>Gallery</h2>
+					</div>
+					<div class="three mobile-one columns center"></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="twelve columns centered">
+					<ul class="nav-bar">
+						<li class="active"><a href="#">Newest</a></li>
+						<li><a href="#">Most Popular</a></li>
+						<li><a href="#">Friends</a></li>
+					</ul>
+				</div>
+			</div>
+
+
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="twelve columns centered">
+
+						<ul class="block-grid mobile three-up">
+							<li>
+								<div class="panel">
+									Avatar 2m <img src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg" /> Firstname
+									Lastname This is the caption I chose.
+									<div class="row">
+										<a href="#">Like</a>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="panel">
+									<img src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg" />
+								</div>
+							</li>
+							<li>
+								<div class="panel">
+									<img src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg" />
+								</div>
+							</li>
+						</ul>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="badges">
+
+			<div data-role="header" id="hdr" data-position="fixed">
+				<div class="row">
+					<div class="two mobile-one columns center purple">
+						<a href="#home"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="eight mobile-three columns center">
+						<h2>Badges</h2>
+					</div>
+					<div class="two mobile-one columns center"></div>
+				</div>
+			</div>
+
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="twelve columns centered">
+						<ul class="block-grid four-up">
+							<li><img src="img/badge_carny.png" />Monster</li>
+							<li><img src="img/badge_castle.png" />Monster</li>
+							<li><img src="img/badge_horror.png" />Monster</li>
+							<li><img src="img/badge_monster.png" />Monster</li>
+							<li><img src="img/badge_robot.png" />Monster</li>
+							<li><img src="img/badge_wrestler.png" />Monster</li>
+							<li><img src="img/badge_monster.png" />Monster</li>
+							<li><img src="img/badge_monster.png" />Monster</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="profile">
+
+			<div data-role="header" id="hdr" data-position="fixed">
+				<div class="row">
+					<div class="three mobile-one columns center purple">
+						<a href="#home"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="six mobile-three columns center">
+						<h2>Profile</h2>
+					</div>
+					<div class="three mobile-one columns center"></div>
+				</div>
+			</div>
+
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="twelve columns centered">Avatar Points Redeem Points for Credits Credits #currentnum Buy Credits</div>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="backgrounds">
+
+			<div data-role="header" id="hdr" data-position="fixed">
+				<div class="row">
+					<div class="three mobile-one columns center ">
+						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="six mobile-three columns center">
+						<h2>Backgrounds</h2>
+					</div>
+					<div class="three mobile-one columns center"></div>
+				</div>
+			</div>
+
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="twelve columns centered">
+						<ul class="block-grid four-up">
+							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
+							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
+							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
+							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
+							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
+							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="loginaccount" data-role="page" data-rel="dialog" data-theme="a">
+
+			<div data-role="header" id="hdr" data-position="fixed">
+				<div class="row">
+					<div class="three mobile-one columns center purple">
+						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="six mobile-three columns center">
+						<h2>Login with Yak</h2>
+					</div>
+					<div class="three mobile-one columns center"></div>
+				</div>
+			</div>
+			<div data-role="content" class="content">
+				<div class="row">
+					<div class="twelve columns centered">
+						<div class="nine columns centered grate">
+							<form id="loginform" action="">
+								<fieldset>
+									<div data-role="fieldcontain">
+										<label for="username">Username</label> <input type="text" name="login" id="username" value="ddd" /> <label
+											class="error" for="username" id="username_error">This field is required.</label>
+									</div>
+									<div data-role="fieldcontain">
+										<label for="password">Password</label> <input type="password" name="password" id="password" value="ddd" /><label
+											class="error" for="password" id="password_error">This field is required.</label>
+									</div>
+								</fieldset>
+							</form>
+
+							<div id="login_btn_div">
+								<a href="#" id="btn_login">Log In</a>
+							</div>
+
+
+							<a href="#forgotpassword">Forgot Password?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--here-->
+
+			<!--
 <div data-role="header">
 <a href="#" data-rel="back" data-icon="delete" class="ui-btn-left">Back</a>
 <h1>Log In to Yak</h1>
@@ -736,12 +734,11 @@ Your Password?</a>
 </div>
 -->
 
-<!--here-->
-</div>
-		
+			<!--here-->
+		</div>
 
-		<div id="forgotpwd_pg" data-role="page" data-rel="dialog"
-			data-theme="a">
+
+		<div id="forgotpwd_pg" data-role="page" data-rel="dialog" data-theme="a">
 
 			<!-- start header -->
 			<div data-role="header">
@@ -762,20 +759,17 @@ Your Password?</a>
 							</div>
 
 							<div data-role="fieldcontain">
-								<label for="username">Username</label> <input type="text"
-									name="login" id="username" value="ddd" /> <label class="error"
-									for="username" id="username_error">This field is
-									required.</label>
+								<label for="username">Username</label> <input type="text" name="login" id="username" value="ddd" /> <label
+									class="error" for="username" id="username_error">This field is required.</label>
 							</div>
 
 
 							<div id="forgotpwd_btn_div">
-								<a href="#home" data-role="button" id="btn_getpwd"
-									data-inline="true">Reset Password</a>
+								<a href="#home" data-role="button" id="btn_getpwd" data-inline="true">Reset Password</a>
 							</div>
 
-							<input type="hidden" name="sitename" value="Weirdoids.com" /> <input
-								type="hidden" name="siteurl" value="http://www.weirdoids.com" />
+							<input type="hidden" name="sitename" value="Weirdoids.com" /> <input type="hidden" name="siteurl"
+								value="http://www.weirdoids.com" />
 
 						</fieldset>
 					</form>
@@ -785,7 +779,7 @@ Your Password?</a>
 			</div>
 			<!-- /content -->
 		</div>
-		
+
 
 		<div id="signup_pg" data-role="page" data-rel="dialog" data-theme="a">
 
@@ -793,8 +787,7 @@ Your Password?</a>
 			<div data-role="header">
 				<a href="#" data-rel="back" data-icon="delete" class="ui-btn-left">Back</a>
 				<h1>Sign Up to Yak</h1>
-				<a href="#loginaccount" id="signup_pg_login_btn" data-icon="star"
-					class="ui-btn-right">Log In</a>
+				<a href="#loginaccount" id="signup_pg_login_btn" data-icon="star" class="ui-btn-right">Log In</a>
 			</div>
 			<!-- end header -->
 
@@ -806,35 +799,28 @@ Your Password?</a>
 						<fieldset>
 
 							<div data-role="fieldcontain">
-								<label for="signup_username">Username</label> <input type="text"
-									name="login" id="signup_username" value="ddd" /> <label
-									class="error" for="signup_username" id="signup_username_error">This
-									field is required.</label>
+								<label for="signup_username">Username</label> <input type="text" name="login" id="signup_username" value="ddd" />
+								<label class="error" for="signup_username" id="signup_username_error">This field is required.</label>
 							</div>
 
 							<div data-role="fieldcontain">
-								<label for="email">Email</label> <input type="email"
-									name="email" id="email" value="ddd" /><label class="error"
+								<label for="email">Email</label> <input type="email" name="email" id="email" value="ddd" /><label class="error"
 									for="email" id="email_error">This field is required.</label>
 							</div>
 
 							<div data-role="fieldcontain">
-								<label for="signup_password">Password</label> <input
-									type="password" name="password" id="signup_password"
-									value="ddd" /><label class="error" for="signup_password"
-									id="signup_password_error">This field is required.</label>
+								<label for="signup_password">Password</label> <input type="password" name="password" id="signup_password"
+									value="ddd" /><label class="error" for="signup_password" id="signup_password_error">This field is
+									required.</label>
 							</div>
 
 							<div data-role="fieldcontain">
-								<label for="cpassword">Re-Type Password</label> <input
-									type="password" name="cpassword" id="cpassword" value="ddd" /><label
-									class="error" for="cpassword" id="cpassword_error">This
-									field is required.</label>
+								<label for="cpassword">Re-Type Password</label> <input type="password" name="cpassword" id="cpassword"
+									value="ddd" /><label class="error" for="cpassword" id="cpassword_error">This field is required.</label>
 							</div>
 
 							<div id="signup_btn_div">
-								<a href="#" data-role="button" id="btn_signup"
-									data-inline="true">Sign Up</a>
+								<a href="#" data-role="button" id="btn_signup" data-inline="true">Sign Up</a>
 							</div>
 
 						</fieldset>
@@ -845,7 +831,7 @@ Your Password?</a>
 			</div>
 			<!-- /content -->
 		</div>
-		
+
 
 		<div id="fblogin" data-role="page" data-theme="c">
 
@@ -868,24 +854,20 @@ Your Password?</a>
 				<div id="debug"></div>
 
 				<div id="other" style="display: none">
-					<a href="#" onclick="showStream(); return false;">Publish Wall
-						Post</a> | <a href="#" onclick="share(); return false;">Share With
-						Your Friends</a> | <a href="#"
-						onclick="graphStreamPublish(); return false;">Publish Stream
-						Using Graph API</a> | <a href="#" onclick="fqlQuery(); return false;">FQL
-						Query Example</a> <br />
+					<a href="#" onclick="showStream(); return false;">Publish Wall Post</a> | <a href="#"
+						onclick="share(); return false;">Share With Your Friends</a> | <a href="#"
+						onclick="graphStreamPublish(); return false;">Publish Stream Using Graph API</a> | <a href="#"
+						onclick="fqlQuery(); return false;">FQL Query Example</a> <br />
 					<textarea id="status" cols="50" rows="5">Write your status here and click 'Status Set Using Legacy Api Call'</textarea>
-					<br /> <a href="#" onclick="setStatus(); return false;">Status
-						Set Using Legacy Api Call</a>
+					<br /> <a href="#" onclick="setStatus(); return false;">Status Set Using Legacy Api Call</a>
 				</div>
 			</div>
 			<!-- end content -->
 		</div>
-		
 
 
-		<div id="wanttoshare" data-role="page" data-rel="dialog"
-			data-theme="a">
+
+		<div id="wanttoshare" data-role="page" data-rel="dialog" data-theme="a">
 
 			<!-- start header -->
 			<div data-role="header">
@@ -897,26 +879,22 @@ Your Password?</a>
 			<div id="content" data-role="content" class="content">
 
 
-				<h1 id="wanttoshare_h1">Do you want to share your Weirdoid? You
-					have to log in first!</h1>
+				<h1 id="wanttoshare_h1">Do you want to share your Weirdoid? You have to log in first!</h1>
 
 				<div id="wanttoshare_login_btn_div">
-					<a href="#" data-role="button" id="wanttoshare_btn_login">Log
-						In</a>
+					<a href="#" data-role="button" id="wanttoshare_btn_login">Log In</a>
 				</div>
 				<div id="wanttoshare_nothanks_btn_div">
-					<a href="#" data-rel="back" data-role="button"
-						id="wanttoshare_btn_nothanks">No Thanks</a>
+					<a href="#" data-role="button" id="wanttoshare_btn_nothanks">No Thanks</a>
 				</div>
 
 
 			</div>
 			<!-- /content -->
 		</div>
-		
 
-		<div id="fbverify_pg" data-role="page" data-rel="dialog"
-			data-theme="c">
+
+		<div id="fbverify_pg" data-role="page" data-rel="dialog" data-theme="c">
 
 			<!-- start header -->
 			<div data-role="header">
@@ -927,24 +905,21 @@ Your Password?</a>
 			<div id="content" data-role="content" class="content">
 
 
-				<h2 id="fbverify_pg_h1_1">You are already logged in to
-					Facebook.</h2>
+				<h2 id="fbverify_pg_h1_1">You are already logged in to Facebook.</h2>
 				<h2 id="fbverify_pg_h1_2">Want to log into Yak using this ID?</h2>
 
 				<div id="fbverify_pg_btn_div">
-					<a href="#" data-role="button" id="fbverify_pg_btn_login">Log
-						In</a>
+					<a href="#" data-role="button" id="fbverify_pg_btn_login">Log In</a>
 				</div>
 				<div id="fbverify_pg_btn_div">
-					<a href="#" data-rel="back" data-role="button"
-						id="fbverify_pg_btn_nothanks">No Thanks</a>
+					<a href="#" data-rel="back" data-role="button" id="fbverify_pg_btn_nothanks">No Thanks</a>
 				</div>
 
 
 			</div>
 			<!-- /content -->
 		</div>
-		
+
 
 		<div id="share_on_fb" data-role="page" data-theme="c">
 
@@ -967,23 +942,20 @@ Your Password?</a>
 				<div id="debug"></div>
 
 				<div id="other" style="display: none">
-					<a href="#" onclick="showStream(); return false;">Publish Wall
-						Post</a> | <a href="#" onclick="share(); return false;">Share With
-						Your Friends</a> | <a href="#"
-						onclick="graphStreamPublish(); return false;">Publish Stream
-						Using Graph API</a> | <a href="#" onclick="fqlQuery(); return false;">FQL
-						Query Example</a> <br />
+					<a href="#" onclick="showStream(); return false;">Publish Wall Post</a> | <a href="#"
+						onclick="share(); return false;">Share With Your Friends</a> | <a href="#"
+						onclick="graphStreamPublish(); return false;">Publish Stream Using Graph API</a> | <a href="#"
+						onclick="fqlQuery(); return false;">FQL Query Example</a> <br />
 					<textarea id="status" cols="50" rows="5">Write your status here and click 'Status Set Using Legacy Api Call'</textarea>
 					<br />
-					<onclick="setStatus(); returnfalse;">Status Set Using
-					Legacy Api Call</onclick></a>
+					<onclick="setStatus(); returnfalse;">Status Set Using Legacy Api Call</onclick>
+					</a>
 				</div>
 			</div>
 			<!-- end content -->
 		</div>
 
-		<div data-role="page" data-theme="d" id="buy_now_page"
-			data-rel="dialog">
+		<div data-role="page" data-theme="d" id="buy_now_page" data-rel="dialog">
 			<!-- start header -->
 			<div data-role="header">
 				<h1>Buy using Google Checkout</h1>
@@ -994,8 +966,7 @@ Your Password?</a>
 			<div id="content" data-role="content" class="content">
 
 				<div data-role="header" id="packshdr">
-					<a href="#" data-rel="back" data-icon="back" class="ui-btn-left"
-						data-theme="a">Back</a>
+					<a href="#" data-rel="back" data-icon="back" class="ui-btn-left" data-theme="a">Back</a>
 					<h1 id="buypreview_header_text" class="headertext">Buy a Pack</h1>
 				</div>
 				<!-- /header -->
@@ -1016,32 +987,21 @@ Your Password?</a>
 
 					<div id="google_checkout_div" class="payment-processor">
 						<h1>Buy using Google Checkout!</h1>
-						<form
-							action="https://sandbox.google.com/checkout/api/checkout/v2/checkoutForm/Merchant/770630670709102"
-							id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm"
-							target="_top">
-							<input name="item_name_1" type="hidden" value="Weirdoid Pack" />
-							<input name="item_description_1" type="hidden"
-								value="Monster Mash pack" /> <input name="item_quantity_1"
-								type="hidden" value="1" /> <input name="item_price_1"
-								type="hidden" value="1.99" /> <input name="item_currency_1"
-								type="hidden" value="USD" /> <input type="hidden"
-								name="shopping-cart.items.item-1.merchant-item-id"
-								value="1234abcd" /><input type="hidden"
-								name="shopping-cart.merchant-private-data" value="1234abcd" />
-							<input
-								name="shopping-cart.items.item-1.digital-content.description"
-								type="hidden" value="these are instructions" /> <input
-								name="shopping-cart.items.item-1.digital-content.key"
-								type="hidden"
+						<form action="https://sandbox.google.com/checkout/api/checkout/v2/checkoutForm/Merchant/770630670709102"
+							id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm" target="_top">
+							<input name="item_name_1" type="hidden" value="Weirdoid Pack" /> <input name="item_description_1" type="hidden"
+								value="Monster Mash pack" /> <input name="item_quantity_1" type="hidden" value="1" /> <input
+								name="item_price_1" type="hidden" value="1.99" /> <input name="item_currency_1" type="hidden" value="USD" /> <input
+								type="hidden" name="shopping-cart.items.item-1.merchant-item-id" value="1234abcd" /><input type="hidden"
+								name="shopping-cart.merchant-private-data" value="1234abcd" /> <input
+								name="shopping-cart.items.item-1.digital-content.description" type="hidden" value="these are instructions" /> <input
+								name="shopping-cart.items.item-1.digital-content.key" type="hidden"
 								value="WGF0jlsYj9iFyCQ5TZHrmVBxecTMlRKLQjQa5T5W54w=" /> <input
-								name="shopping-cart.items.item-1.digital-content.key.is-encrypted"
-								type="hidden" value="true" /><input type="hidden"
-								name="checkout-flow-support.merchant-checkout-flow-support.continue-shopping-url"
-								value="http://yrcreative.com/clients/yakbooks/weirdoids/index.html" />
-							<input name="shopping-cart.items.item-1.digital-content.url"
-								type="hidden" value="http://weirdoids.com/fileaccessurl" /> <input
-								name="_charset_" type="hidden" value="utf-8" /> <input alt=""
+								name="shopping-cart.items.item-1.digital-content.key.is-encrypted" type="hidden" value="true" /><input
+								type="hidden" name="checkout-flow-support.merchant-checkout-flow-support.continue-shopping-url"
+								value="http://yrcreative.com/clients/yakbooks/weirdoids/index.html" /> <input
+								name="shopping-cart.items.item-1.digital-content.url" type="hidden" value="http://weirdoids.com/fileaccessurl" />
+							<input name="_charset_" type="hidden" value="utf-8" /> <input alt=""
 								src="https://sandbox.google.com/checkout/buttons/buy.gif?merchant_id=770630670709102&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US"
 								type="image" />
 						</form>
@@ -1051,15 +1011,13 @@ Your Password?</a>
 			</div>
 			<!-- body -->
 		</div>
-		
 
-		<div data-role="page" data-theme="d" id="confirm_clear_pg"
-			data-rel="dialog">
+
+		<div data-role="page" data-theme="d" id="confirm_clear_pg" data-rel="dialog">
 			<div data-role="content">
 				<h1>Are you sure you want to clear the Vault?</h1>
-				<a href="#" data-rel="back" data-theme="d" id="btn_clear_vault_yes"
-					data-role="button">Yes</a> <a href="#" data-theme="d"
-					data-rel="back" id="btn_clear_vault_no" data-role="button">No</a>
+				<a href="#" data-rel="back" data-theme="d" id="btn_clear_vault_yes" data-role="button">Yes</a> <a href="#"
+					data-theme="d" data-rel="back" id="btn_clear_vault_no" data-role="button">No</a>
 			</div>
 		</div>
 
@@ -1067,14 +1025,13 @@ Your Password?</a>
 			<div id="modal_wrapper">
 				<div data-role="content" id="modalcontent"></div>
 				<div id="modal_btn_div">
-					<a href="#" data-theme="d" data-rel="back" id="btn_myModal"
-						data-role="button">Close</a>
+					<a href="#" data-theme="d" data-rel="back" id="btn_myModal" data-role="button">Close</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 
-	
+
+
 </body>
 </html>

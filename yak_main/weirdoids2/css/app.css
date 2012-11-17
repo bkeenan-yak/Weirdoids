@@ -41,6 +41,8 @@ h1, h2, h3, h4, h5, p {
 #ftr {
 	background: #000 url('../img/bkgd_grate.jpg') repeat !important;
 	max-height: 100px;
+	min-height: 100px;
+	height: 100px;
 }
 #ftr img {
 	max-height: 100px;
@@ -88,8 +90,8 @@ h1, h2, h3, h4, h5, p {
     position: relative;
 }
 #fields {
-    bottom: 40%;
-    position: absolute;
+    
+    position: relative;
 }
 .purple {
 	background-color: #b962c0;
@@ -97,4 +99,11 @@ h1, h2, h3, h4, h5, p {
 .green {
 	background-color: #61b649;
 }
+#Firstname,#Lastname {
+	color: white;
+}
 
+.name_spinner input[type=text] {
+	color: white;
+	visibility: hidden;
+}

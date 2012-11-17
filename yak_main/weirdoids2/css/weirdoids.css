@@ -58,9 +58,9 @@ body {
 
 .packgrid li {
 	list-style: none outside none;
-	    margin: 2%;
+	    /*margin: 0%; */
 	    position: relative;
-	    width: 29%;
+	   /* width: 29%;*/
 }
 
 .packgrid a {
@@ -576,7 +576,7 @@ body {
 }
 
 #btn_prev_body {
-	background: transparent url('../imgs/btn_prev_body.png') no-repeat;
+	background: transparent url('../imgs/btn_prev_head.png') no-repeat;
 	position: absolute;
 	left: 0;
 	width: 50px;
@@ -592,7 +592,7 @@ body {
 }
 
 #btn_next_body {
-	background: transparent url('../imgs/btn_next_body.png') no-repeat;
+	background: transparent url('../imgs/btn_next_head.png') no-repeat;
 	position: absolute;
 	right: 0;
 	width: 50px;
@@ -607,6 +607,37 @@ body {
 	height: 100px;
 }
 
+#btn_prev_leg {
+	background: transparent url('../imgs/btn_prev_head.png') no-repeat;
+	position: absolute;
+	left: 0;
+	width: 50px;
+	height: 100px;
+	z-index: 100;
+	top: 300px;
+}
+
+#btn_prev_leg a {
+	display: block;
+	width: 50px;
+	height: 100px;
+}
+
+#btn_next_leg {
+	background: transparent url('../imgs/btn_next_head.png') no-repeat;
+	position: absolute;
+	right: 0;
+	width: 50px;
+	height: 100px;
+	z-index: 100;
+	top: 300px;
+}
+
+#btn_next_leg a {
+	display: block;
+	width: 50px;
+	height: 100px;
+}
 #bands {
 	z-index: 50;
 	position: relative;
@@ -1015,18 +1046,53 @@ div.inline {
 	margin: 0 0 10px 10px;
 }
 
+/*
+#vaulthdr {
+	
+}
+
+
+
+.headercontent {
+	display: block;
+	height: 10%;
+}
+*/
+
+#vaultfooter {
+	display:block;
+        width: 100%;
+        margin: 0% -50%;
+        position: fixed;
+        left: 50%;
+        bottom: 0%;
+    background:#0f0;
+    }
+
+#vault_back_btn {
+	max-height: 50px;
+	width: auto;
+	
+}
+
+#vault_back_btn img{
+	height:	50px;
+	width: auto;
+	
+}
 #vaultgrid {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
     display: block;
-    height: 100%;
-    margin-top: 1em;
-    overflow: hidden;
+    /* height: 100% ; */
+   padding-top: 1em;
+   /* overflow: auto;*/
 }
+
 
 .vault_div {
 	position: relative;
-	margin: 0 auto;
+	margin: 5px auto 0;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -1041,8 +1107,11 @@ div.inline {
 
 #vaultcontent {
 	overflow: hidden;
-	height: 87%;
+	/*height: 87%; */
 	position: relative;
+	height: auto;
+	padding: 0 2%;
+	
 }
 
 
@@ -1149,12 +1218,19 @@ div.inline {
 	cursor: pointer;
 }
 
+#vaultlist canvas { //
+	width: auto; //
+	height: auto;
+}
+
+/*
 #vault ul {
 	margin: 0;
 	padding: 0;
 }
 
-#vault li {
+
+#vaultlist li {
 	list-style: none;
 	display: inline-block;
 	width: 225px;
@@ -1162,9 +1238,10 @@ div.inline {
 	background-color: #ccc;
 }
 
-#vault li img {
-	width: 225px;
-	height: 300px;
+*/
+#vaultlist li img {
+	width: auto;
+	height: 100%;
 }
 
 #vault .vaultcanvas-hidden {

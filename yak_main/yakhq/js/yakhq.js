@@ -31,7 +31,7 @@ function resetScreens() {
 	$('#signup3d form')[0].reset();
 	$('#signup4 form')[0].reset();
 	$('#signup5 form')[0].reset();
-
+	$('.error').hide();
 	// assume parent
 	$('.yakbar_request_btn').parent().show();
 
@@ -212,6 +212,8 @@ $(document)
 		.ready(
 				function() {
 
+					$('.error').hide();
+					
 					// fill in fastlogin
 					get_fastlogins();
 
@@ -860,6 +862,14 @@ $(document)
 
 										return false;
 									});
+					
+					$('.refresh_activity').live(
+							'click',
+							function(e) {
+								e.preventDefault();
+								get_user_activity();
+								
+							});
 
 					$('.profilebtn')
 							.live(
@@ -1421,6 +1431,7 @@ function addKidRequests(json) {
 		var kidrequest = json.kidrequests[x];
 		var reqid = 'kidreq_' + kidrequest.child_id;
 
+		// Brian: kid request page: classes: kidrequest_avatar,kidrequest_name
 		var html = '<li id="' + reqid + '">';
 		if (kidrequest.avatar)
 			html += '<img class="kidrequest_avatar"src="' + kidrequest.avatar
@@ -1561,6 +1572,9 @@ function setupFriendRequests(json) {
 	for ( var x = 0; x < json.friendrequests.length; x++) {
 		console.log("Add Friend Request data to list");
 
+		// Brian: friend requests: classes:friendrequest,friend_req_text,friend_req_relationship
+		// friend_req_status_div,approve_friend_btns,approvebtn,rejectbtn
+
 		var k = json.friendrequests[x];
 		var reqid = 'friendreq_' + k.user_friend_id;
 		var approve_reqid = 'approvefriendreq_' + k.user_friend_id;
@@ -1585,6 +1599,7 @@ function setupFriendRequests(json) {
 			target_yaklogin = k.friend1_yaklogin;
 		}
 
+		// Brian: friend requests: classes 
 		var html = '<li id="' + reqid + '"><div class="row">';
 		html += '<div class="friend_req_text">' + initiator_fname
 				+ ' wants to be your friend</div>';
@@ -1617,6 +1632,10 @@ function setupFriendRequests(json) {
 	for ( var x = 0; x < json.kidfriendrequests.length; x++) {
 		console.log("Add Friend Request data to list");
 
+		// Brian: kid friend request classes: kidfriendrequest,friend_req_text,friend_req_relationship
+		// friend_req_status_div,friend_req_status,approve_friend_btns,kidapprovebtn,kidrejectbtn,
+		// kidrejectflagbtn,kidemailparentbtn
+		
 		var k = json.kidfriendrequests[x];
 		var reqid = 'kidfriendreq_' + k.user_friend_id;
 		var approve_reqid = 'approvekidfriendreq_' + k.user_friend_id;
@@ -1968,7 +1987,8 @@ function load_notifications_success_handler(json) {
 							console.log("notification options: " + options);
 						}
 
-						// TODO: parse optional data
+						// Brian: notification code
+						// Classes: notification_div,notification_avatar_div,notification_body,notification_clock_div,notification_date
 						item += '<li><div class="row"><div class="notification_div eight columns centered ">';
 
 						item += '<div class="one columns notification_avatar_div"><img class="" src="'
@@ -2030,7 +2050,9 @@ function load_approvals_success_handler(json) {
 //							console.log("notification options: " + options);
 //						}
 
-						// TODO: parse optional data
+						
+						// TODO: Brian: notifications have classes of notification_div, notification_avatar_div,
+						// notification_body, notification_body_message,
 						item += '<li><div class="row"><div class="notification_div eight columns centered ">';
 
 						item += '<div class="one columns notification_avatar_div"><img class="" src="'
@@ -2048,8 +2070,8 @@ function load_approvals_success_handler(json) {
 						// approved or denied
 						// kid's comments and likes can be be denied
 
-						console.log("notification_const :"
-								+ options.notification_const);
+//						console.log("notification_const :"
+//								+ options.notification_const);
 						var show_approve_btn = false;
 						var show_deny_btn = false;
 						var approve_data = [];
@@ -2063,6 +2085,9 @@ function load_approvals_success_handler(json) {
 									var fname = options.fname;
 									var lname = options.lname;
 									console.log("imgname = " + imgname + " fname "+ fname);
+									
+									// Brian: weirdoid in notification approval
+									// classes: approval_weirdoid_div,approval_weirdoid,approval_weirdoid_name
 									item += '<div class="approval_weirdoid_div twelve columns">';
 									item += '<div class="approval_weirdoid three columns"><img src="' + imgname + '"></div>';
 									item += '<div class="approval_weirdoid_name three columns">' + fname + ' ' + lname + '</div>';
@@ -2094,6 +2119,9 @@ function load_approvals_success_handler(json) {
 						if (options.is_parent_actionable > 0
 								&& (show_approve_btn || show_deny_btn)) {
 
+							// Brian: buttons in notification approval
+							// classes: approval_buttons_div,approve_button,deny_button,approval_status
+
 							item += '<div class="approval_buttons_div twelve columns">';
 							if (show_approve_btn)
 								item += '<a href="#" class="approve_button small radius red button" upid="' + options.user_post_id + '">Approve</a>';
@@ -2105,6 +2133,9 @@ function load_approvals_success_handler(json) {
 						}
 
 						item += '</div>'; // notification_body
+
+						// Brian: clock/time 
+						// classes: notification_clock_div,notification_date
 
 						item += '<div class="notification_clock_div one columns"><img src="./img/icon_datetime.png" ></div>';
 
@@ -2453,6 +2484,8 @@ function display_status_msg_post(target_div, message) {
 	console.log("displaying user status message post for: " + message.yaklogin
 			+ " msg: " + message.message);
 
+	// Brian: status message post has class of status_msg_post
+
 	myhtml = '<div class="status_msg_post">' + message.message + '</div>';
 
 	return myhtml;
@@ -2460,6 +2493,10 @@ function display_status_msg_post(target_div, message) {
 
 function display_post_header(profile_btn_id, avatar, yaklogin, daysago, hrsago,
 		minsago, secsago) {
+	
+	// Brian: here is the post header for both weirdoids and status messages
+	// Classes: posthrd, profilebtn, icon_datetime, gallery-age
+
 	var myhtml = '';
 	myhtml += '<div class="posthdr row">';
 	myhtml += '<div class="two mobile-one columns"><a href="#" class="profilebtn" id="'
@@ -2504,34 +2541,41 @@ function display_post(target_div, id_prefix, post, objidx, post_type_id) {
 
 	if (post['likes'])
 		likecount = post['likes'];
+	
+	/*
+	 * TODO: Brian look here! class: post_post
+	 * 
+	 */
 
 	var myhtml = '<li><div class="post_post" id="' + post_id + '">';
 
-	// TODO: put avatar in header of post
 	myhtml += display_post_header(profile_btn_id, post.avatar, yaklogin,
 			post.daysago, post.hrsago, post.minsago, post.secsago);
 
 	// post content
 	switch (post_type_id) {
 	case 1:
-		// weirdoid
+		// weirdoid post
+		// Brian: image has class of gallery-image
 		myhtml += '<img src="' +  post["url"]
 				+ '" class="gallery-image" ><br>';
 
-		var wholename = "";
+		var wholename = " ";
 		if (post.fname && post.fname.length > 0)
-			wholename += post.fname;
+			wholename = post.fname;
 		if (post.lname && post.lname.length > 0) {
 			if (wholename.length > 0) {
 				wholename += ' ';
 			}
 			wholename += post.lname;
 		}
+		
+		// Brian: weirdoid name has class of gallery-name
 		if (wholename.length > 0)
 			myhtml += '<div class="gallery-name">' + wholename + '</div>';
 		break;
 	case 2:
-		// status msg
+		// status msg post
 		myhtml += display_status_msg_post(target_div, post);
 		break;
 	default:
@@ -2561,6 +2605,9 @@ function display_post(target_div, id_prefix, post, objidx, post_type_id) {
 
 function display_post_comments(post, like_btn_id, comment_btn_id, other_btn_id,
 		likecount_id, likecount) {
+	
+	// Brian: post comments: classes: like_comment_btns,likebtn,commentbtn,otherbtn
+	// post_likes_comments,post_likes,post_comments,post_comments_list
 	var myhtml = '<div class="like_comment_btns">';
 	var btntext = (post.user_liked_already > 0) ? 'Unlike' : 'Like';
 	myhtml += '<a href="#" class="likebtn small button" id="' + like_btn_id
@@ -2757,6 +2804,8 @@ function commentbtn_handler(user_post) {
 function get_comment_html(comment) {
 	var comment_html = ' ';
 
+	// Brian: comment text
+	// classes: post_comment,commentor
 	if (comment && comment['comment_text']) {
 
 		comment_html += '<li class="post_comment">';
@@ -2821,6 +2870,7 @@ function get_scripted_comments_success_handler(json) {
 			if (sc['scripted_comment_id'])
 				scripted_comment_id = sc['scripted_comment_id'];
 
+			// Brian: comments list elements: classes: getCommentsListItem,getCommentsAnchor
 			var myhtml = '<li class="getCommentsListItem">';
 			myhtml += '<a class="getCommentsAnchor"	href="#" id="' + anchor_id
 					+ '" >' + sc['comment_text'] + '</a></li>';
@@ -3037,6 +3087,7 @@ function get_friend_list_success_handler(json) {
 			var tmp_id = Math.floor(Math.random() * 4);
 			friend.avatar = "./img/avatar_" + tmp_id + ".jpg";
 		}
+		// Brian: friend list buttons: class: friend_profile_btn
 		item += '<li><a href="#" class="friend_profile_btn" fid="' + fid
 				+ '"><img src="' + friend.avatar + '" />' + friend.yaklogin
 				+ '</a></li>';
