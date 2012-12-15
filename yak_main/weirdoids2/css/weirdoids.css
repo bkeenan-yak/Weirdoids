@@ -63,20 +63,6 @@ body {
 	   /* width: 29%;*/
 }
 
-.packgrid a {
-	
-}
-
-.packgrid a .ui-btn-inner {
-	padding: 0
-}
-
-.packgrid a img {
-	height: auto;
-	max-width: 260px;
-	width: 100%;
-}
-
 .packprice {
 	background-color: #666666;
 	border: 1px solid rgba(255, 255, 255, 0.15);
@@ -142,15 +128,15 @@ body {
 }
 
 #login_btn_div {
-	width: 120px;
-	margin-left: auto;
-	margin-right: auto;
+	//width: 120px;
+	//margin-left: auto;
+	//margin-right: auto;
 }
 
 #signup_btn_div {
-	width: 120px;
-	margin-left: auto;
-	margin-right: auto;
+	//width: 120px;
+	//margin-left: auto;
+	//margin-right: auto;
 }
 
 #login_with_fb_btn_div {
@@ -179,6 +165,16 @@ body {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	clear: both;
+}
+
+
+#handle {
+    background: url("../img/handle.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 140px;
+    position: absolute;
+    width: 90px;
+    z-index: 2000;
 }
 
 #firstname_div,#lastname_div {
@@ -286,9 +282,20 @@ body {
 	margin: 0 auto;
 }
 
+#previewshare_row {
+	height:	90%;
+	display: block;
+}
+
 #previewshare_header {
-	height: 15%;
+	height: 10%;
 	overflow: hidden;
+}
+
+#preview {
+	max-height: 100% !important;
+	min-height: 100% !important;
+		height: 100% !important;
 }
 
 #previewshare_footer {
@@ -297,7 +304,7 @@ body {
 }
 
 #previewshare_content {
-	height: 68%;
+	height: 85%;
 	overflow: hidden;
 }
 
@@ -341,14 +348,14 @@ body {
 }
 
 #pack_preview_small {
-	width: 25%;
-	margin-left: 10px;
-	margin-right: 10px;
-	float: left;
+	//width: 25%;
+	//margin-left: 10px;
+	//margin-right: 10px;
+	//float: left;
 }
 
 #pack_preview_small img {
-	width: 100%;
+	//width: 100%;
 }
 
 #pack_preview_hdr {
@@ -370,9 +377,9 @@ body {
 }
 
 #pack_preview_content_top_right {
-	float: left;
-	display: inline;
-	text-align: left;
+	//float: left;
+	//display: inline;
+	//text-align: left;
 }
 
 #pack_preview_content_top {
@@ -473,12 +480,12 @@ body {
 }
 
 #pack_heading1 {
-	font-weight: bold;
-	font-size: 34px;
-	color: white;
-	text-align: left;
-	margin-top: 20px;
-	clear: both;
+	//font-weight: bold;
+	//font-size: 34px;
+	//color: white;
+	//text-align: left;
+	//margin-top: 20px;
+	//clear: both;
 }
 
 #pack_heading2 {
@@ -491,12 +498,8 @@ body {
 }
 
 #pack_preview_text {
-	font-weight: bold;
-	font-size: 20px;
-	color: #999999;
-	text-align: center;
-	margin-top: 20px;
-	clear: both;
+	//font-size: 1.4rem;
+	//margin-bottom: 5%;
 }
 
 .pack_preview_cost {
@@ -661,20 +664,30 @@ body {
 }
 
 .easteregg {
-	background-color: blue;
+	background-color: transparent;
 	position: absolute;
+	margin: 0 auto;
 	z-index: 100;
 }
 
 .easteregg img {
-	height: auto;
-	width: 100%;
+	height: 100%;
+	width: auto;
+		margin: 0 auto;
+	position: relative;
+	display: block;
 }
 
 #buildhdr { 
 	
 	width: 100%;
 	position: relative;
+}
+
+#build_help {
+	position: fixed;
+	height: 50%;
+	width: 100%;
 }
 
 #banks-nav-bar .ui-navbar ul,#buildhdr .ui-navbar-expanded ul { //
@@ -827,7 +840,8 @@ body {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
-	height: 100%;
+	height: 100% !important;
+	max-height: 100% !important;
 }
 
 #packs {
@@ -841,7 +855,7 @@ body {
 /*
 #homediv {
 	background: transparent url('../imgs/bkgd_home.jpg') no-repeat;
-	height: 100%;
+	height: 100% !important;
 	max-width: 768px;
 	width: 100% ! important;
 	max-height: 100% ! important;
@@ -892,6 +906,36 @@ body {
 	position: relative;
 }
 
+#homecontent {
+	min-height: 80%;
+}
+
+#homeftr {
+	min-height: 20%;
+	max-height: 20%;
+}
+
+.homeftr_btn a{
+	margin: 5px;
+}
+
+#home {
+	min-height: 100% !important;
+	height: 100% !important;
+	overflow: hidden;
+}
+/*
+.homebtn_row {
+	.width: 50%;
+	
+}
+
+.homebtn_row img {
+	.width: 100%;
+	
+}
+*/
+/*
 #homemain {
 	margin: 0 auto;
 	max-width: 768px;
@@ -916,7 +960,7 @@ body {
 	z-index: 200;
 }
 
-/*
+
 #homefooter {
 	background-color: #222222;
 	bottom: 0;
@@ -929,66 +973,6 @@ body {
 	z-index: 200;
 }
 */
-
-#homefooter {
-	background-color: #222222;
-	box-shadow: 5px 5px 5px;
-	clear: both;
-	min-height: 6%;
-	overflow: hidden;
-	width: 100%;
-	z-index: 200;
-	height: 5em;
-}
-
-.homefooterbtn {
-	display: inline-block;
-	height: auto;
-	max-width: 130px;
-	width: 40%;
-}
-
-#homefooterbtnsl {
-	left: 0;
-	padding: 1%;
-	position: absolute;
-	width: 50%;
-}
-
-#homefooterbtns {
-	padding: 1%;
-	position: absolute;
-	right: 0;
-	text-align: right;
-	width: 48%;
-}
-
-#homefooterbtns_afterlogin {
-	padding: 1%;
-	position: absolute;
-	right: 0;
-	text-align: right;
-	width: 48%;
-}
-
-#homefooterbtns_afterlogin #user_name {
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	font-size: 18px;
-	color: white; //
-	margin-right: 15px;
-	vertical-align: middle;
-}
-
-#home_login_btn { //
-	margin-right: 20px;
-	display: inline;
-}
-
-#home_logout_btn {
-	display: inline;
-	vertical-align: middle;
-}
 
 #item_desc_div {
 	width: 65%;
@@ -1057,7 +1041,7 @@ div.inline {
 	display: block;
 	height: 10%;
 }
-*/
+
 
 #vaultfooter {
 	display:block;
@@ -1066,26 +1050,48 @@ div.inline {
         position: fixed;
         left: 50%;
         bottom: 0%;
-    background:#0f0;
+        height: 8%;
+    //background:#0f0;
+    }
+*/
+
+#vault {
+	max-height: 100% !important;
+	min-height: 100%;
+	height: 100% !important;
+	overflow: hidden;
+}
+
+#vaulthdr {
+	height: 7%;
+}
+
+#vaultcontent {
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: relative;
+	height: 81% !important;
+	padding: 0 2%;
+	margin-top: 1%;
+	width: 100%;
+	
+}
+
+
+#vaultfooter {
+	display:block;
+        width: 100%;
+        
+        height: 8%;
+    //background:#0f0;
     }
 
-#vault_back_btn {
-	max-height: 50px;
-	width: auto;
-	
-}
-
-#vault_back_btn img{
-	height:	50px;
-	width: auto;
-	
-}
 #vaultgrid {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
     display: block;
-    /* height: 100% ; */
-   padding-top: 1em;
+    height: 100%;
+   
    /* overflow: auto;*/
 }
 
@@ -1105,14 +1111,7 @@ div.inline {
     width: auto;
 }
 
-#vaultcontent {
-	overflow: hidden;
-	/*height: 87%; */
-	position: relative;
-	height: auto;
-	padding: 0 2%;
-	
-}
+
 
 
 .vault-name {
@@ -1218,27 +1217,25 @@ div.inline {
 	cursor: pointer;
 }
 
-#vaultlist canvas { //
-	width: auto; //
+#vaultlist canvas {  
+	width: auto; 
 	height: auto;
 }
 
-/*
-#vault ul {
-	margin: 0;
-	padding: 0;
+
+#vaultlist {  
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 
 #vaultlist li {
-	list-style: none;
-	display: inline-block;
-	width: 225px;
-	height: 300px;
-	background-color: #ccc;
+	height: 100%;
 }
 
-*/
+
+
 #vaultlist li img {
 	width: auto;
 	height: 100%;

@@ -222,12 +222,11 @@ function compose_easteregg(easteregg, target, std_height, std_width) {
 	+ '"></img></div>');
 
 	$(divid).hide();
-	$(divid).css('background-color', 'transparent');
 	$(divid).css('top', easteregg.top_pct + '%');
 	$(divid).css('left', easteregg.left_pct + '%');
 	$(divid).width(easteregg.width_pct + '%');
 	$(divid).height(easteregg.height_pct + '%');
-	$(divid).css("position", "absolute");
+
 	$(divid).fadeIn('slow', function() {
 
 		// Animation complete.

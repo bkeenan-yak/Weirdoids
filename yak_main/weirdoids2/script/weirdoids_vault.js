@@ -8,10 +8,27 @@ var VAULT_DISPLAY_COUNT = 6;
 $(document).ready(function() {
 	console.log("in ready vault");
 	
+
+	
 	$(document).delegate( '#vault','pageshow',	function() {
 		var mh = Math.min(STD_HEIGHT, $(window).height());
-		var the_height = (mh - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]')	.height() - 35);
-		$(this).height(mh).find('[data-role="content"]').height(the_height);
+		var hdrh = $(this).find('[data-role="header"]').height();
+		var ftrh = $(this).find('[data-role="footer"]')	.height();
+		var the_height = (mh - hdrh - ftrh - 35);
+		console.log("vault: mh=" + mh + " hdrh=" + hdrh + " ftrh=" + ftrh);
+		
+		if (navigator.userAgent.match(/iPad/i))
+		{
+			var ch = parseInt($('#vault').css('height'));
+			
+			var nuh = (ch - 100)/mh * 100;
+			console.log("vault: content hgt = " + ch + " nuh=" + nuh);
+			$('#vault').css('height',nuh + '% !important');
+			$('#vault').css('max-height',nuh + '% !important');
+			
+		}
+		resizeVault();
+		//$(this).height(mh).find('[data-role="content"]').height(the_height);
 	});
 	
 	$("#btn_clear_vault_yes").click(function(e) {
@@ -26,14 +43,18 @@ $(document).ready(function() {
 	$('#vault').live('pagebeforeshow', function(event) {
 		// draw all the saved weirdoids
 		$vault_start_idx = 0;
-		$('#btn_vault_prev').button('disable');
-		$('#btn_vault_more').button('disable');
+		$('#btn_vault_prev').addClass('deselected');
+		$('#btn_vault_more').addClass('deselected');
+		
 		drawVault();
 	});
 
 	$('#btn_vault_prev').click(
 
 	function(event) {
+		if ($(this).hasClass('deselected')) 
+			return;
+		
 		if ($vault_start_idx > 0) {
 			$vault_start_idx = Math.max(0,$vault_start_idx - getVaultDivCount());
 			drawVault();
@@ -45,11 +66,16 @@ $(document).ready(function() {
 	$('#btn_vault_more').click(
 
 	function(event) {
-
+		if ($(this).hasClass('deselected')) 
+			return;
 		if ($vault_start_idx < $weirdoids.length) {
 			$vault_start_idx = Math.min($weirdoids.length - 1,$vault_start_idx 	+ getVaultDivCount());
 			drawVault();
 		}
+		
+		if ($vault_start_idx >=  $weirdoids.length)
+			$('#btn_vault_more').addClass('deselected');
+
 		event.preventDefault();
 	});
 
@@ -80,7 +106,8 @@ var $vault_start_idx = 0;
 function getVaultDivCount() {
 
 	var view_width = $(window).width();
-	var vaultDivCount = VAULT_DISPLAY_COUNT;
+	
+	var vaultDivCount =  (navigator.userAgent.match(/iPad/i)) ? 2 : VAULT_DISPLAY_COUNT;
 
 	if (view_width <= NARROW_WIDTH) {
 		vaultDivCount = 1;
@@ -99,7 +126,7 @@ function drawVault(event) {
 	//var gridname = "vaultgrid";
 
 	//$('#vaultcontent').append('<div class="ui-grid-b" id="vaultgrid" data-scroll="true"></div>');
-	$('#vaultcontent').append('<div id="vaultgrid"><ul class="block-grid three-up mobile-five-up" id="vaultlist"></ul></div>');
+	$('#vaultcontent').append('<div id="vaultgrid"><ul class="block-grid two-up mobile" id="vaultlist"></ul></div>');
 
 //	if (view_width > NARROW_WIDTH) {
 //		$('#vaultcontent').append('<div class="ui-grid-b" id="vaultgrid" data-scroll="true"></div>');
@@ -134,14 +161,14 @@ function drawVault(event) {
 		reversedWeirdoids = reversedWeirdoids.reverse().slice($vault_start_idx,	eidx); // reverse it, then slice
 
 		if ($vault_start_idx > 0)
-			$('#btn_vault_prev').button('enable');
+			$('#btn_vault_prev').removeClass('deselected');
 		else
-			$('#btn_vault_prev').button('disable');
+			$('#btn_vault_prev').addClass('deselected');
 
 		if (eidx >= $weirdoids.length)
-			$('#btn_vault_more').button('disable');
+			$('#btn_vault_more').addClass('deselected');
 		else
-			$('#btn_vault_more').button('enable');
+			$('#btn_vault_more').removeClass('deselected');
 		
 		//$('#vaultgrid').removeClass('ui-grid-b');
 
@@ -174,61 +201,11 @@ function drawVault(event) {
 
 							if (fullname.length == 0)
 								fullname = "THE NAMELESS WEIRDOID";
-
-
 							
-							var classname = "four mobile-one columns center";
-							/*
-							if (view_width > NARROW_WIDTH) {
-								var idx = vaultCnt % 3;
-								
-								switch (idx) {
-								case 2:
-									classname = "four mobile-one columns center";//"ui-block-c";
-									break;
-								case 1:
-									classname = "ui-block-b";
-									break;
-
-								default:
-									classname = "ui-block-a";
-								}
-
-							} else
-								classname = "vault_cycle_div";
-*/
+							//var classname = "four mobile-one columns center";
 							
 							vaultCnt += 1;
 
-
-
-//							if (view_width <= NARROW_WIDTH) {
-//								$('#vault_narrow_wrapper').append('<div id="'
-//														+ canvasdiv
-//														+ '" class="vault_cycle_inner_div" data-theme="b"></div><div class="vault-narrow-name">'
-//														+ fullname + '</div>');
-//							} else {
-//								$('#vaultgrid')
-//										.append('<div class="'
-//														+ classname
-//														+ '"><div id="'
-//														+ canvasdiv
-//														+ '" class=" vault_div" data-theme="b"></div><div class="vault-name">'
-//														+ fullname
-//														+ '</div></div>');
-//
-//								$('#vaultgrid').page();
-//							}
-
-							
-//								$('#vaultgrid')
-//										.append('<div class="'
-//														+ classname
-//														+ '"><div id="'
-//														+ canvasdiv
-//														+ '" class=" vault_div" data-theme="b"></div><div class="vault-name">'
-//														+ fullname
-//														+ '</div></div>');
 								
 								$('#vaultlist')
 								.append('<li class=""><div id="'
@@ -261,10 +238,8 @@ function drawVault(event) {
 								e.preventDefault();
 							});
 
-							// var target_height = parseInt($('#' + canvasdiv)
-							// .height());
-							// var target_width = parseInt($('#' +
-							// canvasdiv).width());
+//							 var target_height = parseInt($('#' + canvasdiv).height());
+//							 var target_width = parseInt($('#' + canvasdiv).width());
 							//
 
 //							if (view_width > NARROW_WIDTH) {
@@ -272,9 +247,14 @@ function drawVault(event) {
 								var vaultheight = STD_VAULT_HEIGHT;
 								var vaultwidth = (vaultheight / STD_HEIGHT)
 								* STD_WIDTH;
+								
+								 //var docheight = parseInt($(document).height());
 
-								$('#' + canvasdiv).height(vaultheight + "px");
-								$('#' + canvasdiv).width(vaultwidth + "px");
+								$('#' + canvasdiv).height('auto');
+								$('#' + canvasdiv).width('100%');
+
+								//$('#' + canvasdiv).height(vaultheight + "px");
+								//$('#' + canvasdiv).width(vaultwidth + "px");
 //							}
 
 							var btarget = $('#' + canvasdiv);
@@ -289,5 +269,6 @@ function drawVault(event) {
 		// drawFromQueue();
 
 	}
+	resizeVault();
 
 };

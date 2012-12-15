@@ -1,214 +1,223 @@
+$(document).ready(function()
+{
 
+	console.log("in ready home");
 
+	$('#home').live('pagebeforeshow', function(event)
+	{
+		$.resizeHome();
+	});
 
-$(document).ready(function() {
+	$('#home').live('pageshow', function(event)
+	{
+		$.mobile.silentScroll(60);
+	});
 
-					console.log("in ready home");
+	// get orig location of home buttons
+	$btn_build_top = $('#btn_build').css('top');
+	$btn_vault_top = $('#btn_vault').css('top');
+	$btn_packs_top = $('#btn_packs').css('top');
 
-					$('#home').live('pagebeforeshow', function(event) {
+	$("#bldbtn,#packsbtn").removeClass('ui-disabled').css('opacity', '.5');
 
-						$.resizeHome();
+	$('#home_login_btn').click(function(e)
+	{
 
-					});
-					
-					// get orig location of home buttons
-					$btn_build_top = $('#btn_build').css('top');
-					$btn_vault_top = $('#btn_vault').css('top');
-					$btn_packs_top = $('#btn_packs').css('top');
+		console.log("home login button clicked");
+		$srcPage = "#home";
+		$afterLoginPage = "#home";
 
-					$("#bldbtn,#packsbtn").removeClass('ui-disabled').css('opacity','.5');
-					
-					$('#home_login_btn').click(function(e) {
+		$('#logged_in_msg').hide();
 
-						console.log("home login button clicked");
+		$.mobile.changePage("#loginaccount", {
+			transition : "fade"
+		});
+		return false;
 
-						$srcPage = "#home";
+	});
 
-						$afterLoginPage = "#home";
+	$('#homefooterbtns_afterlogin').children().hide();
 
-						$('#logged_in_msg').hide();
+	$('#btn_getpwd').click(function(e)
+	{
+		console.log("btn_getpwd button clicked");
+		resetpwd();
+		gotoPage("#home");
+		return false;
 
-						$.mobile.changePage("#loginaccount", {
+	});
 
-							transition : "fade"
+	$('#home_signup_btn').click(function(e)
+	{
 
-						});
+		console.log("home signup button clicked");
 
-						return false;
+		$('.error').hide();
 
-					});
+		$.mobile.changePage("#signup_pg", {
+			transition : "fade"
+		});
 
-					$('#homefooterbtns_afterlogin').children().hide();
+		// displayUserName("Bob Wiley");
+		return false;
+	});
 
-					$('#btn_getpwd').click(function(e) {
+	$('#btn_login').click(function(e)
+	{
+		loginToYak();
+		return false;
+	});
 
-						console.log("btn_getpwd button clicked");
+	$("#loginaccount").bind("keydown", function(event)
+	{
+		// track enter key
+		var keycode = (event.keyCode ? event.keyCode : (event.which ? event.which : event.charCode));
+		if (keycode == 13)
+		{ // keycode for enter key
+			// force the 'Enter Key' to implicitly click the Update button
+			$('#btn_login').click();
+			return false;
+		} else
+		{
+			return true;
+		}
+	}); // end of function
 
-						resetpwd();
+	$('#btn_signup').click(function(e)
+	{
+		$srcPage = "#signup_pg";
+		$afterLoginPage = '#home';
+		signupToYak();
+		return false;
+	});
 
-						gotoPage("#home");
+	$('#btn_getpwd').click(function(e)
+	{
 
-						return false;
+		getPassword();
 
-					});
+		return false;
 
-					$('#home_signup_btn').click(function(e) {
+	});
 
-						console.log("home signup button clicked");
+	$('#loginaccount').live('pagebeforeshow', function(event)
+	{
 
-						$('.error').hide();
+		// hide errors
 
-						$.mobile.changePage("#signup_pg", {
+		$('#logged_in_msg').hide();
 
-							transition : "fade"
+		$('.error').hide();
 
-						});
+	});
 
-						// displayUserName("Bob Wiley");
+	$('.build_button').each(function()
+	{
 
-						return false;
+		$(this).click(function(event)
+		{
+			console.log("in bldbt click");
+			if ($currentPack == '')
+			{
+				if ($loadedpacks.length > 0)
+					$currentPack = $items[$loadedpacks[0]];
+			}
 
-					});
+			if ($currentPack == '')
+			{
 
-					$('#btn_login').click(function(e) {
-
-						loginToYak();
-
-						return false;
-
-					});
-
-					$('#btn_signup').click(function(e) {
-
-						$srcPage = "#signup_pg";
-
-						$afterLoginPage = '#home';
-
-						signupToYak();
-
-						return false;
-
-					});
-
-					$('#btn_getpwd').click(function(e) {
-
-						getPassword();
-
-						return false;
-
-					});
-
-					
-					$('#loginaccount').live('pagebeforeshow', function(event) {
-
-						// hide errors
-
-						$('#logged_in_msg').hide();
-
-						$('.error').hide();
-
-					});
-				
-					$('.build_button').each(function() {
-
-						$(this).click(function(event) {
-							console.log("in bldbt click");
-							if (currentPack == '') {
-								$.mobile.changePage(
-								"#packs",
-								{
-									transition : "fade"
-								});
-
-								event.preventDefault();
-								return false;
-							} else {
-
-								$('#build').waitForImages(function() {
-									console.log('bldbtn: All images are loaded.');
-
-									setTimeout(	function() {
-										// load
-										// the
-										// pack,
-										// when
-										// all
-										// are
-										// loaded,
-										// transition
-										// to
-										// build
-										console.log("before build show");
-
-										$.loadPack(currentPack);
-
-									},
-									1000);
-								});
-							}
-							return true;
-						});
-					});
-
-					$('#packsbtn').click(function(event) {
-						console.log("in packs click");
-						$.mobile.changePage("#packs", {
-							transition : "fade"
-						});
-						event.preventDefault();
-						return fasle;
-
-					});
-
-					$('#vaultbtn').click(function(event) {
-						console.log("in packs vault");
-						$.mobile.changePage("#vault", {
-							transition : "fade"
-						});
-						event.preventDefault();
-
-						return fasle;
-					});
+				$.mobile.changePage("#packs", {
+					transition : "fade"
 				});
 
-function loginToYak() {
+				event.preventDefault();
+				return false;
+			} else
+			{
 
+				myWaitForImages(function()
+				{
+
+					console.log('Before bldbtn click show, all images loaded.');
+					setTimeout(function()
+					{
+						// load
+						// the
+						// pack,
+						// when
+						// all
+						// are
+						// loaded,
+						// transition
+						// to
+						// build
+						console.log("before build show");
+
+						loadPack($currentPack, true);
+
+					}, 1000);
+
+				}, function(loaded, count, success)
+				{
+					console.log("Loaded " + loaded + ' of ' + count + ' images has ' + (!success ? 'failed to load' : 'loaded') + '.');
+				});
+
+			}
+			return true;
+		});
+	});
+
+	$('#packsbtn').click(function(event)
+	{
+		console.log("in packs click");
+		$.mobile.changePage("#packs", {
+			transition : "fade"
+		});
+		event.preventDefault();
+		return fasle;
+
+	});
+
+	$('#vaultbtn').click(function(event)
+	{
+		console.log("in packs vault");
+		$.mobile.changePage("#vault", {
+			transition : "fade"
+		});
+		event.preventDefault();
+
+		return fasle;
+	});
+});
+
+function loginToYak()
+{
 	$('.error').hide();
 
 	var name = $("#username").val();
 
-	if (name == "") {
-
+	if (name == "")
+	{
 		$("label#name_error").show();
-
 		$("#name").focus();
 
 		return false;
-
 	}
 
 	var password = $("#password").val();
-
-	if (password == "") {
-
+	if (password == "")
+	{
 		$("label#password_error").show();
-
 		$("input#password").focus();
-
 		return false;
-
 	}
 
 	// cache the form element for use in this
-
 	// function
-
 	// var $this = $(this);
-
 	// prevent the default submission of the form
 
 	$is_logged_in = false;
-
 	$('.logged-in-only').attr('disabled', '');
 
 	$.ajax({
@@ -216,15 +225,16 @@ function loginToYak() {
 		type : 'post',
 		dataType : 'json',
 		data : $('#loginform').serialize(),
-		success : function(json) {
+		success : function(json)
+		{
 			// process the result
-			if (json.errorcode == 0) {
+			if (json.errorcode == 0)
+			{
 				console.log("logged in!");
 
 				$is_logged_in = true;
-				if (json.userid) {
-					$userid = json.userid;
-				}
+
+				process_user_info(json);
 
 				$('#logged_in_msg').show();
 				// myalert("User " + name + " logged in! userid=" + $userid);
@@ -234,87 +244,101 @@ function loginToYak() {
 				displayUserName(name);
 				// synch up user data
 				afterLogin($userid);
-				window.setTimeout(function() {
+				window.setTimeout(function()
+				{
 					chgPageAfterLoginOrShare();
 				}, 2000);
 
-			} else {
+			} else
+			{
 				serverAlert("Login failure", json);
 				console.log("Login failure");
 				console.log(json.errormsg);
 			}
 		},
-		failure : function(data) {
+		failure : function(data)
+		{
 			console.log("login failure");
 		},
-		complete : function(xhr, data) {
+		complete : function(xhr, data)
+		{
 			if (xhr.status != 0 && xhr.status != 200)
-				alert('Error calling server to login up. Status=' + xhr.status
-				+ " " + xhr.statusText);
+				alert('Error calling server to login up. Status=' + xhr.status + " " + xhr.statusText);
 		}
 	});
 }
 
-function resetpwd() {
+function resetpwd()
+{
 	$.ajax({
-				url : '../yak/controllers/reset_pwd.php',
-				type : 'post',
-				dataType : 'json',
-				data : $('#resetpwdform').serialize(),
-				success : function(json) {
-					// process the result
-					if (json.errorcode == 0) {
-						console.log("Pwd reset request completed.");
-						myalert("An email was sent to you to complete the reset process.");
-					} else {
-						serverAlert("Pwd reset request error", json);
-						console.log("Pwd reset request error");
-						console.log(json.errormsg);
-					}
-				},
+		url : '../yak/controllers/reset_pwd.php',
+		type : 'post',
+		dataType : 'json',
+		data : $('#resetpwdform').serialize(),
+		success : function(json)
+		{
+			// process the result
+			if (json.errorcode == 0)
+			{
+				console.log("Pwd reset request completed.");
+				myalert("An email was sent to you to complete the reset process.");
+			} else
+			{
+				serverAlert("Pwd reset request error", json);
+				console.log("Pwd reset request error");
+				console.log(json.errormsg);
+			}
+		},
 
-				failure : function(data) {
-					myalert("Pwd reset request failure");
-				},
+		failure : function(data)
+		{
+			myalert("Pwd reset request failure");
+		},
 
-				complete : function(xhr, data) {
-					if (xhr.status != 0 && xhr.status != 200)
-						myalert('Error calling server to make Pwd reset request. Status='
-								+ xhr.status + " " + xhr.statusText);
-				}
-			});
+		complete : function(xhr, data)
+		{
+			if (xhr.status != 0 && xhr.status != 200)
+				myalert('Error calling server to make Pwd reset request. Status=' + xhr.status + " " + xhr.statusText);
+		}
+	});
 }
 
-function signupToYak() {
+function signupToYak()
+{
 	$('.error').hide();
 	var name = $("#signup_username").val();
-	if (name == "") {
+	if (name == "")
+	{
 		$("label#signup_username_error").show();
 		$("#signup_name").focus();
 		return false;
 	}
 
 	var email = $('#email').val();
-	if (email == "") {
+	if (email == "")
+	{
 		$("label#email_error").show();
 		$("#email").focus();
 		return false;
 	}
 
 	var password = $("#signup_password").val();
-	if (password == "") {
+	if (password == "")
+	{
 		$("label#signup_password_error").show();
 		$("input#signup_password").focus();
 		return false;
 	}
 
 	var cpassword = $("#cpassword").val();
-	if (cpassword == "") {
+	if (cpassword == "")
+	{
 		$("label#cpassword_error").html("This field is required.").show();
 		$("input#cpassword").focus();
 		return false;
 
-	} else if (cpassword != password) {
+	} else if (cpassword != password)
+	{
 		$("label#cpassword_error").html("Passwords don't match.").show();
 		$("input#cpassword").focus();
 		return false;
@@ -330,16 +354,19 @@ function signupToYak() {
 		type : 'post',
 		dataType : 'json',
 		data : $('#signupform').serialize(),
-		success : function(json) {
+		success : function(json)
+		{
 
 			// process the result
 
-			if (json.errorcode == 0) {
+			if (json.errorcode == 0)
+			{
 				console.log("logged in!");
 
 				$is_logged_in = true;
 
-				if (json.userid) {
+				if (json.userid)
+				{
 					$userid = json.userid;
 				}
 
@@ -352,80 +379,102 @@ function signupToYak() {
 				afterLogin($userid);
 				chgPageAfterLoginOrShare();
 
-			} else {
+			} else
+			{
 				serverAlert("Sign up failure", json);
 				console.log("Sign up failure");
 				console.log(json.errormsg);
 			}
 		},
-		failure : function(data) {
+		failure : function(data)
+		{
 			console.log("Sign up failure");
 		},
 
-		complete : function(xhr, data) {
+		complete : function(xhr, data)
+		{
 			if (xhr.status != 0 && xhr.status != 200)
-				myalert('Error calling server to sign up. Status=' + xhr.status
-				+ " " + xhr.statusText);
+				myalert('Error calling server to sign up. Status=' + xhr.status + " " + xhr.statusText);
 		}
 	});
 }
 
-function displayUserName(uname) {
+function displayUserName(uname)
+{
 
 	$('#homefooterbtns').hide();
 	$('#homefooterbtns').children().hide();
-	$('#homefooterbtns_afterlogin').show();
+	$('#homefooterbtns_afterlogin,#homeftr_avatar').show();
+	// $('#homefooterbtns_afterlogin a').css('display','block');
+
 	$('#homefooterbtns_afterlogin #user_name').html(uname);
 	$('#homefooterbtns_afterlogin').children().show();
 
 	$('#home_logout_btn').show();
-	$('#home_logout_btn').click(function(e) {
+	$('#home_logout_btn').click(function(e)
+	{
 		// myalert("Log the user out");
-		$userid = null;
+		reset_user_variables();
 
 		$is_logged_in = false;
+
 		$('#homefooterbtns').show();
 		$('#homefooterbtns').children().show();
-		$('#homefooterbtns_afterlogin').hide();
+		// $('#homefooterbtns a').css('display','block');
+		$('#homefooterbtns_afterlogin,#homeftr_avatar').hide();
 		$('#home_logout_btn').hide();
 	});
 
+	if ($avatar != null)
+	{
+		// avatars are in yakhq/img
+		var rel_url = ($avatar.indexOf("yakhq") != -1) ? $avatar : '../yakhq/' + $avatar;
+
+		$('.user_avatar').attr('src', rel_url);
+	}
+
 }
 
-function getPassword() {
+function getPassword()
+{
 	console.log("getPassword");
 	$('.error').hide();
 	var email = $('#forgotpwd_email').val();
-	if (email == "") {
+	if (email == "")
+	{
 		$("label#forgotpwd_email_error").show();
 		$("#forgotpwd_email").focus();
 		return false;
 	}
 }
 
-function checkAutoLogin() {
+function checkAutoLogin()
+{
 	// cache the form element for use in this
 	// function
 	// var $this = $(this);
 
 	// prevent the default submission of the form
-	if ($is_logged_in) {
+	if ($is_logged_in)
+	{
 		console.log("checkAutoLogin: already logged in");
 		return;
 	}
 
-	$.ajax({url : '../yak/controllers/checklogin.php',
+	$.ajax({
+		url : '../yak/controllers/checklogin.php',
 		type : 'post',
 		dataType : 'json',
-		success : function(json) {
+		success : function(json)
+		{
 			// process the result
-			if (json.errorcode == 0) {
+			if (json.errorcode == 0)
+			{
 				console.log(" auto logged in!");
 
 				$is_logged_in = true;
-				if (json.userid) {
-					$userid = json.userid;
-				}
+
+				process_user_info(json);
 
 				$('#logged_in_msg').show();
 				// myalert("User " + name + " logged in! userid=" + $userid);
@@ -438,31 +487,53 @@ function checkAutoLogin() {
 				// synch up user data
 				afterLogin($userid);
 
-			} else if (json.errorcode == 1) {
+			} else if (json.errorcode == 1)
+			{
 				console.log("No previous login");
 				console.log(json.errormsg);
-			} else {
+			} else
+			{
 				serverAlert("Login check error", json);
 				console.log("Login check error");
 				console.log(json.errormsg);
 			}
 		},
 
-		failure : function(data) {
+		failure : function(data)
+		{
 			console.log("login check failure");
 		},
 
-		complete : function(xhr, data) {
+		complete : function(xhr, data)
+		{
 			if (xhr.status != 0 && xhr.status != 200)
-				alert('Error calling server to check login up. Status='
-				+ xhr.status + " " + xhr.statusText);
+				alert('Error calling server to check login up. Status=' + xhr.status + " " + xhr.statusText);
 		}
 	});
 }
 
+function process_user_info(json)
+{
+	if (json.userid)
+	{
+		$userid = json.userid;
+	}
+	if (json.avatar)
+	{
+		$avatar = json.avatar;
+	}
+	if (json.is_kid)
+	{
+		$is_kid = json.is_kid;
+	}
+	if (json.is_parent)
+	{
+		$is_parent = json.is_parent;
+	}
+}
 
-
-jQuery.resizeHome = function() {
+jQuery.resizeHome = function()
+{
 	console.log("resize home page " + $.mobile.activePage);
 	return;
 
@@ -475,13 +546,10 @@ jQuery.resizeHome = function() {
 	var scaleFactor = Math.max(Math.abs(Math.min(divheight / STD_HEIGHT, 1)), 0.5);
 
 	console.log("scalefactor " + scaleFactor + '  divheight ' + divheight);
-	$('#btn_vault').css('top',
-			parseInt($('#btn_vault').attr('origtop')) * scaleFactor);
+	$('#btn_vault').css('top', parseInt($('#btn_vault').attr('origtop')) * scaleFactor);
 
-	$('#btn_packs').css('top',
-			parseInt($('#btn_packs').attr('origtop')) * scaleFactor);
+	$('#btn_packs').css('top', parseInt($('#btn_packs').attr('origtop')) * scaleFactor);
 
-	$('#btn_build').css('top',
-			parseInt($('#btn_build').attr('origtop')) * scaleFactor);
+	$('#btn_build').css('top', parseInt($('#btn_build').attr('origtop')) * scaleFactor);
 
 };

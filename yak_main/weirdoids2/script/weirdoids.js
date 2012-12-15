@@ -1,4 +1,5 @@
 var $active_cycle;
+var $cycling_body = true;
 
 var firstNameVar = null;
 var lastNameVar = null;
@@ -10,21 +11,23 @@ var $savingFromPreview = false;
 var $saveSuccessFunction = null;
 var $srcPage = null;
 var $saved_new_weirdoid = false;
+var $firstTimeShowHelp = true; // flag to show help on build screen
+
 var $packs = [];
 
 var STD_HEIGHT = 1024;
 var STD_WIDTH = 768;
 var WIDTH_TO_HEIGHT = STD_WIDTH / STD_HEIGHT;
 var NARROW_WIDTH = 600;
-
+var $userkey_prefix = "myWeirdoids_";
 
 var $btn_build_top = 400;
 var $btn_vault_top = 500;
 var $btn_packs_top = 600;
 
-
-
 var $online = navigator.onLine;
+
+// user variables
 var $is_logged_in = false;
 var $is_on_facebook = false;
 var $is_trial_only = false;
@@ -32,9 +35,12 @@ var $username = 'Guest';
 var $local_user_keys = [];
 var $current_user_key = null;
 var $userid = null;
+var $avatar = null;
 var $facebook_userid = null;
-var $userkey_prefix = "myWeirdoids_";
+
 var $local_user_id = 0;
+var $is_kid = 1;
+var $is_parent = 0;
 
 // easter egg variables
 var $random_cycle = false;
@@ -42,18 +48,18 @@ var $random_eggs = 0;
 var $current_eastereggs = [];
 var iWebkit;
 
+// Pack globals
+var $currentPack = '';
+var lastLoadedPack = '';
+
+
 if (typeof console == "undefined" || typeof console.log == "undefined")
-
 	var console = {
-
 		log : function() {
-
 		}
-
 	};
 
-$(document)
-		.ready(
+$(document).ready(
 				function() {
 
 					console.log("in ready weirdoids");
@@ -76,11 +82,8 @@ $(document)
 					console.log("browser " + navigator.userAgent);
 
 					if (navigator.userAgent.match(/Android/i)
-
 					|| navigator.userAgent.match(/webOS/i)
-
 					|| navigator.userAgent.match(/iPhone/i)
-
 					|| navigator.userAgent.match(/iPad/i)) {
 						console.log('in match');
 						$('.browser-nav-btn').remove();
@@ -95,9 +98,7 @@ $(document)
 					});
 
 					$(window).bind("online", function(e) {
-
 						console.log("online");
-
 						$online = navigator.onLine;
 
 						// enable online functionality
@@ -148,63 +149,27 @@ $(document)
 					});
 
 
-//					$(document).delegate('#simplebool', 'click', function() {
-//
-//						$(this).simpledialog({
-//							'mode' : 'bool',
-//							'prompt' : 'How about it?',
-//							'useModal' : true,
-//							'buttons' : {
-//								'OK' : {
-//									click : function() {
-//										$('#dialogoutput').text('OK');
-//									}
-//								},
-//
-//								'Cancel' : {
-//									click : function() {
-//										$('#dialogoutput').text('Cancel');
-//									},
-//									icon : "delete",
-//									theme : "c"
-//								}
-//							}
-//
-//						});
-//
-//					});
-
 					$('#myModal').click(function(e) {
 						e.preventDefault();
 						return;
 					});
 
 					if (navigator.userAgent.match(/Android/i)
-
 					|| navigator.userAgent.match(/webOS/i)
-
 					|| navigator.userAgent.match(/iPhone/i)
-
 					|| navigator.userAgent.match(/iPad/i)) {
-
 						$(window).bind(
 										'orientationchange',
-
 										function(event) {
-
 											console.log("new orientation "
-
 											+ window.orientation);
 
 											if (window.orientation == 90
-
 											|| window.orientation == -90
-
 											|| window.orientation == 270) {
 												$('meta[name="viewport"]')
 														.attr('content',
 														'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
-
 											} else {
 
 												$('meta[name="viewport"]')
@@ -221,21 +186,28 @@ $(document)
 					get_weirdoids_from_local_storage();
 					
 					// get product keys
-
 					synchProdKeys();
 
 
 				});
 
 
-function getUserKey() {
-	if ($current_user_key == null)
+function reset_user_variables()
+{
 
-		$current_user_key = $userkey_prefix + $userid;
-}
-
-function getNewUserKey(userid) {
-	return $userkey_prefix + userid;
+	$is_logged_in = false;
+	$is_on_facebook = false;
+	$is_trial_only = false;
+	$username = 'Guest';
+	$local_user_keys = [];
+	$current_user_key = null;
+	$userid = null;
+	$avatar = null;
+	$facebook_userid = null;
+	$local_user_id = 0;
+	$is_kid = 1;
+	$is_parent = 0;	
+	$weirdoids = [];
 }
 
 function afterFirstFBLogin(isloggedin, msg) {
@@ -298,28 +270,22 @@ function chgPageAfterLoginOrShare() {
 			$afterLoginPage = $savedReturnPage;
 			$savedReturnPage = null;
 		}
-
 		afterFBLoginBeforeShare(true, "null msg");
 	} else if ($($afterLoginPage).length > 0) {
-
 		$.mobile.changePage($afterLoginPage, {
 			transition : "fade"
 		});
-
 	} else {
 		myalert("Unknown $afterLoginPage " + $afterLoginPage);
 	}
 
 	$afterLoginPage = null;
-
 }
 
 function gotoPage(page) {
-
 	$.mobile.changePage(page, {
 		transition : "fade"
 	});
-
 }
 
 
@@ -335,11 +301,8 @@ function afterFBLoginBeforeShare(success, msg) {
 
 
 $(window).load(function() {
-
 	var dataurl = localStorage.getItem("myimg");
-
 	$('#myimg').append(	'<img src="' + dataurl 	+ '" style="width:100%;height:100%;" />');
-
 	var dataurl2 = localStorage.getItem("myimg2");
 
 	$('#myimg').append(	'<img src="' + dataurl2
@@ -377,27 +340,18 @@ function onAfterClickPack(curr, next, opts) {
 	var cycle = opts.$cont;
 
 	// if (typeof $active_cycle == undefined || $active_cycle == '') {
-
 	// console.log("$active_cycle undefined");
-
 	// return;
-
 	// }
 
 	if (typeof cycle == undefined || cycle == '') {
-
 		console.log("onAfter: cycle undefined");
-
 		return;
-
 	}
 
 	cycle.currSlide = index;
-
 	cycle.data('currSlide', index);
-
 	console.log('Build Pack slide = ' + index + ' curr ' + cycle.currSlide);
-
 }
 
 

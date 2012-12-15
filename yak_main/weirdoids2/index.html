@@ -12,13 +12,25 @@
 <title>Weirdoids Proto2</title>
 <link rel="icon" type="image/png" href="images/favicon.png" />
 
+
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+<!-- link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+<script src="js/jquery-1.8.2.js"></script>jquery.easing.1.3.js
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.js"></script-->
+
+
+<!-- >script src="js/jquery-ui-1.8.24.custom.min.js"></script-->
+
+<!-- script	src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.1.0.min.js"></script-->
+
+
 <link rel="stylesheet" type="text/css" href="css/jcarousel.css" />
+
 <link rel="stylesheet" type="text/css" href="css/mobiscroll-2.1.custom.min.css" />
-
-
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-
-
 <link href="css/weirdoids.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/themes/weirdoidstheme.css" />
 
@@ -27,19 +39,16 @@
 <![endif]-->
 
 
-<script src="js/jquery-1.8.2.js"></script>
-<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.js"></script>
-<script src="js/jquery-ui-1.8.24.custom.min.js"></script>
 
-<!-- script	src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.1.0.min.js"></script-->
-
-
-<script src="script/libs/jquery.cycle.all.js" type="text/javascript"></script>
+<script src="js/jquery.cycle.all.js" type="text/javascript"></script>
+<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
 
 <script src="js/mobiscroll.core-2.1.js" type="text/javascript"></script>
 <script src="js/mobiscroll.jqm-2.1.js" type="text/javascript"></script>
 <script src="js/mobiscroll.select-2.1.js" type="text/javascript"></script>
 <script src="js/mobiscroll.datetime-2.1.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="script/libs/jquery.spritely-0.6.js"></script>
 
 <script src="script/libs/jquery.waitforimages.js" type="text/javascript"></script>
 <script src="script/libs/jquery.cookies.2.2.0.min.js" type="text/javascript"></script>
@@ -86,45 +95,63 @@
 
 		<div data-role="page" id="home">
 
-			<div data-role="content">
+			<div data-role="content" id="homecontent">
 
 				<div class="row">
 					<div class="ten columns centered center">
 						<div id="logo">
 							<img src="img/logo_weirdoids.png" />
 						</div>
-						<div class="eight columns centered center grate">
-							<a href="#build" id="bldbtn" class="large success button build_button">Build</a> <a href="#packs"
-								class="large alert button">Packs</a> <a href="#vault" class="large button">Vault</a> <a href="#gallery"
-								class="large button">Gallery</a> <a href="#badges" class="large button">Badges</a>
+
+						<div class="six columns centered center grate">
+
+							<div class="row homebtn_row">
+								<a href="#build" id="bldbtn" class="build_button"> <img src="img/btn_build.png" />
+								</a>
+							</div>
+							<div class="row homebtn_row">
+								<a href="#packs"> <img src="img/btn_packs.png" />
+								</a>
+							</div>
+							<div class="row homebtn_row">
+								<a href="#vault"> <img src="img/btn_vault.png" />
+								</a>
+							</div>
 
 						</div>
 					</div>
 				</div>
 
+
 			</div>
 
-			<div data-role="footer" data-position="fixed" id="ftr">
+			<div id="homeftr">
 				<div class="row">
-					<div class="two mobile-one columns center ">
-						<a href="#"><img src="img/ftricon_yakhq.png" /></a>
+					<div class="two mobile-one columns center homeftr_btn">
+						<a href="http://yrcreative.com/clients/yakbooks/yakhq" target="blank" class="small button round black"><img
+							src="img/ftricon_yakhq.png" /></a>
 					</div>
-					<div class="two mobile-one columns center">
-						<a href="#info"><img src="img/ftricon_info.png" /></a>
+					<div class="two mobile-one columns center homeftr_btn">
+						<a href="#settings" class="small button round black"><img src="img/ftricon_settings.png" /></a>
 					</div>
-					<div class="two mobile-one columns center">
-						<a href="#help"><img src="img/ftricon_help.png" /></a>
+					<div class="two mobile-one columns center homeftr_btn">
+						<a href="#help" class="small button round black"><img src="img/ftricon_help.png" /></a>
 					</div>
-					<div class="two mobile-one columns center">
-						<a href="#profile">Profile</a>
+					<div class="two mobile-one columns center homeftr_btn">
+						<a href="#feed" class="small button round black"><img src="img/ftricon_profile.png" /></a>
 					</div>
-					<div class="four mobile-one columns center">
+					<div class="two mobile-one columns center homeftr_btn">
 						<div id="homefooterbtns">
-							<a href="#" id="home_login_btn">Log In</a> <a href="#" id="home_signup_btn">Sign Up</a>
+							<a href="#" id="home_login_btn" class="small button round black"> <img src="img/ftricon_login.png" />
+							</a>
 						</div>
-						<div id="homefooterbtns_afterlogin">
-							<span id="user_name"></span> <a href="#" id="home_logout_btn">Logout</a>
+						<div id="homefooterbtns_afterlogin" style:"display:none;">
+							<a href="#" id="home_logout_btn" class="small button round black"> <img src="img/ftricon_logout.png" />
+							</a>
 						</div>
+					</div>
+					<div class="two mobile-one columns center homeftr_btn" id="homeftr_avatar">
+						<a href="#"><img class="user_avatar" /></a>
 					</div>
 				</div>
 			</div>
@@ -134,28 +161,6 @@
 
 
 		<div id="build" data-role="page" data-theme="a">
-
-
-			<!--
-			<div data-role="header" id="buildhdr">
-				<div id="banks-nav-bar" data-role="navbar"
-					class="nav-glyphish-example" data-grid="d" data-theme="a">
-					<ul>
-						<li><a href="#" id="headbtn" data-iconpos="notext"
-							data-icon="custom" data-theme="a">Heads</a></li>
-						<li><a href="#" id="bodybtn" data-iconpos="notext"
-							data-icon="custom" data-theme="a">Body</a></li>
-						<li><a href="#" id="legbtn" data-iconpos="notext"
-							data-icon="custom" data-theme="a">Legs</a></li>
-						<li><a href="#" id="xtrabtn" data-iconpos="notext"
-							data-icon="custom" data-theme="a">Xtra</a></li>
-						<li><a href="#" id="bkgdbtn" data-iconpos="notext"
-							data-icon="custom" data-theme="a">Bkgds</a></li>
-					</ul>
-				</div>
-			</div>
-			-->
-
 
 			<div id="band_wrapper">
 				<div id="btn_prev_head" class="browser-nav-btn">
@@ -185,20 +190,26 @@
 
 			<div data-role="footer" data-position="fixed" id="ftr">
 				<div class="row">
-					<div class="three mobile-one columns center ">
-						<a href="#home" id="cancelbtn"><img src="img/ftricon_cancel.png" /></a>
+					<div class="two mobile-one columns center ">
+						<a href="#home" id="cancelbtn" class="button round black"><img src="img/ftricon_cancel.png" /></a>
+					</div>
+					<div class="four mobile-two columns center">
+						<ul class="button-group even three-up">
+							<li><a href="#" id="cycle_body_btn" class="build_cycle_btns button selected"><img
+									src="img/ftricon_hbl.png" /></a></li>
+							<li><a href="#" id="cycle_xtra_btn" class="build_cycle_btns button"><img src="img/ftricon_extras.png" /></a></li>
+							<li><a href="#" id="cycle_bkgd_btn" class="build_cycle_btns button"><img
+									src="img/ftricon_backgrounds.png" /></a></li>
+						</ul>
+					</div>
+					<div class="two hide-for-small columns center">
+						<a href="#" class="button round black" id="build_packs_btn"><img src="img/ftricon_packs.png" /></a>
 					</div>
 					<div class="two mobile-one columns center">
-						<a href="#packs"><img src="img/ftricon_packs.png" /></a>
+						<a href="#" id="randombtn" class="button round black"><img src="img/ftricon_random.png" /></a>
 					</div>
 					<div class="two mobile-one columns center">
-						<a href="#" id="randombtn"><img src="img/ftricon_random.png" /></a>
-					</div>
-					<div class="two mobile-one columns center">
-						<a href="#backgrounds">Bkgd</a>
-					</div>
-					<div class="three mobile-one columns center">
-						<a href="#" id="donebtn"><img src="img/ftricon_check.png" /></a>
+						<a href="#" id="donebtn" class="button round black"><img src="img/ftricon_check.png" /></a>
 					</div>
 				</div>
 			</div>
@@ -207,10 +218,10 @@
 
 		<div id="packs" data-role="page" data-title="Select a Pack" data-theme="a">
 
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" class="hdr">
 
 				<div class="row">
-					<div class="two mobile-one columns center purple">
+					<div class="two mobile-one columns center">
 						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="eight mobile-three columns center">
@@ -224,8 +235,6 @@
 			<div class="content">
 				<div class="packgrid" id="packgrid">
 
-
-
 					<ul id="packlist" class="block-grid three-up mobile-five-up"></ul>
 
 				</div>
@@ -236,48 +245,49 @@
 
 		<div id="buypreview" data-role="page" data-theme="a">
 
-			<div data-role="header" id="packshdr">
-				<a href="#" data-rel="back" data-icon="back" class="ui-btn-left" data-theme="a">Back</a>
-				<h1 id="buypreview_header_text" class="headertext">Buy a Pack</h1>
+			<div data-role="header" class="hdr">
+
+				<div class="row">
+					<div class="two mobile-one columns center">
+						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="eight mobile-three columns center">
+						<h2>Buy Pack</h2>
+					</div>
+					<div class="two mobile-one columns center"></div>
+				</div>
 			</div>
-			<!-- /header -->
 
 			<div data-role="content" id="pack_preview_content" class="content">
 
-				<div id="pack_preview_content_top">
-					<div id="pack_preview_small"></div>
-					<div id="pack_preview_content_top_right">
-						<h1 id="pack_heading1">Original Weirdoids</h1>
 
-						<div id="pack_preview_text">Lora ipsum etc.</div>
-						<div id="pack_cost" class="pack_preview_cost" data-role="button"></div>
+			<div class="row">
+				<div class="four columns">
+					<div class="row">
+						<div class="three columns">
+							<div id="pack_preview_small"></div>
+						</div>
+						<div class="nine columns">
+							<div id="pack_preview_content_top_right">
+								<h1 id="pack_heading1">Original Weirdoids</h1>
+							</div>
+						</div>
 					</div>
+					<div class="row">
+						<div class="twelve columns">
+							<h3 id="pack_preview_text">Lora ipsum etc.</h3>
+							<div id="pack_cost" class="pack_preview_cost button large"></div>
+						</div>
+					</div>
+					
+					
 				</div>
-				<div id="pack_preview_large"></div>
-				<div id="pack_preview_footer">
-
-					<div class="pack_cycle_count_wrapper nav_icon_1">
-						<div id="pack_preview_head_count" class="pack_cycle_count">6</div>
-					</div>
-					<div class="pack_cycle_count_wrapper nav_icon_2">
-						<div id="pack_preview_body_count" class="pack_cycle_count">6</div>
-					</div>
-					<div class="pack_cycle_count_wrapper nav_icon_3">
-						<div id="pack_preview_leg_count" class="pack_cycle_count">6</div>
-					</div>
-					<div class="pack_cycle_count_wrapper nav_icon_4">
-						<div id="pack_preview_xtra_count" class="pack_cycle_count">3</div>
-					</div>
-					<div class="pack_cycle_count_wrapper nav_icon_5">
-						<div id="pack_preview_bkgd_count" class="pack_cycle_count">2</div>
-					</div>
-					<div id="pack_preview_combinations">
-						<div id="pack_preview_total_count" class="pack_total_count">3642</div>
-						<div id="pack_preview_total_text">COMBINATIONS</div>
-					</div>
-
+				<div class="eight columns">
+					<div id="pack_preview_large"></div>
 				</div>
-				<!-- /content -->
+			</div>
+				
+
 
 			</div>
 			<!-- /content -->
@@ -286,37 +296,38 @@
 
 		<div id="vault" data-role="page" data-theme="a">
 
-			<div data-role="header" id="vaulthdr"  >
-				<div class="headercontent">
-					<div class="row" id="vaulthdr_row">
-						<div class="two mobile-one columns center purple">
-							<a href="#" id="vault_back_btn" data-rel="back"><img src="img/hdricon_back.png" /></a>
-						</div>
-						<div class="eight mobile-three columns center">
-							<h2>Vault</h2>
-						</div>
-						<div class="two mobile-one columns center">
-							<a href="#home">Home</a>
-						</div>
+			<div data-role="header" class="hdr" id="vaulthdr">
+
+				<div class="row">
+					<div class="two mobile-one columns center">
+						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
+					</div>
+					<div class="eight mobile-three columns center">
+						<h2>Vault</h2>
+					</div>
+					<div class="two mobile-one columns center">
+						<a href="#home"><img src="img/hdricon_home.png" /></a>
 					</div>
 				</div>
+
 			</div>
 
 
 			<div id="vaultcontent" data-role="content" class="content"></div>
 
-			<div id="vaultfooter">
-				<a href="#" data-role="button" class="ui-btn-left" id="btn_vault_prev" data-inline="true">Previous</a> <a href="#"
-					data-role="button" class="ui-btn-right" id="btn_vault_more" data-inline="true">More</a>
+			<div id="vaultfooter" class="grate">
+
+				<a href="#" class="small button" id="btn_vault_prev">Previous</a> <a href="#" class="small button"
+					id="btn_vault_more">More</a>
 			</div>
 		</div>
 
+
 		<div id="previewpage" data-role="page" data-theme="a">
 
-			<div data-role="header" id="hdr" data-position="fixed">
-
+			<div data-role="header" class="hdr">
 				<div class="row">
-					<div class="two mobile-one columns center purple">
+					<div class="two mobile-one columns center">
 						<a href="#" id="cancelsave" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="eight mobile-three columns center">
@@ -329,38 +340,45 @@
 			</div>
 
 			<div data-role="content" class="content">
+
 				<div class="row">
-					<div class="nine columns centered">
 
-						<div class="row" id="namectr">
-							<div class="nine mobile-four columns grate" id="fields">
-								<div class="name_spinner six columns">
-									<select name="Firstname" id="Firstname" class="twelve" style="display: none" data-role="none"></select>
+					<div class="ten columns mobile-four grate">
 
+						<div class="row">
 
-								</div>
-								<div class="name_spinner six columns">
-									<select name="Lastname" id="Lastname" showLabel="false" class="twelve" data-role="none" style="display: none"></select>
-								</div>
+							<div class="name_spinner six columns">
+								<h3>Firstname</h3>
+								<select name="Firstname" id="Firstname" class="twelve" style="display: none" data-role="none"></select>
 							</div>
-							<div class="three mobile-one columns" id="random">
-								<a href="#" id="random_name_btn"><img src="img/gfx_random.png" /></a>
+
+							<div class="name_spinner six columns">
+								<h3>Lastname</h3>
+								<select name="Lastname" id="Lastname" showLabel="false" class="twelve" data-role="none" style="display: none"></select>
 							</div>
 
 						</div>
 					</div>
+
+					<div id="random" class="two mobile-one columns">
+						<a href="#" id="random_name_btn"><div onclick="$('#handle').spToggle();" id="handle" style="background-position: 0px 0px;"></div></a>
+						
+					</div>
+
 				</div>
+
 			</div>
+
 
 		</div>
 
 		<div id="previewshare" data-role="page" data-theme="a">
 
 
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" class="hdr">
 
 				<div class="row">
-					<div class="two mobile-one columns center purple">
+					<div class="two mobile-one columns center">
 						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="eight mobile-three columns center">
@@ -391,7 +409,7 @@
 				<div class="row">
 					<div class="eight columns centered">
 						<div class="grate">
-							<input type="text" class="expand input-text" id="expandedNiceInput" placeholder="Write your caption"> <label
+							<input type="text" class="expand input-text" id="getCommentsList" placeholder="Write your caption"> <label
 								for="checkbox1"><input type="checkbox" id="checkbox1"> Facebook</label> <label for="checkbox1"><input
 								type="checkbox" id="checkbox1"> Email</label>
 						</div>
@@ -399,49 +417,27 @@
 				</div>
 			</div>
 
-			<!--
-			<div data-role="footer" data-position="fixed" id="previewshare_footer">
-				<div id="preview-share-buttons">
-					<a href="#" data-role="button" class="online-only"
-						id="btn_share_on_fb" data-icon="star" data-inline="true"
-						data-theme="c">Share on Facebook</a> <a href="#"
-						data-role="button" class="online-only" id="btn_post_gallery"
-						data-theme="d" data-icon="plus" data-inline="true">Share on
-						Yak</a>
-				</div>
-			</div>
-			-->
-
 		</div>
 
 		<div id="preview" data-role="page" data-theme="a">
 
-
-			<!--
-					<div data-role="header" data-position="inline" id="previewshare_header" >
-						<a href="#" data-rel="back" data-icon="back" class="ui-btn-left">Back</a>
-						<h1>Preview</h1>
-						<a href="#vault" class="ui-btn-right">Vault</a>
-					</div>
-					-->
-
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" class="hdr" id="previewshare_header">
 
 				<div class="row">
-					<div class="three mobile-one columns center ">
+					<div class="three mobile-one columns center">
 						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="six mobile-three columns center">
-						<h2>Share It</h2>
+						<h2>Preview</h2>
 					</div>
-					<div class="three mobile-one columns center">
-						<a href="#vault"><img src="img/hdricon_check.png" /></a>
-					</div>
+					<div class="three mobile-one columns center"></div>
 				</div>
 			</div>
 
 			<div data-role="content" class="content" id="previewshare_content">
-				<div id="previewshare_body_wrapper"></div>
+				<div class="" id="previewshare_row">
+					<div id="previewshare_body_wrapper"></div>
+				</div>
 				<div id="preview-share-weirdoid-name" class="preview-weirdoid-name">Weirdoid Name</div>
 				<div id="saved_or_shared_msg_previewshare">
 					<h1></h1>
@@ -449,21 +445,14 @@
 				<div id="shared_msg_previewshare">
 					<h1></h1>
 				</div>
-			</div>
 
-			<div data-role="footer" data-position="fixed" id="previewshare_footer">
-				<div id="preview-share-buttons">
-					<a href="#" data-role="button" class="online-only" id="btn_share_on_fb" data-icon="star" data-inline="true"
-						data-theme="c">Share on Facebook</a> <a href="#" data-role="button" class="online-only" id="btn_post_gallery"
-						data-theme="d" data-icon="plus" data-inline="true">Share on Yak</a>
-				</div>
 			</div>
 
 		</div>
 
 		<div data-role="page" id="help">
 
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" class="hdr">
 				<div class="row">
 					<div class="three mobile-one columns center ">
 						<a href="#home"><img src="img/hdricon_back.png" /></a>
@@ -482,36 +471,83 @@
 			</div>
 		</div>
 
-		<div data-role="page" id="info">
+		<div data-role="page" id="settings">
 
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" class="hdr">
 				<div class="row">
-					<div class="three mobile-one columns center purple">
+					<div class="three mobile-one columns center">
 						<a href="#home"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="six mobile-three columns center">
-						<h2>Info</h2>
+						<h2>Settings</h2>
 					</div>
 					<div class="three mobile-one columns center"></div>
 				</div>
 			</div>
 
 			<div data-role="content" class="content">
+				
+			<div class="row">
+				<div class="six columns centered grate">
+				
 				<div class="row">
-					<div class="twelve columns centered">Info</div>
+					<div class="eight columns mobile-three">
+						<label for="flip-1">Auto-post to Yak Feed</label>
+					</div>	
+					<div class="four columns mobile-two">
+						<select name="flip-1" id="flip-1" data-role="slider">
+							<option value="on">On</option>
+							<option value="off">Off</option>
+							
+						</select>
+					</div>
 				</div>
+				<div class="row">
+					<div class="eight columns mobile-three">
+						<label for="flip-1">Auto-post to Weirdoids Gallery</label>
+					</div>	
+					<div class="four columns mobile-two">
+						<select name="flip-1" id="flip-1" data-role="slider">
+							<option value="on">On</option>
+							<option value="off">Off</option>
+							
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="eight columns mobile-three">
+						<label for="flip-1">Save Locally</label>
+					</div>	
+					<div class="four columns mobile-two">
+						<select name="flip-1" id="flip-1" data-role="slider">
+							<option value="on">On</option>
+							<option value="off">Off</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="eight columns mobile-three">
+						Logged in as Blank
+					</div>	
+					<div class="four columns mobile-two">
+						<a href="#loginaccount" class="button small">Logout</a>
+					</div>
+				</div>
+				</div>
+			</div>
+			
 			</div>
 		</div>
 
-		<div data-role="page" id="gallery">
+		<div data-role="page" id="feed">
 
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" class="hdr">
 				<div class="row">
-					<div class="three mobile-one columns center purple">
+					<div class="three mobile-one columns center">
 						<a href="#home"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="six mobile-three columns center">
-						<h2>Gallery</h2>
+						<h2>Feed</h2>
 					</div>
 					<div class="three mobile-one columns center"></div>
 				</div>
@@ -535,7 +571,7 @@
 						<ul class="block-grid mobile three-up">
 							<li>
 								<div class="panel">
-									Avatar 2m <img src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg" /> Firstname
+									<img class="avatar" src="http://yrcreative.com/clients/yakbooks/weirdoids/user_images/616.jpg" /> Firstname
 									Lastname This is the caption I chose.
 									<div class="row">
 										<a href="#">Like</a>
@@ -562,7 +598,7 @@
 
 		<div data-role="page" id="badges">
 
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" id="hdr">
 				<div class="row">
 					<div class="two mobile-one columns center purple">
 						<a href="#home"><img src="img/hdricon_back.png" /></a>
@@ -592,64 +628,11 @@
 			</div>
 		</div>
 
-		<div data-role="page" id="profile">
-
-			<div data-role="header" id="hdr" data-position="fixed">
-				<div class="row">
-					<div class="three mobile-one columns center purple">
-						<a href="#home"><img src="img/hdricon_back.png" /></a>
-					</div>
-					<div class="six mobile-three columns center">
-						<h2>Profile</h2>
-					</div>
-					<div class="three mobile-one columns center"></div>
-				</div>
-			</div>
-
-			<div data-role="content" class="content">
-				<div class="row">
-					<div class="twelve columns centered">Avatar Points Redeem Points for Credits Credits #currentnum Buy Credits</div>
-				</div>
-			</div>
-		</div>
-
-		<div data-role="page" id="backgrounds">
-
-			<div data-role="header" id="hdr" data-position="fixed">
-				<div class="row">
-					<div class="three mobile-one columns center ">
-						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
-					</div>
-					<div class="six mobile-three columns center">
-						<h2>Backgrounds</h2>
-					</div>
-					<div class="three mobile-one columns center"></div>
-				</div>
-			</div>
-
-			<div data-role="content" class="content">
-				<div class="row">
-					<div class="twelve columns centered">
-						<ul class="block-grid four-up">
-							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
-							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
-							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
-							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
-							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
-							<li><img src="imgs/p3_bkgd_1.jpg" /></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
 		<div id="loginaccount" data-role="page" data-rel="dialog" data-theme="a">
 
-			<div data-role="header" id="hdr" data-position="fixed">
+			<div data-role="header" class="hdr">
 				<div class="row">
-					<div class="three mobile-one columns center purple">
+					<div class="three mobile-one columns center">
 						<a href="#" data-rel="back"><img src="img/hdricon_back.png" /></a>
 					</div>
 					<div class="six mobile-three columns center">
@@ -660,29 +643,30 @@
 			</div>
 			<div data-role="content" class="content">
 				<div class="row">
-					<div class="twelve columns centered">
-						<div class="nine columns centered grate">
-							<form id="loginform" action="">
-								<fieldset>
-									<div data-role="fieldcontain">
-										<label for="username">Username</label> <input type="text" name="login" id="username" value="ddd" /> <label
-											class="error" for="username" id="username_error">This field is required.</label>
-									</div>
-									<div data-role="fieldcontain">
-										<label for="password">Password</label> <input type="password" name="password" id="password" value="ddd" /><label
-											class="error" for="password" id="password_error">This field is required.</label>
-									</div>
-								</fieldset>
-							</form>
 
-							<div id="login_btn_div">
-								<a href="#" id="btn_login">Log In</a>
-							</div>
+					<div class="nine columns centered grate">
+						<form id="loginform" action="">
+							<fieldset>
+								<div data-role="fieldcontain">
+									<label for="username">Username</label> <input type="text" name="login" id="username" value="ddd" /> <label
+										class="error" for="username" id="username_error">This field is required.</label>
+								</div>
+								<div data-role="fieldcontain">
+									<label for="password">Password</label> <input type="password" name="password" id="password" value="ddd" /><label
+										class="error" for="password" id="password_error">This field is required.</label>
+								</div>
+							</fieldset>
+						</form>
 
-
-							<a href="#forgotpassword">Forgot Password?</a>
+						<div id="login_btn_div">
+							<a href="#" id="btn_login" class="button large">Log In</a>
 						</div>
+
+
+						<a href="#forgotpassword">Forgot Password?</a>
+
 					</div>
+
 				</div>
 			</div>
 
@@ -893,6 +877,25 @@ Your Password?</a>
 			<!-- /content -->
 		</div>
 
+		<div id="wanttoleavebuild" data-role="page" data-rel="dialog" data-theme="a">
+
+			<div id="content" data-role="content" class="content">
+
+
+				<h1 id="wanttoleavebuild_h1">Changes not saved. Are you sure you want to Cancel?</h1>
+
+				<div id="wanttoleavebuild_yes_div">
+					<a href="#" data-role="button" id="wanttoleavebuild_yes_btn">Yes</a>
+				</div>
+				<div id="wanttoleavebuild_nothanks_btn_div">
+					<a href="#" data-role="button" data-rel="back" id="wanttoleavebuild_no_btn">No</a>
+				</div>
+
+
+			</div>
+			<!-- /content -->
+		</div>
+
 
 		<div id="fbverify_pg" data-role="page" data-rel="dialog" data-theme="c">
 
@@ -1029,7 +1032,13 @@ Your Password?</a>
 				</div>
 			</div>
 		</div>
+
+		<div data-role="popup" id="build_help_popup" style="display:none;" data-theme="a" data-overlay-theme="a" class="ui-content">
+			<div id="build_help_content">THIS IS PLACEHOLDER FOR BUILD HELP</div>
+		</div>
+		
 	</div>
+
 
 
 

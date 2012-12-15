@@ -40,7 +40,8 @@ function saveWeirdoid(tmpWeirdoid) {
 			// user must log in first
 			console.log("User must log in first.");
 			$.mobile.changePage("#wanttoshare", {
-				transition : "fade"
+				transition : "fade",
+				role: "dialog"
 			});
 			return false;
 		}
@@ -53,7 +54,7 @@ function onSavedWeirdoidInDB(savedok, id) {
 	if ($srcPage == '#previewpage') {
 		if (savedok) {
 			console.log("after save in database, switch to previewshare");
-			gotoPage('#previewshare');
+			gotoPage('#vault'); // skipping previewshare
 			return;
 		} else {
 			console.log("after failing to save in database, switch to src page");
@@ -416,6 +417,15 @@ function getLocalWeirdoids(getKey) {
 		$.cookies.set('last_user_key', getKey);
 	}
 
+}
+
+function getUserKey() {
+	if ($current_user_key == null)
+		$current_user_key = $userkey_prefix + $userid;
+}
+
+function getNewUserKey(userid) {
+	return $userkey_prefix + userid;
 }
 
 function get_weirdoids_from_local_storage() {
