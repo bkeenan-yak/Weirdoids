@@ -185,6 +185,7 @@ function composeWeirdoid(weirdoid, btarget, is_centered) {
 	// var yfactor = std_height * 100.0;
 	// var xfactor = std_width * 100.0;
 
+
 	compose_band(weirdoid.bkgd, "bkgd", btarget, std_height, std_width,	is_centered);
 	compose_band(weirdoid.leg, "leg", btarget, std_height, std_width,is_centered);
 	compose_band(weirdoid.body, "body", btarget, std_height, std_width,	is_centered);
@@ -238,6 +239,12 @@ var div_ctr = 0;
 
 function compose_band(band, bandname, btarget, std_height, std_width,is_centered) {
 
+	// verify required part
+	if(band === undefined || band.sprite === undefined || band.sprite.src === undefined ||
+			band.sprite.src.length == 0){
+		myalert("No image defined for cycle " + bandname);
+		return;
+	}
 	var top_pct = (band.topoffset / std_height) * 100;
 	var left_pct = (band.sprite.xloc / std_width) * 100;
 	var divname = 'preview_' + bandname + '_' + div_ctr;

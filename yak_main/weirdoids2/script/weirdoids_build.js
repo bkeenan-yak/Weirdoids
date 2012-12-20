@@ -6,40 +6,52 @@ $(document).ready(function()
 
 	$('#build').live('pagebeforeshow', function(event)
 	{
-		$('#headbtn').trigger('click');
+		// $('#headbtn').trigger('click');
 		// $('#randombtn').trigger('click');
 
 		$current_eastereggs = [];
-		var clist_items = $('#mycarousel').children();
 
-		jQuery.each(clist_items, function(i, item)
+		// var clist_items = $('#mycarousel').children();
+		//
+		// jQuery.each(clist_items, function(i, item)
+		// {
+		//
+		// if (item != undefined)
+		// {
+		//
+		// var packobj = $(item).find('a');
+		//
+		// if (packobj != undefined)
+		// {
+		//
+		// var packitem = $(packobj).data('item');
+		//
+		// if (packitem != undefined && packitem.id)
+		// {
+		//
+		// var packitemid = packitem.id;
+		// if ($.inArray(packitemid, $loadedpacks) < 0)
+		// {
+		// $(packobj).addClass('notloaded_pack');
+		// $(packobj).attr('title', 'Click to load');
+		// } else
+		// {
+		// $(packobj).removeClass('notloaded_pack');
+		// $(packobj).attr('title', 'Loaded');
+		// }
+		// }
+		// }
+		// }
+		// });
+
+		// make sure there is at least one image in each cycle
+		$('.bandcycle').each(function()
 		{
-
-			if (item != undefined)
+			var imgcnt = $(this).children().length;
+			if (imgcnt == 0)
 			{
+				myalert("Error: at least one image must be loaded in each cycle: " + $(this).attr('id'));
 
-				var packobj = $(item).find('a');
-
-				if (packobj != undefined)
-				{
-
-					var packitem = $(packobj).data('item');
-
-					if (packitem != undefined && packitem.id)
-					{
-
-						var packitemid = packitem.id;
-						if ($.inArray(packitemid, $loadedpacks) < 0)
-						{
-							$(packobj).addClass('notloaded_pack');
-							$(packobj).attr('title', 'Click to load');
-						} else
-						{
-							$(packobj).removeClass('notloaded_pack');
-							$(packobj).attr('title', 'Loaded');
-						}
-					}
-				}
 			}
 		});
 
@@ -90,42 +102,42 @@ $(document).ready(function()
 		$firstTimeShowHelp = false; // first time through build cycle
 	});
 
-	$('#headbtn').click(function(e)
-	{
-		$active_cycle = $('#cycle_heads');
-		console.log("in head click");
-		// e.preventDefault();
-		return true;
-	});
+	// $('#headbtn').click(function(e)
+	// {
+	// $active_cycle = $('#cycle_heads');
+	// console.log("in head click");
+	// // e.preventDefault();
+	// return true;
+	// });
+	//
+	// $('#legbtn').click(function(e)
+	// {
+	// console.log("in legs click");
+	// $active_cycle = $('#cycle_legs');
+	// e.preventDefault();
+	// return true;
+	// });
+	//
+	// $('#bodybtn').click(function(e)
+	// {
+	// $active_cycle = $('#cycle_bodies');
+	// // e.preventDefault();
+	// return true;
+	// });
 
-	$('#legbtn').click(function(e)
-	{
-		console.log("in legs click");
-		$active_cycle = $('#cycle_legs');
-		e.preventDefault();
-		return true;
-	});
-
-	$('#bodybtn').click(function(e)
-	{
-		$active_cycle = $('#cycle_bodies');
-		// e.preventDefault();
-		return true;
-	});
-
-	$('#xtrabtn').click(function(e)
-	{
-		$active_cycle = $('#cycle_xtras');
-		// e.preventDefault();
-		return true;
-	});
-
-	$('#bkgdbtn').click(function(e)
-	{
-		$active_cycle = $('#cycle_bkgds');
-		// e.preventDefault();
-		return true;
-	});
+	// $('#xtrabtn').click(function(e)
+	// {
+	// $active_cycle = $('#cycle_xtras');
+	// // e.preventDefault();
+	// return true;
+	// });
+	//
+	// $('#bkgdbtn').click(function(e)
+	// {
+	// $active_cycle = $('#cycle_bkgds');
+	// // e.preventDefault();
+	// return true;
+	// });
 
 	// new cycle select btns
 	$('#cycle_body_btn').click(function(e)
@@ -136,7 +148,10 @@ $(document).ready(function()
 		$(this).addClass('selected');
 		$cycling_body = true;
 		$active_cycle = $('#cycle_heads');
-		// e.preventDefault();
+
+		// show all body/leg btns in browser
+		$('#btn_next_body, #btn_next_leg, #btn_prev_body, #btn_prev_leg').show();
+
 		return true;
 	});
 
@@ -148,6 +163,9 @@ $(document).ready(function()
 		$(this).addClass('selected');
 		$cycling_body = false;
 		$active_cycle = $('#cycle_xtras');
+
+		// hide all body/leg btns in browser
+		$('#btn_next_body, #btn_next_leg, #btn_prev_body, #btn_prev_leg').hide();
 		// e.preventDefault();
 		return true;
 	});
@@ -160,7 +178,10 @@ $(document).ready(function()
 		$(this).addClass('selected');
 		$cycling_body = false;
 		$active_cycle = $('#cycle_bkgds');
-		// e.preventDefault();
+
+		// hide all body/leg btns in browser
+		$('#btn_next_body, #btn_next_leg, #btn_prev_body, #btn_prev_leg').hide();
+
 		return true;
 	});
 
@@ -296,7 +317,7 @@ $(document).ready(function()
 	$('#build_packs_btn').click(function(e)
 	{
 		clearHelpTimer();
-		
+
 		$.mobile.changePage("#packs", {
 			transition : "fade"
 		});
@@ -850,31 +871,33 @@ function myWaitForImages(finishedCallback, eachCallback)
 	});
 }
 
-function fixPng(png)
-{
-
-	// get src
-	var src = png.src;
-	if (!src.match(/png$/))
-		return;
-
-	// set width and height
-	if (!png.style.width)
-	{
-		png.style.width = $(png).width();
-	}
-	if (!png.style.height)
-	{
-		png.style.height = $(png).height();
-	}
-
-	// replace by blank image
-	png.onload = function()
-	{
-		console.log("onload");
-	};
-	png.src = blank.src;
-
-	// set filter (display original image)
-	png.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "',sizingMethod='scale')";
-}
+// function fixPng(png)
+// {
+//
+// // get src
+// var src = png.src;
+// if (!src.match(/png$/))
+// return;
+//
+// // set width and height
+// if (!png.style.width)
+// {
+// png.style.width = $(png).width();
+// }
+// if (!png.style.height)
+// {
+// png.style.height = $(png).height();
+// }
+//
+// // replace by blank image
+// png.onload = function()
+// {
+// console.log("onload");
+// };
+// png.src = blank.src;
+//
+// // set filter (display original image)
+// png.runtimeStyle.filter =
+// "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src +
+// "',sizingMethod='scale')";
+// }

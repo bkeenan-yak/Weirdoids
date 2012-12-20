@@ -404,26 +404,26 @@ function displayUserName(uname)
 
 	$('#homefooterbtns').hide();
 	$('#homefooterbtns').children().hide();
-	$('#homefooterbtns_afterlogin,#homeftr_avatar').show();
+	//$('#homefooterbtns_afterlogin,#homeftr_avatar').show();
 	// $('#homefooterbtns_afterlogin a').css('display','block');
 
-	$('#homefooterbtns_afterlogin #user_name').html(uname);
-	$('#homefooterbtns_afterlogin').children().show();
+	//$('#homefooterbtns_afterlogin #user_name').html(uname);
+	//$('#homefooterbtns_afterlogin').children().show();
 
-	$('#home_logout_btn').show();
-	$('#home_logout_btn').click(function(e)
-	{
-		// myalert("Log the user out");
-		reset_user_variables();
-
-		$is_logged_in = false;
-
-		$('#homefooterbtns').show();
-		$('#homefooterbtns').children().show();
-		// $('#homefooterbtns a').css('display','block');
-		$('#homefooterbtns_afterlogin,#homeftr_avatar').hide();
-		$('#home_logout_btn').hide();
-	});
+	//$('#home_logout_btn').show();
+//	$('#home_logout_btn').click(function(e)
+//	{
+//		// myalert("Log the user out");
+//		reset_user_variables();
+//
+//		$is_logged_in = false;
+//
+//		$('#homefooterbtns').show();
+//		$('#homefooterbtns').children().show();
+//		// $('#homefooterbtns a').css('display','block');
+//		//$('#homefooterbtns_afterlogin,#homeftr_avatar').hide();
+//		//$('#home_logout_btn').hide();
+//	});
 
 	if ($avatar != null)
 	{

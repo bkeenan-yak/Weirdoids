@@ -417,15 +417,15 @@ function drawPreview(event, target)
 		if (hdrheight == 0 || footer_height == 0)
 		{
 		}
-		var nusize = $('body').height() - hdrheight - footer_height;
-		var previewsize = nusize * 0.8; // 80% of space
+		//var nusize = $('body').height() - hdrheight - footer_height;
+		//var previewsize = nusize * 0.8; // 80% of space
 		// var previewpct = (nusize / body_height) * 100.0;
 		// btarget.height(previewpct + '%');
 		// btarget.height(previewsize + 'px');
 
 		// var body_width = $('body').width();
-		var factor = previewsize / STD_HEIGHT;
-		var nuwidth = STD_WIDTH * factor;
+		//var factor = previewsize / STD_HEIGHT;
+		//var nuwidth = STD_WIDTH * factor;
 		// var wpct = (nuwidth / body_width) * 100.0;
 		// btarget.width(wpct + '%');
 		// btarget.width(nuwidth + 'px');
@@ -756,8 +756,8 @@ function processNameJson(json, url)
 
 	selector.append(myhtml);
 	var fld = (is_first_name) ? $("#Firstname") : $("#Lastname");
-	var src = (is_first_name) ? $fnames : $lnames;
-	var sugg_ul = (is_first_name) ? '#fname_suggestions' : '#lname_suggestions';
+	//var src = (is_first_name) ? $fnames : $lnames;
+	//var sugg_ul = (is_first_name) ? '#fname_suggestions' : '#lname_suggestions';
 	//
 	// fld.autocomplete(
 	// {

@@ -375,7 +375,7 @@ function process_easteregg(easteregg)
 	$eastereggs.push(easteregg);
 }
 
-function process_band(i, band, packid, pack_easteregg_ids)
+function process_band(i, band, packid)
 {
 	console.log("next band " + band.divname);
 
@@ -395,7 +395,7 @@ function process_band(i, band, packid, pack_easteregg_ids)
 		// $("#bands").append('<div class="cyclediv" id="' + cycleid + '">');
 		$("#bands").append('<div id ="' + divid + '" class="scalable_wrapper" ><div id="'
 
-		+ cycleid + '" class="scalable_div">');
+		+ cycleid + '" class="scalable_div  bandcycle">');
 
 		$('#' + cycleid).css("z-index", band.zindex);
 		$('#' + cycleid).css("margin", "0px auto");
@@ -412,10 +412,10 @@ function process_band(i, band, packid, pack_easteregg_ids)
 		// console.log("next image " +
 		// var src = sprite.src;
 
-		var easteregg = (sprite.easteregg) ? sprite.easteregg : 1.0;
+		var show_pct = (sprite.show_pct) ? sprite.show_pct/100.0 : 1.0;
 		var easteregg_id = (sprite.easteregg_id) ? sprite.easteregg_id : -1;
 
-		if (check_show_easteregg(easteregg, easteregg_id, pack_easteregg_ids))
+		if (check_show_easteregg(show_pct, easteregg_id))
 		{
 			$('#' + cycleid).append('<div class="cycle_element" packid="' + packid + '" ><img id="' + sprite.id + '" class="cycleimg" src="' + sprite.src // dataurl
 					+ '"></image></div>');
@@ -532,7 +532,7 @@ function onAfter(curr, next, opts)
 		$.each($eastereggs, function(i, easteregg)
 		{
 
-			var randval = Math.random() * 100.0;
+			var randval = Math.random() * 100.0 ;
 
 			var location_class = (easteregg.location_class && easteregg.location_class.length > 0) ? easteregg.location_class : "none";
 			egg_cnt++;
@@ -558,28 +558,28 @@ function onAfter(curr, next, opts)
 	}
 }
 
-function check_show_easteregg(easteregg, easteregg_id, pack_easteregg_ids)
+function check_show_easteregg(show_pct, easteregg_id)
 {
 
 	var showit = true;
 
-	if ($.inArray(easteregg_id, pack_easteregg_ids) >= 0)
-	{
-		return true;
-	}
+//	if ($.inArray(easteregg_id, pack_easteregg_ids) >= 0)
+//	{
+//		return true;
+//	}
 
-	if (easteregg < 1.0)
+	if (show_pct < 1.0)
 	{
 		var randval = Math.random();
-		showit = (randval <= easteregg);
+		showit = (randval <= show_pct);
 	}
 
 	if (!showit)
-		console.log("Skipping easteregg image " + easteregg);
-	else if (easteregg < 1.0)
+		console.log("Skipping easteregg image " + show_pct);
+	else if (show_pct < 1.0)
 	{
-		console.log("showing easteregg image " + easteregg);
-		pack_easteregg_ids.push(easteregg_id);
+		console.log("showing easteregg image " + show_pct);
+		//pack_easteregg_ids.push(easteregg_id);
 	}
 
 	return showit;
@@ -603,11 +603,11 @@ function processPackJson(json, packid,fromBuild)
 	}
 
 	$active_cycle = '';
-	var pack_easteregg_ids = [];
+	//var pack_easteregg_ids = [];
 
 	$.each(json.bands, function(i, band)
 	{
-		process_band(i, band, packid, pack_easteregg_ids);
+		process_band(i, band, packid);
 	});
 
 	if (json.eastereggs)

@@ -134,36 +134,7 @@
                 "top": "38",
                 "zindex": "10",
                 "fullsize": 0,
-                "images": [  {
-                        "id": "7",
-                        "src": "imgs/p6_extra_1.png",
-                        "dataurl": " "
-                    },
-                    {
-                        "id": "8",
-                        "src": "imgs/p6_extra_2.png",
-                        "dataurl": " "
-                    },
-                    {
-                        "id": "9",
-                        "src": "imgs/p6_extra_3.png",
-                        "dataurl": " "
-                    },
-                    {
-                        "id": "10",
-                        "src": "imgs/p6_extra_4.png",
-                        "dataurl": " "
-                    },
-                    {
-                        "id": "11",
-                        "src": "imgs/p6_extra_5.png",
-                        "dataurl": " "
-                    },
-                    {
-                        "id": "12",
-                        "src": "imgs/p6_extra_6.png",
-                        "dataurl": " "
-                    }]
+                "images": [ ]
             },
             {
                 "divname": "bkgds",
